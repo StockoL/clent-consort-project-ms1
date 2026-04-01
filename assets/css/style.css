@@ -1,0 +1,165 @@
+/* Root Variables */
+:root {
+  /* Spacing Scale */
+  --s-1: 0.8rem;
+  --s0: 1rem;
+  --s1: 1.5rem;
+  --s2: 2.25rem;
+  --s3: 3.375rem;
+
+  /* Font Stacks */
+  --font-heading: "Cinzel", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+.logo-link {
+  font-family: var(--font-heading);
+  text-transform: uppercase; /* Cinzel looks best in all-caps */
+  letter-spacing: 0.05ch;
+}
+
+/* Header Styles */
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1ch;
+  color: #1a1a1a;
+}
+header {
+  display: flex;
+  flex-direction: column; /* Stack on mobile */
+  align-items: center;
+  gap: var(--s1);
+  padding: var(--s1);
+  background-color: white;
+}
+/* The 'Switcher' - flip to horizontal row on tablets/desktops */
+@media (min-width: 45rem) {
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  gap: var(--s0); /* Tighten gap slightly for small screens */
+  margin: 0;
+  padding: 0;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+header a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header nav a {
+  font-family: var(--font-body);
+  font-size: var(--s0);
+  font-weight: 500;
+  color: #444;
+  transition: color 0.2s;
+  padding: 0.5rem; /* Bigger tap target for fingers! */
+}
+
+header nav a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+/* Hero Cover Styles */
+
+.hero-cover {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  padding: var(--s1);
+
+  /* The Image sitting behind the div */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/hero_image_clent_consort.JPG");
+  background-size: cover;
+  background-position: center;
+
+  /* Centering the 'center-content' div inside the section */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-cover h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 10vw, 5rem); /* This makes it scale beautifully */
+  font-weight: 700;
+  margin-bottom: var(--s1);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds an extra layer of readability */
+}
+
+.hero-cover p {
+  font-size: 1.2rem;
+  margin-bottom: var(--s2);
+  max-width: 60ch; /* Limit line length for better readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: #fff;
+  color: #1a1a1a;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 2px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: background-color 0.3s;
+  margin-top: var(--s1);
+}
+
+.cta-button:hover {
+  background-color: #ddd;
+}
+
+/* Footer Styles */
+footer {
+  padding: var(--s2) var(--s1);
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+footer ul {
+  display: flex;
+  justify-content: center;
+  gap: var(--s1);
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--s1);
+}
+
+footer a {
+  text-decoration: none;
+  color: #555;
+}

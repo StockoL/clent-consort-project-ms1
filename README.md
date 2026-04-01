@@ -108,7 +108,7 @@ To ensure "easy-to-follow journeys," the site is designed around key user paths:
 
 **Wireframes**
 
-- [Link to Wireframes PDF/Folder]
+- [See assets/documentation/ folder]
 - _Note: In line with "Mobile-First" design principles, wireframes were first conceived for small-screen devices before being "orchestrated" for Tablet and Desktop resolutions._
 
 ## 5. Surface Plane
