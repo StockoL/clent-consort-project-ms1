@@ -1,4 +1,9 @@
 /* Root Variables */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 :root {
   /* Spacing Scale */
   --s-1: 0.8rem;
@@ -6,6 +11,8 @@
   --s1: 1.5rem;
   --s2: 2.25rem;
   --s3: 3.375rem;
+  --s4: 5.063rem;
+  --s5: 7.594rem; /* New largest spacing for the Cycle section padding */
 
   /* Font Stacks */
   --font-heading: "Cinzel", serif;
@@ -162,4 +169,124 @@ footer ul {
 footer a {
   text-decoration: none;
   color: #555;
+}
+
+/* About Page */
+.mission-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../images/cathedral_choir.jpg");
+  background-size: cover;
+  background-position: center 25%;
+  min-height: 50vh;
+  color: white;
+  text-align: center;
+  padding: var(--s1);
+}
+
+.mission-cover p {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive size */
+  max-width: 40ch;
+  line-height: 1.2;
+}
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+  padding: var(--s2) var(--s1);
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.sidebar-image {
+  flex-basis: 15rem; /* The "small" side */
+  flex-grow: 1;
+}
+
+.sidebar-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: sepia(20%) contrast(105%); /* Gives it a slightly warmer, 'historic' choral feel */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-text {
+  flex-basis: 0;
+  flex-grow: 999; /* This forces the text to take the remaining space */
+  min-width: 50%;
+}
+.cycle-container {
+  /* This creates the gap between the White section and the Dark section */
+  margin-top: var(--s4);
+
+  /* This ensures the dark background is visible and tall enough */
+  background-color: #1a1a1a;
+  padding: var(--s4) var(--s1);
+
+  /* Layout logic */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the Heading and the Switcher */
+  width: 100%;
+}
+
+.cycle-container h2 {
+  /* Reset the default browser margins that cause 'sticking' */
+  margin: 0 0 var(--s3) 0;
+  color: #c9a45e;
+  font-family: var(--font-heading);
+  text-align: center;
+}
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  justify-content: center;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.step-box {
+  flex-basis: calc((30rem - 100%) * 999);
+  flex-grow: 1;
+  padding: var(--s2);
+  background: #262626; /* Slightly lighter than the container to pop */
+  border: 1px solid #333; /* Subtle 'frame' */
+  border-top: 4px solid #c9a45e; /* Gold 'accent' bar on top */
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.step-box:hover {
+  transform: translateY(-5px); /* Professional 'lift' on hover */
+  background: #2d2d2d;
+}
+
+/* 4. Text inside the boxes */
+.step-number {
+  font-family: var(--font-heading);
+  font-size: var(--s2);
+  color: #c9a45e;
+  margin-bottom: var(--s1);
+  display: block;
+}
+
+.step-box h3 {
+  font-family: var(--font-heading);
+  color: #ffffff;
+  margin-bottom: var(--s0);
+  text-transform: uppercase;
+  letter-spacing: 0.05ch;
+}
+
+.step-box p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ccc; /* Dimmed text for descriptions to prioritize headings */
 }
