@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Clent Consort - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header id="top">
+      <a href="index.html" class="logo-link">
+        <img
+          src="assets/images/clent-consort-logo.png"
+          alt="Clent Consort Icon"
+          width="50"
+          height="50"
+        />
+        <span class="brand-name">The Clent Consort</span>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="l-center">
+      <div class="l-stack l-stack--large">
+        <section class="contact-hero l-stack l-stack--small">
+          <h1>Get in Touch</h1>
+          <p>
+            Whether you're interested in booking the Consort or applying for an
+            audition, we'd love to hear from you.
+          </p>
+        </section>
+
+        <div class="l-switcher contact-forms-layout" style="--threshold: 60rem">
+          <section class="contact-form-container box invert l-stack">
+            <h2>General Enquiry</h2>
+            <form action="#" method="post" class="l-stack">
+              <div class="form-group l-stack l-stack--small">
+                <label for="subject-general">Subject</label>
+                <select id="subject-general" name="subject">
+                  <option value="general">General Enquiry</option>
+                  <option value="booking">Concert Booking</option>
+                </select>
+              </div>
+              <div class="form-group l-stack l-stack--small">
+                <label for="name-general">Name</label>
+                <input type="text" id="name-general" name="name" required />
+              </div>
+              <div class="form-group l-stack l-stack--small">
+                <label for="email-general">Email</label>
+                <input type="email" id="email-general" name="email" required />
+              </div>
+              <div class="form-group l-stack l-stack--small">
+                <label for="message-general">Message</label>
+                <textarea
+                  id="message-general"
+                  name="message"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="cta-button">Send Message</button>
+            </form>
+          </section>
+
+          <section class="contact-form-container box invert l-stack">
+            <h2>Join the Consort</h2>
+            <form action="#" method="post" class="l-stack">
+              <div class="form-group l-stack l-stack--small">
+                <label for="name-audition">Name</label>
+                <input type="text" id="name-audition" name="name" required />
+              </div>
+              <div class="form-group l-stack l-stack--small">
+                <label for="email-audition">Email</label>
+                <input type="email" id="email-audition" name="email" required />
+              </div>
+              <div class="form-group l-stack l-stack--small">
+                <label for="voice">Voice Type</label>
+                <select id="voice" name="voice">
+                  <option value="soprano">Soprano</option>
+                  <option value="alto">Alto</option>
+                  <option value="tenor">Tenor</option>
+                  <option value="baritone">Baritone</option>
+                  <option value="bass">Bass</option>
+                </select>
+              </div>
+              <div class="form-group l-stack l-stack--small">
+                <label for="experience">Choral Experience</label>
+                <textarea
+                  id="experience"
+                  name="experience"
+                  rows="5"
+                  placeholder="Tell us about your previous experience..."
+                ></textarea>
+              </div>
+              <button type="submit" class="cta-button">
+                Apply to Audition
+              </button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <nav aria-label="Footer Navigation">
+        <ul>
+          <li><a href="members.html">Member Resource Area</a></li>
+          <li><a href="#top">Back to Top</a></li>
+        </ul>
+      </nav>
+      <p>&copy; 2026 The Clent Consort. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

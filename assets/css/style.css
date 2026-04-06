@@ -95,7 +95,66 @@ h3 {
   align-items: center;
   gap: var(--s1);
 }
+/* The Switcher Pattern */
+.l-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+}
 
+.l-switcher > * {
+  flex-grow: 1;
+  /* If container < threshold, basis becomes huge and forces wrap */
+  flex-basis: calc((var(--threshold, 40rem) - 100%) * 999);
+}
+/* --- THE STACK --- */
+/* Injects vertical space between siblings */
+.l-stack > * + * {
+  margin-top: var(--space, var(--s1));
+}
+
+.l-stack--small {
+  --space: var(--s-1);
+}
+.l-stack--large {
+  --space: var(--s4);
+}
+
+/* --- THE BOX --- */
+.box {
+  padding: var(--s1);
+  border: 1px solid transparent;
+}
+
+/* Unified Invert: The "Card" standard for the whole site */
+.box.invert {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(201, 164, 94, 0.3);
+  overflow: hidden;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.3),
+    0 40px 60px -15px rgba(0, 0, 0, 0.4);
+}
+
+/* --- UTILITIES --- */
+
+/* Visually Hidden:
+  Hides an element visually while keeping it 
+  discoverable by screen readers and keyboard users.
+*/
+.u-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
 /* ==========================================================================
    3. GLOBAL COMPONENTS (Header, Footer, Buttons)
    ========================================================================== */
@@ -233,7 +292,7 @@ footer a {
 }
 
 .hero-cover p {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: var(--s2);
   max-width: 60ch;
   margin-inline: auto;
@@ -474,6 +533,90 @@ footer a {
   flex-grow: 999;
 }
 
+/* --- CONTACT PAGE --- */
+
+/* 1. Layout & Constraints */
+.contact-hero {
+  text-align: center;
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+.contact-forms-layout {
+  --threshold: 60rem;
+  max-width: 75rem;
+  margin-inline: auto;
+  gap: var(--s2);
+  align-items: flex-start;
+}
+
+/* 2. The Form Card Container */
+.contact-form-container {
+  flex: 1 1 25rem;
+  max-width: 35rem;
+}
+
+/* 3. Elements & Typography */
+.contact-form-container h2 {
+  color: #c9a45e;
+  margin-top: 0;
+  border-bottom: 1px solid rgba(201, 164, 94, 0.2);
+  padding-bottom: var(--s-1);
+}
+
+.contact-form-container .form-group label {
+  color: #c9a45e;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1ch;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* 4. White Well Inputs & Buttons */
+.contact-form-container input,
+.contact-form-container select,
+.contact-form-container textarea {
+  width: 100%;
+  padding: var(--s0);
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  color: #1a1a1a;
+  font-family: var(--font-body);
+  border-radius: 4px;
+}
+
+.contact-form-container input:focus,
+.contact-form-container textarea:focus {
+  outline: none;
+  border-color: #c9a45e;
+  box-shadow: 0 0 0 3px rgba(201, 164, 94, 0.2);
+}
+
+.contact-form-container .cta-button {
+  width: 100%;
+  border: 1px solid #ccc; /* Adds definition to the white button */
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+  padding: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1ch;
+}
+
+.contact-form-container .cta-button:hover {
+  background-color: #c9a45e;
+  color: #ffffff;
+  border-color: #c9a45e;
+  transform: translateY(-2px); /* Physical lift on hover */
+  box-shadow: 0 5px 15px rgba(201, 164, 94, 0.4); /* Gold glow */
+}
 /* ==========================================================================
    5. ANIMATIONS
    ========================================================================== */
