@@ -167,6 +167,11 @@ header {
   gap: var(--s1);
   padding: var(--s1);
   background-color: white;
+
+  /* NEW: Align the header with the rest of the content */
+  max-width: 80rem; /* Matches your .l-center */
+  margin-inline: auto;
+  width: 100%;
 }
 
 @media (min-width: 45rem) {
@@ -209,7 +214,7 @@ header nav ul {
 header nav a {
   font-family: var(--font-body);
   font-size: var(--s0);
-  font-weight: 500;
+  font-weight: 505;
   color: #444;
   transition: color 0.2s;
   padding: 0.5rem;
@@ -217,7 +222,7 @@ header nav a {
 }
 
 header nav a:hover {
-  color: #000;
+  color: #c9a45e;
   text-decoration: underline;
 }
 
@@ -646,4 +651,118 @@ footer a {
 .hero-cover .cta-button {
   opacity: 0;
   animation: heroEntrance 1.2s ease-out 0.8s forwards;
+}
+
+/* ==========================================================================
+   6. LOGIN PAGE & SECURITY FEEDBACK
+   ========================================================================== */
+
+.login-nav {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: var(--s-1);
+}
+
+.back-link {
+  color: #666;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1ch;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-link:hover {
+  color: #c9a45e;
+  transform: translateX(-5px); /* Subtle physical movement to the left */
+}
+
+.login-wrapper {
+  margin-top: var(--s2);
+}
+
+.login-header {
+  text-align: center;
+}
+
+.login-header h1,
+.login-header p,
+.login-footer-text,
+.box.invert .form-group label {
+  color: #c9a45e;
+}
+
+.login-footer-text {
+  font-size: 0.85rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* Fat-Finger Touch Targets */
+.box.invert input {
+  min-height: 3.5rem; /* Large enough for thumbs */
+  font-size: 1.1rem; /* Prevents iOS zoom-on-focus */
+  padding: var(--s0);
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.box.invert .cta-button {
+  min-height: 3.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: var(--s1);
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border: none;
+  cursor: pointer;
+}
+
+.box.invert .cta-button:hover {
+  background-color: #c9a45e;
+  color: #ffffff;
+}
+
+/* --- High-Visibility Security Visual Feedback --- */
+
+/* 1. Neutral State: When the box is empty (placeholder is visible) 
+   We use a high-specificity selector to force the grey border */
+.box.invert input[type="password"] {
+  border: 2px solid #444 !important; /* Forces the neutral dark grey */
+  transition: all 0.2s ease-in-out;
+}
+
+/* 2. The 'Invalid' state: ONLY show red IF the user has started typing 
+   AND the input is currently focused */
+.box.invert input[type="password"]:not(:placeholder-shown):focus:invalid {
+  border-color: #ff4d4d !important;
+  box-shadow: 0 0 0 4px rgba(255, 77, 77, 0.4);
+}
+
+/* 3. The 'Valid' state: Green Light when it matches perfectly */
+.box.invert input[type="password"]:focus:valid {
+  border-color: #4caf50 !important;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.4);
+}
+
+/* 4. Persistence: Keep it green after they finish and click away */
+.box.invert input[type="password"]:valid:not(:placeholder-shown) {
+  border-color: #4caf50 !important;
+}
+
+/* 5. Suppress the 'Standard' browser red (Firefox especially) */
+.box.invert input:invalid {
+  box-shadow: none;
 }
