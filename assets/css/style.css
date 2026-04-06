@@ -1,9 +1,7 @@
-/* Root Variables */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+/* ==========================================================================
+   1. BASE STYLES & VARIABLES
+   ========================================================================== */
+
 :root {
   /* Spacing Scale */
   --s-1: 0.8rem;
@@ -12,11 +10,17 @@
   --s2: 2.25rem;
   --s3: 3.375rem;
   --s4: 5.063rem;
-  --s5: 7.594rem; /* New largest spacing for the Cycle section padding */
+  --s5: 7.594rem;
 
   /* Font Stacks */
   --font-heading: "Cinzel", serif;
   --font-body: "Inter", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
@@ -28,44 +32,97 @@ body {
 
 h1,
 h2,
-h3,
-.logo-link {
+h3 {
   font-family: var(--font-heading);
-  text-transform: uppercase; /* Cinzel looks best in all-caps */
+  text-transform: uppercase;
   letter-spacing: 0.05ch;
 }
 
-/* Header Styles */
-.brand-name {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1ch;
-  color: #1a1a1a;
+/* ==========================================================================
+   2. GLOBAL LAYOUT PATTERNS (Every Layout Primitives)
+   ========================================================================== */
+
+/* The Center: Keeps content in a readable middle column */
+.l-center {
+  box-sizing: content-box;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: var(--s1);
 }
+
+/* The Sidebar: General layout tool */
+.l-sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+}
+
+.l-sidebar > :first-child {
+  flex-basis: 20rem;
+  flex-grow: 1;
+}
+
+.l-sidebar > :last-child {
+  flex-basis: 30rem;
+  flex-grow: 999;
+}
+
+/* The Reel: Horizontal scrolling logic */
+.l-reel {
+  display: flex;
+  overflow-x: auto;
+  gap: var(--s1);
+  padding-bottom: var(--s1);
+  scroll-snap-type: x mandatory;
+}
+
+.l-reel > * {
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 60rem) {
+  .l-reel > * {
+    flex: 0 0 calc(33.333% - var(--s1));
+  }
+}
+
+/* The Cluster: For row alignment */
+.l-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s1);
+}
+
+/* ==========================================================================
+   3. GLOBAL COMPONENTS (Header, Footer, Buttons)
+   ========================================================================== */
+
+/* Navigation Header */
 header {
   display: flex;
-  flex-direction: column; /* Stack on mobile */
+  flex-direction: column;
   align-items: center;
   gap: var(--s1);
   padding: var(--s1);
   background-color: white;
 }
-/* The 'Switcher' - flip to horizontal row on tablets/desktops */
+
 @media (min-width: 45rem) {
   header {
     flex-direction: row;
     justify-content: space-between;
   }
 }
-header nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
-  gap: var(--s0); /* Tighten gap slightly for small screens */
-  margin: 0;
-  padding: 0;
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1ch;
+  color: #1a1a1a;
 }
 
 .logo-link {
@@ -75,11 +132,19 @@ header nav ul {
   text-decoration: none;
   color: black;
   font-weight: bold;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05ch;
 }
 
-header a {
-  text-decoration: none;
-  color: inherit;
+header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  gap: var(--s0);
+  margin: 0;
+  padding: 0;
 }
 
 header nav a {
@@ -88,56 +153,22 @@ header nav a {
   font-weight: 500;
   color: #444;
   transition: color 0.2s;
-  padding: 0.5rem; /* Bigger tap target for fingers! */
+  padding: 0.5rem;
+  text-decoration: none;
 }
 
 header nav a:hover {
   color: #000;
   text-decoration: underline;
 }
-/* Hero Cover Styles */
 
-.hero-cover {
-  display: flex;
-  flex-direction: column;
-  min-height: 80vh;
-  padding: var(--s1);
-
-  /* The Image sitting behind the div */
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../images/hero_image_clent_consort.JPG");
-  background-size: cover;
-  background-position: center;
-
-  /* Centering the 'center-content' div inside the section */
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
-}
-
-.hero-cover h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 10vw, 5rem); /* This makes it scale beautifully */
-  font-weight: 700;
-  margin-bottom: var(--s1);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds an extra layer of readability */
-}
-
-.hero-cover p {
-  font-size: 1.2rem;
-  margin-bottom: var(--s2);
-  max-width: 60ch; /* Limit line length for better readability */
-  margin-left: auto;
-  margin-right: auto;
-}
-
+/* CTA Button */
 .cta-button {
   display: inline-block;
   background-color: #fff;
   color: #1a1a1a;
   padding: 1rem 2rem;
+  text-align: center;
   text-decoration: none;
   border-radius: 2px;
   font-family: var(--font-body);
@@ -150,7 +181,7 @@ header nav a:hover {
   background-color: #ddd;
 }
 
-/* Footer Styles */
+/* Global Footer */
 footer {
   padding: var(--s2) var(--s1);
   text-align: center;
@@ -171,7 +202,44 @@ footer a {
   color: #555;
 }
 
-/* About Page */
+/* ==========================================================================
+   4. PAGE-SPECIFIC SECTIONS
+   ========================================================================== */
+
+/* --- HOME PAGE: Hero --- */
+.hero-cover {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh;
+  padding: var(--s1);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/hero_image_clent_consort.png");
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  animation: heroImageFade 2.5s ease-out forwards;
+  overflow: hidden;
+}
+
+.hero-cover h1 {
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 700;
+  margin-bottom: var(--s1);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-cover p {
+  font-size: 1.2rem;
+  margin-bottom: var(--s2);
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+/* --- ABOUT PAGE: Mission & Cycle --- */
 .mission-cover {
   display: flex;
   flex-direction: column;
@@ -190,21 +258,22 @@ footer a {
 
 .mission-cover p {
   font-family: var(--font-heading);
-  font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive size */
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
   max-width: 40ch;
   line-height: 1.2;
 }
+
 .sidebar {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s1);
   padding: var(--s2) var(--s1);
   max-width: 80rem;
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
 .sidebar-image {
-  flex-basis: 15rem; /* The "small" side */
+  flex-basis: 15rem;
   flex-grow: 1;
 }
 
@@ -213,62 +282,56 @@ footer a {
   height: auto;
   object-fit: cover;
   border-radius: 2px;
-  filter: sepia(20%) contrast(105%); /* Gives it a slightly warmer, 'historic' choral feel */
+  filter: sepia(20%) contrast(105%);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-text {
   flex-basis: 0;
-  flex-grow: 999; /* This forces the text to take the remaining space */
+  flex-grow: 999;
   min-width: 50%;
 }
-.cycle-container {
-  /* This creates the gap between the White section and the Dark section */
-  margin-top: var(--s4);
 
-  /* This ensures the dark background is visible and tall enough */
+.cycle-container {
+  margin-top: var(--s4);
   background-color: #1a1a1a;
   padding: var(--s4) var(--s1);
-
-  /* Layout logic */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the Heading and the Switcher */
+  align-items: center;
   width: 100%;
 }
 
 .cycle-container h2 {
-  /* Reset the default browser margins that cause 'sticking' */
   margin: 0 0 var(--s3) 0;
   color: #c9a45e;
-  font-family: var(--font-heading);
   text-align: center;
 }
+
 .switcher {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s2);
   justify-content: center;
   max-width: 100rem;
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
 .step-box {
   flex-basis: calc((30rem - 100%) * 999);
   flex-grow: 1;
   padding: var(--s2);
-  background: #262626; /* Slightly lighter than the container to pop */
-  border: 1px solid #333; /* Subtle 'frame' */
-  border-top: 4px solid #c9a45e; /* Gold 'accent' bar on top */
-  transition: transform 0.3s ease; /* Smooth hover effect */
+  background: #262626;
+  border: 1px solid #333;
+  border-top: 4px solid #c9a45e;
+  transition: transform 0.3s ease;
 }
 
 .step-box:hover {
-  transform: translateY(-5px); /* Professional 'lift' on hover */
+  transform: translateY(-5px);
   background: #2d2d2d;
 }
 
-/* 4. Text inside the boxes */
 .step-number {
   font-family: var(--font-heading);
   font-size: var(--s2);
@@ -278,15 +341,166 @@ footer a {
 }
 
 .step-box h3 {
-  font-family: var(--font-heading);
   color: #ffffff;
   margin-bottom: var(--s0);
-  text-transform: uppercase;
-  letter-spacing: 0.05ch;
 }
 
 .step-box p {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: #ccc; /* Dimmed text for descriptions to prioritize headings */
+  color: #ccc;
+}
+
+/* --- EVENTS PAGE: Featured, Reel, Archive --- */
+.featured-event .invert {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.featured-event .event-image {
+  aspect-ratio: 16 / 9;
+}
+
+.featured-event .event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (min-width: 50.1rem) {
+  .featured-event .event-image {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+}
+
+.featured-event .event-details {
+  padding: var(--s2);
+}
+
+.featured-event h1 {
+  color: #c9a45e;
+  margin-top: 0;
+  line-height: 1.1;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.featured-event .label {
+  color: #c9a45e;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.2ch;
+  display: block;
+  margin-bottom: var(--s-1);
+}
+
+.featured-event ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--s1) 0;
+}
+
+.featured-event ul li {
+  color: #e0e0e0;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--s0);
+  align-items: flex-start;
+  margin-bottom: var(--s-1);
+  width: 100%;
+}
+
+.featured-event ul li strong {
+  color: #c9a45e;
+  flex-shrink: 0;
+  min-width: 4.5rem;
+}
+
+.featured-event ul li span {
+  flex-grow: 1;
+}
+
+.event-card {
+  background: white;
+  padding: var(--s2);
+  border: 1px solid #eee;
+  border-top: 4px solid #c9a45e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.event-card h3 {
+  color: #1a1a1a;
+  margin-top: 0;
+}
+
+.event-card time,
+.archive-item time {
+  color: #c9a45e;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.event-archive h2 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: var(--s0);
+  margin-bottom: var(--s1);
+}
+
+.archive-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s0) var(--s2);
+  padding: var(--s1) 0;
+  border-bottom: 1px solid #eee;
+  align-items: baseline;
+}
+
+.archive-item time {
+  flex-basis: 10rem;
+  flex-grow: 1;
+}
+
+.archive-item span {
+  color: #555;
+  font-weight: 500;
+  flex-basis: 15rem;
+  flex-grow: 999;
+}
+
+/* ==========================================================================
+   5. ANIMATIONS
+   ========================================================================== */
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-cover h1 {
+  animation: heroEntrance 1.2s ease-out forwards;
+}
+
+.hero-cover p {
+  opacity: 0;
+  animation: heroEntrance 1.2s ease-out 0.4s forwards;
+}
+
+.hero-cover .cta-button {
+  opacity: 0;
+  animation: heroEntrance 1.2s ease-out 0.8s forwards;
 }
