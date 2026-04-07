@@ -13,24 +13,26 @@
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
-    <header id="top">
-      <a href="index.html" class="logo-link">
-        <img
-          src="assets/images/clent-consort-logo.png"
-          alt="Clent Consort Icon"
-          width="50"
-          height="50"
-        />
-        <span class="brand-name">The Clent Consort</span>
-      </a>
-      <nav aria-label="Main Navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+    <header id="top" class="site-header">
+      <div class="l-center header-inner">
+        <a href="index.html" class="logo-link">
+          <img
+            src="assets/images/clent-consort-logo.png"
+            alt="Logo"
+            width="50"
+            height="50"
+          />
+          <span class="brand-name">The Clent Consort</span>
+        </a>
+        <nav aria-label="Main Navigation">
+          <ul>
+            <li><a href="index.html" aria-current="page">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
     <main>
       <section class="mission-cover">
@@ -73,48 +75,56 @@
           </p>
         </div>
       </section>
-      <section class="cycle-container">
-        <h2 style="text-align: center; margin-bottom: var(--s2)">
-          Our Project Rhythm
-        </h2>
-        <div class="switcher">
-          <div class="step-box">
-            <h3>1. Foundations</h3>
-            <p>
-              Every project begins with the space. We identify cathedrals and
-              historic foundations we would like to visit, aiming to perform in
-              new places regularly. Once the residency is secured, we ascertain
-              the availability of the Consort's singers for the project.
-            </p>
-          </div>
-          <div class="step-box">
-            <h3>2. Preparation</h3>
-            <p>
-              Music is then chosen to best suit the space and the ensemble.
-              Preparation is a dual process of rehearsal and research. Singers
-              receive scores and high-fidelity rehearsal tracks weeks in
-              advance, allowing our limited face-to-face time to be spent as
-              much as possible on blend, tuning, and 'liturgical flow' rather
-              than note-learning. We study the historical context of the music
-              to ensure our interpretation is both technically flawless and
-              spiritually informed.
-            </p>
-          </div>
-          <div class="step-box">
-            <h3>3. Residency</h3>
-            <p>
-              The cycle culminates in a residency — either a full weekend of
-              choral services, or a Saturday Evensong. Living and singing
-              together in the shadow of the cathedral, the ensemble achieves a
-              level of 'consort-identity' that only comes through shared focus.
-              Whether it is a solemn Evensong or a festal Eucharist, the
-              residency is where the preparation meets the stone, creating a
-              unique moment of musical transcendence.
-            </p>
-          </div>
-        </div>
-      </section>
-    </main>
+      <section class="project-rhythm-scroll">
+  <article class="rhythm-slide" id="slide-01">
+    <div class="l-frame slide-bg">
+      <video autoplay muted loop playsinline poster="assets/images/foundations_still.jpg" aria-hidden="true">
+        <source src="assets/images/foundations_comp.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="slide-content l-stack">
+      <span class="step-number">01</span>
+      <h2>Foundations</h2>
+      <p>
+        Every project begins with the space. We identify cathedrals and
+        historic foundations, aiming to perform in new places regularly.
+      </p>
+    </div>
+  </article>
+
+  <article class="rhythm-slide" id="slide-02">
+    <div class="l-frame slide-bg">
+      <video autoplay muted loop playsinline poster="assets/images/preparation_still.jpg" aria-hidden="true">
+        <source src="assets/images/preparation_comp.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="slide-content l-stack">
+      <span class="step-number">02</span>
+      <h2>Preparation</h2>
+      <p>
+        Music is chosen to suit the space. Preparation is a dual process
+        of rehearsal and research to ensure interpretations are
+        spiritually informed.
+      </p>
+    </div>
+  </article>
+
+  <article class="rhythm-slide" id="slide-03">
+    <div class="l-frame slide-bg">
+      <video autoplay muted loop playsinline poster="assets/images/residency_still.jpg" aria-hidden="true">
+        <source src="assets/images/residency_comp.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="slide-content l-stack">
+      <span class="step-number">03</span>
+      <h2>Residency</h2>
+      <p>
+        The cycle culminates in shared focus — where preparation meets the
+        stone, creating a unique moment of musical transcendence.
+      </p>
+    </div>
+  </article>
+</section>
 
     <footer>
       <nav aria-label="Footer Navigation">

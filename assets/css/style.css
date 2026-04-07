@@ -37,7 +37,19 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.05ch;
 }
+html {
+  scroll-behavior: smooth;
+}
 
+body {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Ensure the scrollytelling section also respects it */
+.project-rhythm-scroll {
+  background-color: #000;
+}
 /* ==========================================================================
    2. GLOBAL LAYOUT PATTERNS (Every Layout Primitives)
    ========================================================================== */
@@ -137,7 +149,19 @@ h3 {
     0 10px 15px -3px rgba(0, 0, 0, 0.3),
     0 40px 60px -15px rgba(0, 0, 0, 0.4);
 }
+.l-frame {
+  aspect-ratio: var(--aspect-ratio, 16/9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
 
+.l-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 /* --- UTILITIES --- */
 
 /* Visually Hidden:
@@ -159,26 +183,37 @@ h3 {
    3. GLOBAL COMPONENTS (Header, Footer, Buttons)
    ========================================================================== */
 
-/* Navigation Header */
-header {
+/* --- THE HEADER WRAPPER --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  background-color: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #eee;
+  width: 100%;
+}
+
+.header-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--s1);
-  padding: var(--s1);
-  background-color: white;
-
-  /* NEW: Align the header with the rest of the content */
-  max-width: 80rem; /* Matches your .l-center */
-  margin-inline: auto;
-  width: 100%;
+  padding: var(--s0) 0;
 }
 
 @media (min-width: 45rem) {
-  header {
+  .header-inner {
     flex-direction: row;
     justify-content: space-between;
   }
+}
+
+/* Active State for Nav */
+header nav a[aria-current="page"] {
+  color: #c9a45e;
+  font-weight: 700;
+  border-bottom: 2px solid #c9a45e;
 }
 
 .brand-name {
@@ -226,6 +261,23 @@ header nav a:hover {
   text-decoration: underline;
 }
 
+/* The Inner: Handles the centering and the flex layout */
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s1);
+  padding: var(--s0) 0; /* Vertical padding only, l-center handles horizontal */
+
+  /* No max-width here; .l-center utility handles it */
+}
+
+@media (min-width: 45rem) {
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
 /* CTA Button */
 .cta-button {
   display: inline-block;
@@ -276,16 +328,13 @@ footer a {
   flex-direction: column;
   min-height: 80vh;
   padding: var(--s1);
-  background-image:
+  background:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../images/hero_image_clent_consort.png");
-  background-size: cover;
-  background-position: center;
+    url("../images/hero_image_clent_consort.png") center/cover;
   justify-content: center;
   align-items: center;
   color: white;
   text-align: center;
-  animation: heroImageFade 2.5s ease-out forwards;
   overflow: hidden;
 }
 
@@ -309,11 +358,9 @@ footer a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image:
+  background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../images/cathedral_choir.jpg");
-  background-size: cover;
-  background-position: center 25%;
+    url("../images/cathedral_choir.jpg") center 25% / cover;
   min-height: 50vh;
   color: white;
   text-align: center;
@@ -356,65 +403,104 @@ footer a {
   min-width: 50%;
 }
 
-.cycle-container {
-  margin-top: var(--s4);
-  background-color: #1a1a1a;
-  padding: var(--s4) var(--s1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* --- ABOUT PAGE: Project Rhythm Seamless Stacking --- */
+
+.project-rhythm-scroll {
+  position: relative;
+  background-color: #000;
+  overflow: visible; /* Crucial for sticky children to work */
+}
+
+.rhythm-slide {
+  position: sticky;
+  top: 0;
+  height: 100dvb;
   width: 100%;
-}
-
-.cycle-container h2 {
-  margin: 0 0 var(--s3) 0;
-  color: #c9a45e;
-  text-align: center;
-}
-
-.switcher {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--s2);
+  align-items: center;
   justify-content: center;
-  max-width: 100rem;
-  margin-inline: auto;
+  overflow: hidden;
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
 }
 
-.step-box {
-  flex-basis: calc((30rem - 100%) * 999);
-  flex-grow: 1;
+/* Proper Z-Index Stack */
+#slide-01 {
+  z-index: 1;
+}
+#slide-02 {
+  z-index: 2;
+}
+#slide-03 {
+  z-index: 3;
+}
+
+/* The Vignette Layer */
+.rhythm-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+/* The Video Background */
+.slide-bg,
+.slide-bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.slide-bg video {
+  object-fit: cover;
+  filter: brightness(0.5) contrast(1.1);
+}
+
+/* The Text Content */
+.slide-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+  max-width: 65ch;
   padding: var(--s2);
-  background: #262626;
-  border: 1px solid #333;
-  border-top: 4px solid #c9a45e;
-  transition: transform 0.3s ease;
+
+  /* Scroll-Driven Reveal Animation */
+  view-timeline-name: --slide-reveal;
+  view-timeline-axis: block;
+  animation: reveal-content linear both;
+  animation-timeline: --slide-reveal;
 }
 
-.step-box:hover {
-  transform: translateY(-5px);
-  background: #2d2d2d;
+@keyframes reveal-content {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
 }
 
 .step-number {
   font-family: var(--font-heading);
-  font-size: var(--s2);
   color: #c9a45e;
-  margin-bottom: var(--s1);
+  font-size: var(--s3);
+  margin-bottom: var(--s-1);
   display: block;
 }
-
-.step-box h3 {
-  color: #ffffff;
-  margin-bottom: var(--s0);
-}
-
-.step-box p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #ccc;
-}
-
 /* --- EVENTS PAGE: Featured, Reel, Archive --- */
 .featured-event .invert {
   background-color: #1a1a1a;
