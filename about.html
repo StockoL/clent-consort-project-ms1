@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore the mission and project rhythm of The Clent Consort, a choral ensemble that bridges ancient and contemporary church music." />
     <title>About - The Clent Consort</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,12 +13,12 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
-  <body>
-    <header id="top" class="site-header">
+  <body id="top">
+    <header class="site-header">
       <div class="l-center header-inner">
         <a href="index.html" class="logo-link">
           <img
-            src="assets/images/clent-consort-logo.png"
+            src="assets/images/clent-consort-logo.webp"
             alt="Logo"
             width="50"
             height="50"
@@ -26,8 +27,8 @@
         </a>
         <nav aria-label="Main Navigation">
           <ul>
-            <li><a href="index.html" aria-current="page">Home</a></li>
-            <li><a href="about.html">About</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" aria-current="page">About</a></li>
             <li><a href="events.html">Events</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
@@ -50,7 +51,9 @@
       <section class="conductor-sidebar sidebar">
         <div class="sidebar-image">
           <img
-            src="assets/images/conductor_headshot.png"
+            src="assets/images/conductor_headshot.jpg"
+            width="400"
+            height="600"
             alt="Conductor in a dark suit and blue tie stands facing the camera with a gentle smile, while a choir in dark attire holding blue music folders is seated behind him before a large pipe organ in a historic church hall, creating a formal and welcoming atmosphere."
           />
         </div>
@@ -75,55 +78,54 @@
           </p>
         </div>
       </section>
-      <section class="project-rhythm-scroll">
-  <article class="rhythm-slide" id="slide-01">
-    <div class="l-frame slide-bg">
-      <video autoplay muted loop playsinline poster="assets/images/foundations_still.jpg" aria-hidden="true">
-        <source src="assets/images/foundations_comp.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="slide-content l-stack">
-      <span class="step-number">01</span>
-      <h2>Foundations</h2>
-      <p>
-        Every project begins with the space. We identify cathedrals and
-        historic foundations, aiming to perform in new places regularly.
-      </p>
-    </div>
-  </article>
+      <section class="project-rhythm-swipe-wrapper">
+  
+  <nav class="swipe-nav" aria-label="Project stages">
+    <a href="#slide-01"><span>01</span> Foundations</a>
+    <a href="#slide-02"><span>02</span> Preparation</a>
+    <a href="#slide-03"><span>03</span> Residency</a>
+  </nav>
 
-  <article class="rhythm-slide" id="slide-02">
-    <div class="l-frame slide-bg">
-      <video autoplay muted loop playsinline poster="assets/images/preparation_still.jpg" aria-hidden="true">
-        <source src="assets/images/preparation_comp.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="slide-content l-stack">
-      <span class="step-number">02</span>
-      <h2>Preparation</h2>
-      <p>
-        Music is chosen to suit the space. Preparation is a dual process
-        of rehearsal and research to ensure interpretations are
-        spiritually informed.
-      </p>
-    </div>
-  </article>
+  <div class="project-rhythm-scroll">
+    <article class="rhythm-slide" id="slide-01">
+      <div class="l-frame slide-bg">
+        <video muted loop playsinline poster="assets/images/foundations_still.jpg" class="lazy-video" aria-hidden="true">
+          <source data-src="assets/images/foundations_comp.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="slide-content l-stack">
+        <span class="step-number">01</span>
+        <h2>Foundations</h2>
+        <p>Every project begins with the space. We identify cathedrals and historic foundations, aiming to perform in new places regularly.</p>
+      </div>
+    </article>
 
-  <article class="rhythm-slide" id="slide-03">
-    <div class="l-frame slide-bg">
-      <video autoplay muted loop playsinline poster="assets/images/residency_still.jpg" aria-hidden="true">
-        <source src="assets/images/residency_comp.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="slide-content l-stack">
-      <span class="step-number">03</span>
-      <h2>Residency</h2>
-      <p>
-        The cycle culminates in shared focus — where preparation meets the
-        stone, creating a unique moment of musical transcendence.
-      </p>
-    </div>
-  </article>
+    <article class="rhythm-slide" id="slide-02">
+      <div class="l-frame slide-bg">
+        <video muted loop playsinline poster="assets/images/preparation_still.jpg" class="lazy-video" aria-hidden="true">
+          <source data-src="assets/images/preparation_comp.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="slide-content l-stack">
+        <span class="step-number">02</span>
+        <h2>Preparation</h2>
+        <p>Music is chosen to suit the space. Preparation is a dual process of rehearsal and research to ensure interpretations are spiritually informed.</p>
+      </div>
+    </article>
+
+    <article class="rhythm-slide" id="slide-03">
+      <div class="l-frame slide-bg">
+        <video muted loop playsinline poster="assets/images/residency_still.jpg" class="lazy-video" aria-hidden="true">
+          <source data-src="assets/images/residency_comp.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="slide-content l-stack">
+        <span class="step-number">03</span>
+        <h2>Residency</h2>
+        <p>The cycle culminates in shared focus — where preparation meets the stone, creating a unique moment of musical transcendence.</p>
+      </div>
+    </article>
+  </div>
 </section>
 
     <footer>

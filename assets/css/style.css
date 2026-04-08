@@ -281,20 +281,26 @@ header nav a:hover {
 /* CTA Button */
 .cta-button {
   display: inline-block;
-  background-color: #fff;
-  color: #1a1a1a;
+  background-color: #c9a45e; /* Gold */
+  color: #1a1a1a; /* Dark Charcoal for contrast */
   padding: 1rem 2rem;
   text-align: center;
   text-decoration: none;
   border-radius: 2px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  transition: background-color 0.3s;
+  font-family:
+    "Cinzel", serif; /* Using the display font for buttons feels more premium */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition:
+    transform 0.2s ease,
+    background-color 0.3s;
   margin-top: var(--s1);
 }
 
 .cta-button:hover {
-  background-color: #ddd;
+  background-color: #dcb97a; /* A lighter gold for the hover state */
+  transform: translateY(-2px); /* A subtle 'lift' effect */
 }
 
 /* Global Footer */
@@ -330,7 +336,7 @@ footer a {
   padding: var(--s1);
   background:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../images/hero_image_clent_consort.png") center/cover;
+    url("../images/hero_image_clent_consort.jpg") center/cover;
   justify-content: center;
   align-items: center;
   color: white;
@@ -360,7 +366,7 @@ footer a {
   align-items: center;
   background:
     linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("../images/cathedral_choir.jpg") center 25% / cover;
+    url("../images/cathedral_choir.webp") center 25% / cover;
   min-height: 50vh;
   color: white;
   text-align: center;
@@ -403,49 +409,115 @@ footer a {
   min-width: 50%;
 }
 
-/* --- ABOUT PAGE: Project Rhythm Seamless Stacking --- */
+.project-rhythm-scroll-wrapper {
+  overflow: hidden;
+  background-color: #000;
+}
+
+/* --- PROJECT RHYTHM REFACTOR (PURE CSS SWIPE) --- */
+
+.project-rhythm-swipe-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+}
 
 .project-rhythm-scroll {
-  position: relative;
-  background-color: #000;
-  overflow: visible; /* Crucial for sticky children to work */
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  height: 100vh;
+  /* Hide scrollbars */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.project-rhythm-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .rhythm-slide {
-  position: sticky;
-  top: 0;
-  height: 100dvb;
-  width: 100%;
+  flex: 0 0 100%;
+  width: 100vw;
+  height: 100%;
+  scroll-snap-align: start;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.5);
 }
 
-/* Proper Z-Index Stack */
-#slide-01 {
-  z-index: 1;
-}
-#slide-02 {
-  z-index: 2;
-}
-#slide-03 {
-  z-index: 3;
+/* Nav Dots */
+.swipe-nav {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 1rem;
+  width: auto;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  border: 1px solid rgba(201, 164, 94, 0.3);
 }
 
-/* The Vignette Layer */
-.rhythm-slide::after {
-  content: "";
+.swipe-nav a {
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 0.1ch;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.swipe-nav a span {
+  color: #c9a45e;
+  font-weight: bold;
+}
+
+.swipe-nav a:hover {
+  background: rgba(201, 164, 94, 0.2);
+  color: #c9a45e;
+}
+
+/* Ensure Videos behave in the new layout */
+.slide-bg,
+.slide-bg video {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  background: radial-gradient(
-    circle,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.8) 100%
-  );
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* On Mobile, we shrink it back to dots so it doesn't crowd the screen */
+@media (max-width: 48rem) {
+  .swipe-nav {
+    background: none;
+    border: none;
+    bottom: 1.5rem;
+  }
+  .swipe-nav a {
+    width: 12px;
+    height: 12px;
+    padding: 0;
+    text-indent: -9999px; /* Hides the text, keeps the dot */
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid #c9a45e;
+  }
 }
 
 /* The Video Background */
@@ -591,7 +663,7 @@ footer a {
 
 .event-card time,
 .archive-item time {
-  color: #c9a45e;
+  color: #36454f;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.9rem;
