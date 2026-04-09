@@ -39,6 +39,7 @@ h3 {
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -278,6 +279,41 @@ header nav a:hover {
     justify-content: space-between;
   }
 }
+/* --- Dashboard Specific Nav (The DRY Way) --- */
+
+@media (max-width: 45rem) {
+  /* Targeting only the dashboard list */
+  .nav-list--dashboard {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    background: #f5f5f5;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin: 0.5rem var(--s0);
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .nav-list--dashboard::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Make the links act like equal-width tabs */
+  .nav-list--dashboard .nav-link {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.2rem;
+    white-space: nowrap;
+    border-bottom: none; /* Clean removal without shouting */
+  }
+
+  /* Shrink logo on mobile dashboard to prevent 'fat' header */
+  .dashboard-page .logo-link img {
+    height: 32px;
+  }
+}
 /* CTA Button */
 .cta-button {
   display: inline-block;
@@ -303,27 +339,113 @@ header nav a:hover {
   transform: translateY(-2px); /* A subtle 'lift' effect */
 }
 
-/* Global Footer */
-footer {
-  padding: var(--s2) var(--s1);
-  text-align: center;
-  border-top: 1px solid #eee;
+/* Footer */
+
+.footer-slim {
+  margin-top: var(--s1);
+  padding: 1.5rem 0 1rem; /* Very tight vertical padding */
+  background-color: #1a1a1a;
+  border-top: 1px solid rgba(201, 164, 94, 0.2);
 }
 
-footer ul {
+.footer-grid {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: var(--s1);
-  list-style: none;
-  padding: 0;
-  margin-bottom: var(--s1);
+  margin-bottom: 1rem;
 }
 
-footer a {
+/* FooterButton Styling */
+.footer-btn {
+  display: inline-block;
   text-decoration: none;
-  color: #555;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1ch;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
+.footer-btn:hover {
+  border-color: #c9a45e;
+  color: #c9a45e;
+  background: rgba(201, 164, 94, 0.05);
+}
+
+/* Column Alignment */
+.footer-col-left {
+  flex: 1;
+  text-align: right;
+}
+.footer-col-center {
+  flex: 1;
+  text-align: center;
+}
+.footer-col-right {
+  flex: 1;
+  text-align: left;
+}
+
+/* Social Icons */
+.social-group {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.social-icon {
+  color: rgba(255, 255, 255, 0.5);
+  width: 18px;
+  height: 18px;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #c9a45e;
+  transform: translateY(-2px);
+}
+
+.copyright {
+  font-size: 0.8rem;
+  opacity: 0.3;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+}
+
+/* Mobile: Stack nicely and swap button order */
+@media (max-width: 45rem) {
+  .footer-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Assign order to columns */
+  .footer-col-right {
+    order: 1; /* Moves "Top ↑" to the first position */
+  }
+
+  .footer-col-center {
+    order: 2; /* Keeps social icons in the middle */
+  }
+
+  .footer-col-left {
+    order: 3; /* Moves "Member Login" to the bottom */
+  }
+
+  /* Reset text alignment for mobile stacking */
+  .footer-col-left,
+  .footer-col-right {
+    width: 100%;
+    text-align: center;
+  }
+}
 /* ==========================================================================
    4. PAGE-SPECIFIC SECTIONS
    ========================================================================== */
@@ -428,7 +550,7 @@ footer a {
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  height: 100vh;
+  height: calc(100vh - 100px);
   /* Hide scrollbars */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -447,6 +569,8 @@ footer a {
   display: flex;
   align-items: center;
   justify-content: center;
+  scroll-margin-top: 0;
+  scroll-snap-align: top;
 }
 
 /* Nav Dots */
@@ -780,6 +904,67 @@ footer a {
   transform: translateY(-2px); /* Physical lift on hover */
   box-shadow: 0 5px 15px rgba(201, 164, 94, 0.4); /* Gold glow */
 }
+
+/* --- Logistics Card Header --- */
+.logistics-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--s1);
+  padding-bottom: var(--s0);
+}
+
+/* --- Refined Large PDF Button --- */
+.file-link--large {
+  display: inline-flex;
+  align-items: center;
+  background-color: rgba(201, 164, 94, 0.1);
+  border: 1px solid rgba(201, 164, 94, 0.4);
+  color: #c9a45e;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.file-link--large:hover {
+  background-color: #c9a45e;
+  color: #1a1a1a;
+  border-color: #c9a45e;
+}
+
+/* Resetting the icon so it doesn't double up */
+.file-link--large .file-icon {
+  background-color: #c9a45e;
+  color: #1a1a1a;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+  margin-right: 0.75rem;
+  transition: background-color 0.2s ease;
+}
+
+.file-link--large:hover .file-icon {
+  background-color: #1a1a1a;
+  color: #c9a45e;
+}
+
+/* Mobile: Stack and center the button */
+@media (max-width: 45rem) {
+  .logistics-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .file-link--large {
+    width: 100%;
+    justify-content: center;
+  }
+}
 /* ==========================================================================
    5. ANIMATIONS
    ========================================================================== */
@@ -932,9 +1117,32 @@ footer a {
 /* --- Layout Settings (Pure CSS Thresholds) --- */
 .dashboard-sidebar {
   --gap: var(--s2);
-  --sidebar-width: 25rem; /* Prevents squishing by prioritizing the list side */
+  display: flex;
+  flex-wrap: wrap;
+}
+/* The Main Schedule (First Child) */
+.dashboard-sidebar > :first-child {
+  /* Start at 40rem and grow to fill almost all available space */
+  flex-basis: 40rem;
+  flex-grow: 999;
 }
 
+/* The Meta Info (Second Child / Aside) */
+.dashboard-sidebar > :last-child {
+  /* Set a smaller basis so it stays slim */
+  flex-basis: 30rem;
+  flex-grow: 1;
+}
+
+/* Add a vertical divider only on desktop to separate the two sections */
+@media (min-width: 50rem) {
+  .schedule-meta {
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0;
+    padding-left: var(--s2);
+  }
+}
 .dashboard-switcher {
   --threshold: 60rem; /* Stacks sooner to allow full-width reading */
 }
