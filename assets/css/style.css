@@ -1109,7 +1109,19 @@ header nav a:hover {
 .box.invert input:invalid {
   box-shadow: none;
 }
+.form-hint {
+  font-size: 0.8rem;
+  color: rgba(201, 164, 94, 0.7); /* Muted gold */
+  line-height: 1.4;
+  margin-top: 0.25rem;
+}
 
+.form-hint strong {
+  color: #c9a45e; /* Brighter gold for the word 'Hint' */
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05ch;
+}
 /* ==========================================================================
    7. MEMBER DASHBOARD SPECIFICS
    ========================================================================== */

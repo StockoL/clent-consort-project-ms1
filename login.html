@@ -73,11 +73,14 @@
                 id="pass"
                 name="password"
                 pattern="Clent2026"
-                title="Invalid Key. Hint: The name of the choir + the current year."
                 placeholder="••••••••"
                 required
                 autocomplete="current-password"
+                aria-describedby="pass-hint"
               />
+              <p id="pass-hint" class="form-hint">
+                <strong>Hint:</strong> The name of the choir + the current year.
+              </p>
             </div>
 
             <button type="submit" class="cta-button">
