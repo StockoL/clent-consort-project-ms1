@@ -194,7 +194,21 @@ body {
   border-bottom: 1px solid #eee;
   width: 100%;
 }
+/* Landscape mode */
+@media (max-height: 450px) and (orientation: landscape) {
+  .site-header {
+    padding: 0.25rem 0;
+  }
 
+  .site-header img {
+    height: 30px;
+    width: 30px;
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+  }
+}
 .header-inner {
   display: flex;
   flex-direction: column;
@@ -469,13 +483,11 @@ header nav a:hover {
 .hero-cover h1 {
   font-size: clamp(2.5rem, 10vw, 5rem);
   font-weight: 700;
-  margin-bottom: var(--s1);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-cover p {
   font-size: 1.4rem;
-  margin-bottom: var(--s2);
   max-width: 60ch;
   margin-inline: auto;
 }
@@ -638,12 +650,20 @@ header nav a:hover {
     width: 12px;
     height: 12px;
     padding: 0;
-    text-indent: -9999px; /* Hides the text, keeps the dot */
+    font-size: 0;
     background: rgba(255, 255, 255, 0.2);
     border: 1px solid #c9a45e;
   }
 }
-
+@media (max-height: 450px) and (orientation: landscape) {
+  .swipe-nav {
+    left: auto;
+    right: 1rem;
+    bottom: 5rem;
+    transform: none;
+    flex-direction: column;
+  }
+}
 /* The Video Background */
 .slide-bg,
 .slide-bg video {
@@ -697,6 +717,7 @@ header nav a:hover {
   margin-bottom: var(--s-1);
   display: block;
 }
+
 /* --- EVENTS PAGE: Featured, Reel, Archive --- */
 .featured-event .invert {
   background-color: #1a1a1a;
@@ -904,6 +925,8 @@ header nav a:hover {
   transform: translateY(-2px); /* Physical lift on hover */
   box-shadow: 0 5px 15px rgba(201, 164, 94, 0.4); /* Gold glow */
 }
+
+/* Members Resource Area */
 
 /* --- Logistics Card Header --- */
 .logistics-card-header {
