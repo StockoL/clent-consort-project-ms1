@@ -1210,20 +1210,35 @@ header nav a:hover {
   margin-top: var(--s1);
 }
 
+/* --- Music Library: Clickable Rows --- */
+
 .music-list {
   list-style: none;
   padding: 0;
 }
 
+/* 1. The Container: Remove flex here so the link can fill the space */
 .music-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.file-link {
+/* 2. The Link: This is now the 'row' itself */
+.music-row-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem var(--s0); /* Slightly more padding for better touch targets */
+  text-decoration: none;
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.music-row-link:hover {
+  background-color: rgba(201, 164, 94, 0.05); /* Subtle highlight */
+}
+
+/* 3. The Indicator: Retaining your exact 'file-link' styling */
+.file-indicator {
   display: inline-flex;
   align-items: center;
   padding: 0.3rem 0.7rem;
@@ -1233,11 +1248,11 @@ header nav a:hover {
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
-  text-decoration: none;
   gap: 0.5rem;
 }
 
-.file-link::before {
+/* Retaining your specific PDF label styling */
+.file-indicator::before {
   content: "PDF";
   font-size: 0.6rem;
   padding: 0.1rem 0.3rem;
@@ -1246,15 +1261,16 @@ header nav a:hover {
   border-radius: 2px;
 }
 
+/* 4. Featured Download: Integrating the new row logic */
 .featured-download {
   background: rgba(201, 164, 94, 0.1);
-  padding: var(--s0);
   border-left: 4px solid #c9a45e;
+  /* Resetting padding here because .music-row-link handles it now */
+  padding: 0;
 }
 
-.featured-download a {
-  color: #fff;
-  text-decoration: none;
+.featured-download .music-row-link {
+  font-weight: 700;
 }
 
 /* --- Sidebar Meta & Voice Hubs --- */
