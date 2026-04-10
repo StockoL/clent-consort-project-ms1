@@ -18,7 +18,7 @@ contactForms.forEach((form) => {
       : "Thank you for reaching out. We will get back to you shortly regarding your enquiry.";
     // 5. Replace the form with a success message
     container.innerHTML = `
-        <div class="box invert l-stack" style="border-color: #4caf50; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+        <div class="box invert l-stack" style="border-color: #4caf50; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; role="alert">
           <h2 style="color: #4caf50;">${successTitle}</h2>
           <p>${successBody}</p>
           <div style="margin-top: var(--s1);">

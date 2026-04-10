@@ -264,6 +264,10 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 
 **Future Features:** Currently, the contact forms are functional on the front-end but do not submit data to a live server. In Phase 2, these would be connected to an API or a back-end service like EmailJS or a Python/Django database.
 
+**JavaScript: Defensive UX Refinement**
+
+To prevent the default browser `405` error associated with static hosting (GitHub Pages), I implemented a custom JavaScript event listener on the contact forms. This script utilises `event.preventDefault()` to intercept the submission and dynamically injects a context-specific success message into the DOM. This ensures a seamless 'User Loop' and maintains the application's visual integrity without requiring a back-end server.
+
 ### members.html
 
 **Strategic Goal:** To provide a centralised, mobile-optimised "Single Source of Truth" for active ensemble members to access logistics and rehearsal materials.
