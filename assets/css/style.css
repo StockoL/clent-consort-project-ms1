@@ -1352,6 +1352,67 @@ header nav a:hover {
   font-size: 0.8rem;
 }
 
+/* --- 1. The Video Primitive (16:9 Aspect Ratio) --- */
+.video-responsive {
+  position: relative;
+  padding-bottom: 56.25%; /* Magic number for 16:9 */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  border-radius: 4px;
+}
+
+.video-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* --- 2. The Hub Layout & Card Taming --- */
+.video-card,
+.video-wrapper {
+  max-width: 800px;
+  margin: 0 auto; /* Centers the video on wide screens */
+}
+
+/* --- 3. Accordion (Details/Summary) Styles --- */
+.video-accordion summary {
+  list-style: none; /* Modern browsers */
+  display: inline-block;
+  cursor: pointer;
+}
+
+.video-accordion summary::-webkit-details-marker {
+  display: none; /* Safari specific */
+}
+
+/* Visual state when the video is revealed */
+.video-accordion[open] summary {
+  margin-bottom: 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(201, 164, 94, 0.5);
+  color: #c9a45e;
+}
+
+/* Smoothly fade in the video when the details are opened */
+.video-accordion[open] .video-responsive {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* --- General Utilities --- */
 .u-measure {
   max-width: 65ch;
