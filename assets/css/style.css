@@ -460,6 +460,27 @@ header nav a:hover {
     text-align: center;
   }
 }
+
+/* Custom Scrollbar */
+
+/* Custom Scrollbar for Chrome/Safari/Edge */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Match your body background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a45e; /* Gold scroll thumb */
+  border-radius: 10px;
+  border: 3px solid #1a1a1a; /* Creates a 'floating' look */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e5c48b; /* Brighter gold on hover */
+}
 /* ==========================================================================
    4. PAGE-SPECIFIC SECTIONS
    ========================================================================== */
