@@ -31,6 +31,14 @@ To ensure the site meets real-world needs, a product audit of local ensemble web
 - **High Priority/High Feasibility:** Responsive calendar and contact form (Core UX).
 - **High Priority/Low Feasibility:** Integrated member-only resources portal with login (deferred to Phase 2 to maintain project timeline/Scope).
 
+**UX Design and Wireframing**
+
+Before writing a single line of code, I utilised **Excalidraw** to create low-fidelity wireframes for each page. This allowed me to:
+
+- **Map User Flows**: Visualise the "Patron's Path" and "Member's Journey" to ensure essential information (such as event dates or rehearsal scores) was never more than two clicks away.
+- **Rapid Prototyping**: Test the "intrinsic layout" concepts from _Every Layout_ in a visual environment, identifying where the `.l-switcher` and `.l-sidebar` primitives would be most effective.
+- **Layout Consistency**: Ensure the "Cathedral Aesthetic" remained grounded in a clean, functional grid across all breakpoints.
+
 ---
 
 ## 2. Scope Plane
@@ -146,7 +154,13 @@ The visual design is engineered to guide the user's eye from the high-impact "Id
 
 ## Global Features & Design System
 
-The Clent Consort web application is built upon a unified design system that ensures visual harmony and technical efficiency across all “movements” (pages) of the site.
+### **The "Every Layout" Methodology**
+
+My approach to CSS was heavily influenced by the principles of **Every Layout** (Heydon Pickering & Andy Bell). Instead of relying on rigid, breakpoint-heavy media queries, I focused on **Intrinsic Layouts** that adapt based on the available space and the content's needs.
+
+- **Axiomatic CSS:** I implemented a set of "Layout Primitives" (The Stack, The Switcher, The Center, and The Reel). These are "Axiomatic" because they provide a robust foundation that handles 90% of the layout requirements without writing new, specific CSS for every component.
+- **The "Threshold" Concept:** Following the Switcher pattern, I used a flex-basis and a threshold (e.g., `60rem` on the Contact page) to allow the browser to decide exactly when to stack elements. This eliminates the "awkward in-between" states often found in traditional responsive design.
+- **Composition over Components:** By using the `.l-stack` primitive, I separated the responsibility of "Layout" (the space between things) from "Component" (the things themselves). This ensures the "Project Rhythm" on the About page and the "Learning Hub" on the Members page maintain a perfect, consistent vertical cadence.
 
 ### The Design System (CSS Architecture)
 
@@ -154,35 +168,33 @@ To ensure the code is DRY (Do not Repeat Yourself) and scalable, I implemented a
 
 #### The Modular Scale
 
-I used CSS Custom Properties (--s-1 to \--s5) to create a mathematical spacing scale. This is to make sure the “rhythm” of margins and paddings is consistent across the site.
+I used CSS Custom Properties (`--s-1` to `--s5`) to create a mathematical spacing scale. This is to make sure the “rhythm” of margins and paddings is consistent across the site.
 
 #### Layout Primitives
 
-- **.l-stack**: Manages vertical spacing between elements automatically, preventing the need for manual margin-top declarations on individual components.
-- **.l-switcher**: An intrinsic layout tool that allows elements to sit side-by-side on large screens but automatically stack vertically when a threshold is met, reducing the reliance on complex media queries.
-- **.l-center**: A utility that keeps content within a readable maximum width while centering it on the screen.
-- **.l-reel**: Provides a smooth, horizontal scrolling experience for galleries or lists on mobile devices.
+- **`.l-stack`**: Manages vertical spacing between elements automatically, preventing the need for manual margin-top declarations on individual components.
+- **`.l-switcher`**: An intrinsic layout tool that allows elements to sit side-by-side on large screens but automatically stack vertically when a threshold is met, reducing the reliance on complex media queries.
+- **`.l-center`**: A utility that keeps content within a readable maximum width while centering it on the screen.
+- **`.l-reel`**: Provides a smooth, horizontal scrolling experience for galleries or lists on mobile devices.
 
 #### Header & Navigation
 
 The header serves as the primary "Command Centre" for the user.
 
 - **Persistent Navigation**: Using position: sticky, the header remains available at all times, ensuring the user never feels "lost in the score."
-- **Semantic Accessibility**: I used the aria-current="page" attribute to provide a visual and structural cue to users (and screen readers) regarding their current location.
+- **Semantic Accessibility**: I used the `aria-current="page"` attribute to provide a visual and structural cue to users (and screen readers) regarding their current location.
 - **Dual-Context Navigation**:
   - **Public Nav**: Focused on the "EPK" experience (About, Events, Contact).
   - **Member Nav**: A tailored "Dashboard" navigation for the _members.html_ page.
-- **Landscape Optimisation:** Implemented a specific "Short-Height" media query (max-height: 450px) to compress the header and brand assets. This prevents the UI from obscuring content on landscape mobile devices, maintaining a functional "aspect ratio" for the user.
+- **Landscape Optimisation:** Implemented a specific "Short-Height" media query (`max-height: 450px`) to compress the header and brand assets. This prevents the UI from obscuring content on landscape mobile devices, maintaining a functional "aspect ratio" for the user.
 
 #### Footer
 
 The footer provides a "Coda" to every page, offering secondary navigation and social proof.
 
 - **Three-Column Grid:** Managed via a responsive flex layout that elegantly stacks into a single column on mobile devices.
-- **Interactive Elements:** Includes a "Member Login" gateway and a "Top ↑" anchor to improve long-page navigation.
+- **Interactive Elements:** Includes a "Member Login" gateway and a "`Top ↑`" anchor to improve long-page navigation.
 - **SVG Integration:** Social media icons are implemented using inline SVGs, ensuring high-performance loading and perfect scaling on all display types.
-
-##
 
 ## Individual Pages
 
@@ -192,10 +204,10 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 
 **Feature:** High-Performance Hero Section
 
-- **Technical Implementation:** Utilises fetchpriority="high" and preload to ensure the Largest Contentful Paint (LCP) is as fast as possible.
-- **Fluid Typography**: Employs the CSS clamp() function for the main heading, ensuring a seamless responsive transition without the need for multiple media queries.
+- **Technical Implementation:** Utilises `fetchpriority="high"` and preload to ensure the Largest Contentful Paint (LCP) is as fast as possible.
+- **Fluid Typography**: Employs the CSS `clamp()` function for the main heading, ensuring a seamless responsive transition without the need for multiple media queries.
 - **Visual Hierarchy:** Uses a dark linear-gradient overlay on the hero image to guarantee text legibility and meet accessibility contrast standards.
-- **Min-height: 80vh**: set as 100vh behaved strangely on some mobile browser address bars, and the navigation was to be kept visible at the bottom of the fold.
+- **`Min-height: 80vh`**: set as `100vh` behaved strangely on some mobile browser address bars, and the navigation was to be kept visible at the bottom of the fold.
 
 **User Flow:** The primary Call to Action (CTA) "Our Next Project" directs users straight to the Events page, facilitating the "Patron’s Path."
 
@@ -205,16 +217,16 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 
 **Feature: "Project Rhythm" Interactive Slider**
 
-- Technical Implementation: A "Pure CSS" slider built using scroll-snap-type. This provides a native-feeling mobile swipe experience without the overhead of JavaScript libraries.
+- Technical Implementation: A "Pure CSS" slider built using `scroll-snap-type`. This provides a native-feeling mobile swipe experience without the overhead of JavaScript libraries.
 - Scroll-Driven Animations: Utilises the view-timeline API to animate content opacity and scale as the user scrolls through the stages, creating a dynamic "reveal" effect.
 
 **Feature: Conductor's Sidebar**
 
-- Layout Pattern: Employs an intrinsic .sidebar primitive. By using a high flex-grow value on the text, the layout self-optimises for various screen sizes, stacking vertically only when necessary to maintain readability.
+- Layout Pattern: Employs an intrinsic `.sidebar` primitive. By using a high flex-grow value on the text, the layout self-optimises for various screen sizes, stacking vertically only when necessary to maintain readability.
 
 **Visual Polish:** Uses a subtle sepia filter and contrast adjustment on the conductor's headshot to align with the "Cathedral Aesthetic" and provide a consistent tonal warmth.
 
-Lighthouse Report: The About page achieved a Performance score of 85\. This 'performance cost' was a conscious design choice to prioritise high-impact visual storytelling via background videos. To mitigate the impact, I implemented poster images and used the playsinline attribute to ensure efficient loading on mobile devices.
+**Lighthouse Report:** The About page achieved a Performance score of 85. This 'performance cost' was a conscious design choice to prioritise high-impact visual storytelling via background videos. To mitigate the impact, I implemented poster images and used the `playsinline` attribute to ensure efficient loading on mobile devices.
 
 ### events.html
 
@@ -222,17 +234,17 @@ Lighthouse Report: The About page achieved a Performance score of 85\. This 'per
 
 **Feature: Featured Event Card**
 
-- **Technical Implementation:** Leverages the .l-sidebar primitive inside a .box.invert container. This creates a high-contrast "Call to Action" area that is fully responsive.
-- **Visual Polish:** Uses aspect-ratio: 16 / 9 for the event imagery on mobile to maintain consistency, which adapts to a full-height cover on larger viewports.
+- **Technical Implementation:** Leverages the `.l-sidebar` primitive inside a `.box.invert` container. This creates a high-contrast "Call to Action" area that is fully responsive.
+- **Visual Polish:** Uses `aspect-ratio: 16 / 9` for the event imagery on mobile to maintain consistency, which adapts to a full-height cover on larger viewports.
 
 **Feature: Recent Performance Reel**
 
-- **Layout Pattern:** Utilises the .l-reel primitive. This allows for horizontal "overflow" scrolling on mobile, providing a tactile way to browse recent history without creating a "long scroll" for the user.
+- **Layout Pattern:** Utilises the `.l-reel` primitive. This allows for horizontal "overflow" scrolling on mobile, providing a tactile way to browse recent history without creating a "long scroll" for the user.
 
 **Feature: Past Events Archive**
 
-- **Clean Code Approach:** Implemented as a list of .archive-item components. By using flexbox with a high flex-grow value on descriptions, the archive functions as a self-aligning table that automatically stacks on smaller screens.
-- **Semantics:** Extensive use of the \<time\> element ensures the chronological data is accessible and SEO-friendly.
+- **Clean Code Approach:** Implemented as a list of `.archive-item` components. By using flexbox with a high flex-grow value on descriptions, the archive functions as a self-aligning table that automatically stacks on smaller screens.
+- **Semantics:** Extensive use of the `<time>` element ensures the chronological data is accessible and SEO-friendly.
 
 ### contact.html
 
@@ -240,15 +252,15 @@ Lighthouse Report: The About page achieved a Performance score of 85\. This 'per
 
 **Feature: Dual-Form Switcher Layout**
 
-- **Technical Implementation:** Utilises the .l-switcher layout primitive. This ensures that the General Enquiry and Audition forms sit side-by-side on larger displays but intelligently stack on mobile devices once the 60rem threshold is reached.
+- **Technical Implementation:** Utilises the `.l-switcher` layout primitive. This ensures that the General Enquiry and Audition forms sit side-by-side on larger displays but intelligently stack on mobile devices once the `60rem` threshold is reached.
 - **Intrinsic Responsiveness:** By allowing the layout to dictate its own "snap point," the design remains robust across a vast array of viewport sizes without redundant media queries.
 
 **Feature: High-Contrast Form Design**
 
-- **Visual Hierarchy:** Uses "White Well" inputs against the .invert (dark) background. This creates an immediate focal point for the user, guiding them toward the input fields.
-- **Interaction Design**: Implemented custom :focus states with a gold glow and a translateY(-2px) hover effect on buttons, providing tactile feedback that mimics a responsive physical interface.
+- **Visual Hierarchy:** Uses "White Well" inputs against the `.invert` (dark) background. This creates an immediate focal point for the user, guiding them toward the input fields.
+- **Interaction Design**: Implemented custom focus states with a gold glow and a `translateY(-2px)` hover effect on buttons, providing tactile feedback that mimics a responsive physical interface.
 
-**Accessibility**: Every form field is explicitly linked to a unique \<label\> and includes required attributes for robust client-side validation.
+**Accessibility**: Every form field is explicitly linked to a unique label and includes required attributes for robust client-side validation.
 
 **Future Features:** Currently, the contact forms are functional on the front-end but do not submit data to a live server. In Phase 2, these would be connected to an API or a back-end service like EmailJS or a Python/Django database.
 
@@ -260,13 +272,9 @@ Lighthouse Report: The About page achieved a Performance score of 85\. This 'per
 
 - **Technical Implementation:** Utilises a specialised "Dashboard Nav" that features a horizontal scroll on mobile devices. This ensures all four key sections (Schedule, Logistics, Library, Learning) are instantly accessible without taking up significant vertical space.
 
-**Feature: Semantic Rehearsal Ledger**
-
-- **Data Structure:** Employs HTML Description Lists (\<dl\>) to ensure schedules and logistics are accessible to screen readers and structurally sound.
-
 **Feature: Voice Part Learning Hub**
 
-- **Layout Pattern**: Uses the .l-switcher primitive to display voice-part specific resources. The layout adapts intrinsically from a multi-column grid to a single-column stack based on the user's viewport.
+- **Layout Pattern**: Uses the `.l-switcher` primitive to display voice-part specific resources. The layout adapts intrinsically from a multi-column grid to a single-column stack based on the user's viewport.
 
 **Feature: Logistics Integration**
 
@@ -278,7 +286,7 @@ Lighthouse Report: The About page achieved a Performance score of 85\. This 'per
 
 **Feature: Semantic Data Display**
 
-- **Logic**: Employs HTML Description Lists (\<dl\>) for rehearsal dates and times. This maintains a strict relationship between the "Date" (label) and the "Repertoire" (data), which is significantly more accessible than a standard bulleted list.
+- **Logic**: Employs HTML Description Lists `<dl>` for rehearsal dates and times. This maintains a strict relationship between the "Date" (label) and the "Repertoire" (data), which is significantly more accessible than a standard bulleted list.
 
 **Feature: Interactive Music Library**
 
@@ -288,7 +296,7 @@ Lighthouse Report: The About page achieved a Performance score of 85\. This 'per
 
 - **Issue Identified:** Lighthouse Audit indicated non-sequential heading orders.
 - **Action Taken:** Refactored sub-headings from `<h4>` to `<h3>` to ensure a sequentially-descending order, improving semantic navigation for screen reader users.
-- **Outcome:** Score increased from 93 to 95, consistent with the rest of the site.
+- **Outcome:** Score increased from 93 to 95, more consistent with the rest of the site.
 
 ### login.html
 
@@ -296,10 +304,10 @@ Lighthouse Report: The About page achieved a Performance score of 85\. This 'per
 
 **Feature: Interactive Security Feedback**
 
-- **Technical Implementation**: Utilises advanced CSS pseudo-classes (:placeholder-shown, :valid, :invalid) to provide real-time visual feedback. The input border transitions from neutral to red (error) or green (success) as the user enters the "Skeleton Key."
-- **Mobile Optimisation**: Input fields and buttons are designed with "Fat-Finger" targets (min-height: 3.5rem) and optimised font sizes to prevent automatic browser zooming on mobile devices.
+- **Technical Implementation**: Utilises advanced CSS pseudo-classes (`:placeholder-shown, :valid, :invalid`) to provide real-time visual feedback. The input border transitions from neutral to red (error) or green (success) as the user enters the "Skeleton Key."
+- **Mobile Optimisation**: Input fields and buttons are designed with "Fat-Finger" targets (`min-height: 3.5rem`) and optimised font sizes to prevent automatic browser zooming on mobile devices.
 
-**Accessibility**: Includes an aria-describedby link between the password input and its hint, ensuring screen reader users receive the same "Clue" as sighted users.
+**Accessibility**: Includes an `aria-describedby` link between the password input and its hint, ensuring screen reader users receive the same "Clue" as sighted users.
 
 **Technical Note: Member Authentication Workaround**
 
@@ -311,10 +319,22 @@ To maintain the project's focus on HTML and CSS while still fulfilling the 'Memb
 
 **Feature: Contextual UX Design**
 
-- Technical Implementation: Utilises the global .l-stack and .l-center primitives to maintain visual consistency with the rest of the application.
-- Dynamic Spacing: Employs a local CSS variable override (--stack-space) to increase vertical padding, ensuring the error message is the central focus of the viewport.
+- Technical Implementation: Utilises the global `.l-stack` and `.l-center` primitives to maintain visual consistency with the rest of the application.
+- Dynamic Spacing: Employs a local CSS variable override (`--stack-space`) to increase vertical padding, ensuring the error message is the central focus of the viewport.
 
 **Tone & Identity:** The copy ("The Silence of the Stones") maintains the "Cathedral Aesthetic," ensuring that even a technical error feels like part of the ensemble's unique brand story.
+
+### Media & Assets
+
+The visual identity of The Clent Consort is a blend of authentic archival photography, professional-grade AI-assisted imagery, and optimised stock media.
+
+#### Source Credits
+
+- **Branding (Logo):** The Clent Consort logo (stylised overlapping 'CC' with the four Clent stones; an iconic local landmark) was designed using generative AI (Gemini), refined to reflect the ensemble's connection to the local landscape.
+- **Home & Events Hero Imagery:** Original photography was provided by ensemble members. To ensure a high-end visual experience, the Home page hero image was enhanced using Gemini’s AI upscaling tools to resolve quality issues at source.
+- **About Page (Project Rhythm):** The background video assets (Foundations, Preparation, Residency) were sourced from **Canva Pro** stock libraries.
+- **Events Page:** The historical postcard image of St Leonard's Church, Clent, was provided by the church authorities specifically for use on this website.
+- **Conductor Profile:** The conductor's headshot was an original photograph, subsequently repurposed through AI (Gemini) to generate a high-quality, professional headshot consistent with the site's "Cathedral Aesthetic."
 
 ### Performance and Accessibility (Lighthouse Scores)
 
@@ -340,17 +360,17 @@ All HTML and CSS files were passed through the **W3C HTML Service** and **W3C Ji
 
 **W3C HTML Service**
 
-While the W3C Validator returned a successful pass with no errors, after pointing out the need for two closing tags, it provided 'Info' regarding the use of trailing slashes on void elements (e.g., \<meta /\>, \<link /\>). I have refactored my code to remove these slashes in accordance with modern HTML5 best practices, ensuring the code is cleaner and adheres to the current living standard.
+While the W3C Validator returned a successful pass with no errors, after pointing out the need for two closing tags, it provided 'Info' regarding the use of trailing slashes on void elements. I have refactored my code to remove these slashes in accordance with modern HTML5 best practices, ensuring the code is cleaner and adheres to the current living standard.
 
-During validation of events.html, the W3C flagged the \<time\> elements for improper formatting. I resolved this by implementing the datetime attribute (ISO 8601 standard) on all event dates. This ensures that while the user sees a human-readable format (e.g., 'October 2025'), search engines and assistive technologies can accurately parse the chronological data, significantly boosting the site's SEO and accessibility.
+During validation of events.html, the W3C flagged the `<time>` elements for improper formatting. I resolved this by implementing the `datetime` attribute (ISO 8601 standard) on all event dates. This ensures that while the user sees a human-readable format (e.g., 'October 2025'), search engines and assistive technologies can accurately parse the chronological data, significantly boosting the site's SEO and accessibility.
 
 **W3C Jigsaw CSS Validator**
 
-The style.css file was validated using the W3C Jigsaw Service. The report returned 4 errors, mostly related to Scroll-Driven Animations (view-timeline-axis and \--slide-reveal).
+The style.css file was validated using the W3C Jigsaw Service. The report returned 4 errors, mostly related to Scroll-Driven Animations (`view-timeline-axis` and `--slide-reveal`).
 
-**Technical Justification:** These are not syntax errors, but rather 'Future-Proof' CSS properties that are part of the emerging CSS Animation Level 4 specification. While the Jigsaw validator (limited to CSS Level 3\) does not yet recognise these properties, they are fully functional in modern browsers and provide a high-end, progressive enhancement to the user experience. I have chosen to retain these properties as they gracefully degrade in older browsers without breaking the core layout.
+**Technical Justification:** These are not syntax errors, but rather 'Future-Proof' CSS properties that are part of the emerging CSS Animation Level 4 specification. While the Jigsaw validator (limited to CSS Level 3) does not yet recognise these properties, they are fully functional in modern browsers and provide a high-end, progressive enhancement to the user experience. I have chosen to retain these properties as they gracefully degrade in older browsers without breaking the core layout.
 
-The final error was resolved at once. I had two definitions for .rhythm-slide, deleting scroll-snap-align: top; in favour of scroll-snap-align: start; as this is the standard-compliant value, whereas top is a non-standard shorthand.
+The final error was resolved at once. I had two definitions for `.rhythm-slide`, deleting `scroll-snap-align: top;` in favour of `scroll-snap-align: start;` as this is the standard-compliant value, whereas `top` is a non-standard shorthand.
 
 **Manual Testing**
 
@@ -359,3 +379,7 @@ The final error was resolved at once. I had two definitions for .rhythm-slide, d
 | Skeleton Key    | Input “Clent2026”         | Redirects to Members Dashboard      | Pass      |
 | Form Validation | Submit empty Contact form | Browser prompts for required fields | Pass      |
 | Sticky Header   | Scroll down any page      | Header remains visible at top       | Pass      |
+
+## Deployment and Submission
+
+The site was deployed to **GitHub Pages**, and the live site is accessible at: [https://stockol.github.io/clent-consort-project-ms1/]
