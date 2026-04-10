@@ -360,7 +360,7 @@ All HTML and CSS files were passed through the **W3C HTML Service** and **W3C Ji
 
 **W3C HTML Service**
 
-While the W3C Validator returned a successful pass with no errors, after pointing out the need for two closing tags, it provided 'Info' regarding the use of trailing slashes on void elements. I have refactored my code to remove these slashes in accordance with modern HTML5 best practices, ensuring the code is cleaner and adheres to the current living standard.
+The project utilises Prettier for code formatting. While the W3C validator provides 'Info' notes regarding trailing slashes on void elements, these are retained to ensure consistent formatting and compatibility with modern developer tooling.
 
 During validation of events.html, the W3C flagged the `<time>` elements for improper formatting. I resolved this by implementing the `datetime` attribute (ISO 8601 standard) on all event dates. This ensures that while the user sees a human-readable format (e.g., 'October 2025'), search engines and assistive technologies can accurately parse the chronological data, significantly boosting the site's SEO and accessibility.
 
