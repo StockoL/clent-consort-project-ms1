@@ -353,6 +353,18 @@ header nav a:hover {
   transform: translateY(-2px); /* A subtle 'lift' effect */
 }
 
+/* Button Feedback */
+.cta-button:active,
+.file-indicator:active {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.9);
+}
+
+/* Global Focus Style */
+:focus-visible {
+  outline: 2px solid #c9a45e; /* Your brand gold */
+  outline-offset: 4px;
+}
 /* Footer */
 
 .footer-slim {
@@ -1292,7 +1304,7 @@ header nav a:hover {
   background-color: rgba(201, 164, 94, 0.05); /* Subtle highlight */
 }
 
-/* 3. The Indicator: Retaining your exact 'file-link' styling */
+/* 3. The Indicator: Retaining 'file-link' styling */
 .file-indicator {
   display: inline-flex;
   align-items: center;
@@ -1306,7 +1318,7 @@ header nav a:hover {
   gap: 0.5rem;
 }
 
-/* Retaining your specific PDF label styling */
+/* Retaining specific PDF label styling */
 .file-indicator::before {
   content: "PDF";
   font-size: 0.6rem;
