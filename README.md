@@ -344,13 +344,13 @@ The visual identity of The Clent Consort is a blend of authentic archival photog
 
 | Page    | Performance | Accessibility | Best Practices | SEO |
 | :------ | :---------- | :------------ | :------------- | :-- |
-| Index   | 93          | 95            | 96             | 100 |
-| About   | 85          | 95            | 96             | 100 |
-| Events  | 99          | 95            | 96             | 100 |
-| Contact | 99          | 96            | 96             | 100 |
-| Login   | 99          | 96            | 96             | 100 |
-| Members | 99          | 95            | 96             | 100 |
-| 404     | 100         | 95            | 96             | 100 |
+| Index   | 93          | 100           | 96             | 100 |
+| About   | 85          | 100           | 96             | 100 |
+| Events  | 99          | 100           | 96             | 100 |
+| Contact | 99          | 100           | 96             | 100 |
+| Login   | 99          | 100           | 96             | 100 |
+| Members | 100         | 100           | 77             | 100 |
+| 404     | 100         | 100           | 96             | 100 |
 
 ### Testing
 

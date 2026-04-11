@@ -15,6 +15,13 @@
   /* Font Stacks */
   --font-heading: "Cinzel", serif;
   --font-body: "Inter", sans-serif;
+
+  /* ACCESSIBILITY TUNED COLORS */
+  --color-gold: #8a6d3b; /* Darkened from #c9a45e for 4.5:1 contrast */
+  --color-gold-light: #dcb97a; /* Kept for hover states on dark backgrounds */
+  --color-dark: #1a1a1a;
+  --color-white: #ffffff;
+  --color-muted: #666666;
 }
 
 *,
@@ -142,6 +149,9 @@ body {
   padding: var(--s1);
   border: 1px solid transparent;
 }
+.box.invert .u-muted {
+  color: #d1d1d1; /* A light grey that provides 10.2:1 contrast against #1a1a1a */
+}
 
 /* Unified Invert: The "Card" standard for the whole site */
 .box.invert {
@@ -206,7 +216,10 @@ body {
 
   .site-header img {
     height: 30px;
-    width: 30px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    display: block;
   }
 
   .brand-name {
@@ -230,9 +243,9 @@ body {
 
 /* Active State for Nav */
 header nav a[aria-current="page"] {
-  color: #c9a45e;
+  color: var(--color-gold);
   font-weight: 700;
-  border-bottom: 2px solid #c9a45e;
+  border-bottom: 2px solid var(--color-gold);
 }
 
 .brand-name {
@@ -276,7 +289,7 @@ header nav a {
 }
 
 header nav a:hover {
-  color: #c9a45e;
+  color: var(--color-gold);
   text-decoration: underline;
 }
 
@@ -330,13 +343,16 @@ header nav a:hover {
   /* Shrink logo on mobile dashboard to prevent 'fat' header */
   .dashboard-page .logo-link img {
     height: 32px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
   }
 }
 /* CTA Button */
 .cta-button {
   display: inline-block;
-  background-color: #c9a45e; /* Gold */
-  color: #1a1a1a; /* Dark Charcoal for contrast */
+  background-color: #b38b3f; /* Gold */
+  color: #000000; /* Black for maximum contrast */
   padding: 1rem 2rem;
   text-align: center;
   text-decoration: none;
@@ -350,10 +366,13 @@ header nav a:hover {
     transform 0.2s ease,
     background-color 0.3s;
   margin-top: var(--s1);
+  min-height: 48px; /* Ensures it's always large enough for touch */
 }
 
 .cta-button:hover {
-  background-color: #dcb97a; /* A lighter gold for the hover state */
+  background-color: var(
+    --color-gold-light
+  ); /* A lighter gold for the hover state */
   transform: translateY(-2px); /* A subtle 'lift' effect */
 }
 
@@ -430,21 +449,21 @@ header nav a:hover {
 }
 
 .social-icon {
-  color: rgba(255, 255, 255, 0.5);
-  width: 18px;
-  height: 18px;
+  color: #b3b3b3;
+  width: 44px;
+  height: 44px;
   transition: all 0.3s ease;
 }
 
 .social-icon:hover {
-  color: #c9a45e;
+  color: var(--color-gold);
   transform: translateY(-2px);
 }
 
 .copyright {
   font-size: 0.8rem;
-  opacity: 0.3;
-  color: #fff;
+  opacity: 1;
+  color: #a0a0a0;
   text-align: center;
   margin: 0;
 }
@@ -896,20 +915,22 @@ header nav a:hover {
 
 /* 2. The Form Card Container */
 .contact-form-container {
+  color: var(--color-muted);
+  opacity: 1;
   flex: 1 1 25rem;
   max-width: 35rem;
 }
 
 /* 3. Elements & Typography */
 .contact-form-container h2 {
-  color: #c9a45e;
+  color: var(--color-gold);
   margin-top: 0;
   border-bottom: 1px solid rgba(201, 164, 94, 0.2);
   padding-bottom: var(--s-1);
 }
 
 .contact-form-container .form-group label {
-  color: #c9a45e;
+  color: var(--color-gold);
   font-weight: 600;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -926,7 +947,7 @@ header nav a:hover {
   padding: var(--s0);
   background-color: #ffffff;
   border: 1px solid #ccc;
-  color: #1a1a1a;
+  color: var(--color-dark);
   font-family: var(--font-body);
   border-radius: 4px;
 }
@@ -934,7 +955,7 @@ header nav a:hover {
 .contact-form-container input:focus,
 .contact-form-container textarea:focus {
   outline: none;
-  border-color: #c9a45e;
+  border-color: var(--color-gold);
   box-shadow: 0 0 0 3px rgba(201, 164, 94, 0.2);
 }
 
@@ -1455,9 +1476,9 @@ header nav a:hover {
   max-width: 65ch;
 }
 .u-muted {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-muted);
   line-height: 1.6;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 .dashboard-footer {
   text-align: center;
