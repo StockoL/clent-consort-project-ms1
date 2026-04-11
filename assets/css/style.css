@@ -111,14 +111,6 @@ body {
   }
 }
 
-/* The Cluster: For row alignment */
-.l-cluster {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--s1);
-}
 /* The Switcher Pattern */
 .l-switcher {
   display: flex;
@@ -149,9 +141,6 @@ body {
   padding: var(--s1);
   border: 1px solid transparent;
 }
-.box.invert .u-muted {
-  color: #d1d1d1; /* A light grey that provides 10.2:1 contrast against #1a1a1a */
-}
 
 /* Unified Invert: The "Card" standard for the whole site */
 .box.invert {
@@ -172,28 +161,6 @@ body {
   overflow: hidden;
 }
 
-.l-frame > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-/* --- UTILITIES --- */
-
-/* Visually Hidden:
-  Hides an element visually while keeping it 
-  discoverable by screen readers and keyboard users.
-*/
-.u-visually-hidden {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
 /* ==========================================================================
    3. GLOBAL COMPONENTS (Header, Footer, Buttons)
    ========================================================================== */
@@ -310,44 +277,7 @@ header nav a:hover {
     justify-content: space-between;
   }
 }
-/* --- Dashboard Specific Nav (The DRY Way) --- */
 
-@media (max-width: 45rem) {
-  /* Targeting only the dashboard list */
-  .nav-list--dashboard {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    background: #f5f5f5;
-    padding: 0.5rem;
-    border-radius: 8px;
-    margin: 0.5rem var(--s0);
-    /* Hide scrollbar */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .nav-list--dashboard::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Make the links act like equal-width tabs */
-  .nav-list--dashboard .nav-link {
-    flex: 1;
-    text-align: center;
-    font-size: 0.9rem;
-    padding: 0.4rem 0.2rem;
-    white-space: nowrap;
-    border-bottom: none; /* Clean removal without shouting */
-  }
-
-  /* Shrink logo on mobile dashboard to prevent 'fat' header */
-  .dashboard-page .logo-link img {
-    height: 32px;
-    width: auto;
-    flex-shrink: 0;
-    object-fit: contain;
-  }
-}
 /* CTA Button */
 .cta-button {
   display: inline-block;
@@ -385,7 +315,7 @@ header nav a:hover {
 
 /* Global Focus Style */
 :focus-visible {
-  outline: 2px solid #c9a45e; /* Your brand gold */
+  outline: 2px solid var(--color-gold);
   outline-offset: 4px;
 }
 /* Footer */
@@ -422,8 +352,8 @@ header nav a:hover {
 }
 
 .footer-btn:hover {
-  border-color: #c9a45e;
-  color: #c9a45e;
+  border-color: var(--color-gold);
+  color: var(--color-gold);
   background: rgba(201, 164, 94, 0.05);
 }
 
@@ -508,13 +438,13 @@ header nav a:hover {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c9a45e; /* Gold scroll thumb */
+  background: var(--color-gold); /* Gold scroll thumb */
   border-radius: 10px;
   border: 3px solid #1a1a1a; /* Creates a 'floating' look */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #e5c48b; /* Brighter gold on hover */
+  background: var(--color-gold-light); /* Brighter gold on hover */
 }
 /* ==========================================================================
    4. PAGE-SPECIFIC SECTIONS
@@ -599,11 +529,6 @@ header nav a:hover {
   min-width: 50%;
 }
 
-.project-rhythm-scroll-wrapper {
-  overflow: hidden;
-  background-color: #000;
-}
-
 /* --- PROJECT RHYTHM REFACTOR (PURE CSS SWIPE) --- */
 
 .project-rhythm-swipe-wrapper {
@@ -674,13 +599,13 @@ header nav a:hover {
 }
 
 .swipe-nav a span {
-  color: #c9a45e;
+  color: var (--color-gold);
   font-weight: bold;
 }
 
 .swipe-nav a:hover {
   background: rgba(201, 164, 94, 0.2);
-  color: #c9a45e;
+  color: var(--color-gold);
 }
 
 /* Ensure Videos behave in the new layout */
@@ -707,7 +632,7 @@ header nav a:hover {
     padding: 0;
     font-size: 0;
     background: rgba(255, 255, 255, 0.2);
-    border: 1px solid #c9a45e;
+    border: 1px solid var(--color-gold);
   }
 }
 @media (max-height: 450px) and (orientation: landscape) {
@@ -767,12 +692,55 @@ header nav a:hover {
 
 .step-number {
   font-family: var(--font-heading);
-  color: #c9a45e;
+  color: var(--color-gold);
   font-size: var(--s3);
   margin-bottom: var(--s-1);
   display: block;
 }
+.repertoire-section {
+  padding-block: var(--s4);
+  border-top: 1px solid #eee;
+}
 
+.repertoire-header {
+  text-align: center;
+}
+
+/* Center the paragraph inside the header if it has a max-width */
+.repertoire-header .u-measure {
+  margin-inline: auto;
+}
+
+.repertoire-grid {
+  align-items: stretch;
+}
+
+/* The 'Season' Info Box */
+.repertoire-grid > :first-child {
+  flex-basis: 30rem;
+  flex-grow: 1;
+  /* Add these to ensure the meta box behaves correctly */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* The Playlist Container */
+.repertoire-grid > :last-child {
+  flex-basis: 20rem;
+  flex-grow: 999;
+}
+
+.playlist-container {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: #000;
+  overflow: hidden; /* Keeps the iframe corners rounded */
+}
+
+.repertoire-section .box.invert {
+  border-left: 4px solid #c9a45e;
+}
 /* --- EVENTS PAGE: Featured, Reel, Archive --- */
 .featured-event .invert {
   background-color: #1a1a1a;
@@ -806,14 +774,14 @@ header nav a:hover {
 }
 
 .featured-event h1 {
-  color: #c9a45e;
+  color: var(--color-gold);
   margin-top: 0;
   line-height: 1.1;
   font-size: clamp(1.5rem, 5vw, 2.5rem);
 }
 
 .featured-event .label {
-  color: #c9a45e;
+  color: var(--color-gold);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -839,7 +807,7 @@ header nav a:hover {
 }
 
 .featured-event ul li strong {
-  color: #c9a45e;
+  color: var(--color-gold);
   flex-shrink: 0;
   min-width: 4.5rem;
 }
@@ -852,7 +820,7 @@ header nav a:hover {
   background: white;
   padding: var(--s2);
   border: 1px solid #eee;
-  border-top: 4px solid #c9a45e;
+  border-top: 4px solid var(--color-gold);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -976,9 +944,9 @@ header nav a:hover {
 }
 
 .contact-form-container .cta-button:hover {
-  background-color: #c9a45e;
+  background-color: var(--color-gold);
   color: #ffffff;
-  border-color: #c9a45e;
+  border-color: var(--color-gold);
   transform: translateY(-2px); /* Physical lift on hover */
   box-shadow: 0 5px 15px rgba(201, 164, 94, 0.4); /* Gold glow */
 }
@@ -999,9 +967,9 @@ header nav a:hover {
 .file-link--large {
   display: inline-flex;
   align-items: center;
-  background-color: rgba(201, 164, 94, 0.1);
-  border: 1px solid rgba(201, 164, 94, 0.4);
-  color: #c9a45e;
+  background-color: rgba(var(--color-gold-rgb), 0.1);
+  border: 1px solid rgba(var(--color-gold-rgb), 0.4);
+  color: var(--color-gold);
   padding: 0.75rem 1.25rem;
   border-radius: 4px;
   text-decoration: none;
@@ -1011,14 +979,14 @@ header nav a:hover {
 }
 
 .file-link--large:hover {
-  background-color: #c9a45e;
+  background-color: var(--color-gold);
   color: #1a1a1a;
-  border-color: #c9a45e;
+  border-color: var(--color-gold);
 }
 
 /* Resetting the icon so it doesn't double up */
 .file-link--large .file-icon {
-  background-color: #c9a45e;
+  background-color: var(--color-gold);
   color: #1a1a1a;
   font-size: 0.65rem;
   font-weight: 800;
@@ -1030,7 +998,7 @@ header nav a:hover {
 
 .file-link--large:hover .file-icon {
   background-color: #1a1a1a;
-  color: #c9a45e;
+  color: var(--color-gold);
 }
 
 /* Mobile: Stack and center the button */
@@ -1101,7 +1069,7 @@ header nav a:hover {
 }
 
 .back-link:hover {
-  color: #c9a45e;
+  color: var(--color-gold);
   transform: translateX(-5px); /* Subtle physical movement to the left */
 }
 
@@ -1117,7 +1085,7 @@ header nav a:hover {
 .login-header p,
 .login-footer-text,
 .box.invert .form-group label {
-  color: #c9a45e;
+  color: var(--color-gold);
 }
 
 .login-footer-text {
@@ -1154,7 +1122,7 @@ header nav a:hover {
 }
 
 .box.invert .cta-button:hover {
-  background-color: #c9a45e;
+  background-color: var(--color-gold);
   color: #ffffff;
 }
 
@@ -1191,13 +1159,13 @@ header nav a:hover {
 }
 .form-hint {
   font-size: 0.8rem;
-  color: rgba(201, 164, 94, 0.7); /* Muted gold */
+  color: rgba(var(--color-gold-rgb), 0.7); /* Muted gold */
   line-height: 1.4;
   margin-top: 0.25rem;
 }
 
 .form-hint strong {
-  color: #c9a45e; /* Brighter gold for the word 'Hint' */
+  color: var(--color-gold); /* Brighter gold for the word 'Hint' */
   text-transform: uppercase;
   font-size: 0.7rem;
   letter-spacing: 0.05ch;
@@ -1270,7 +1238,7 @@ header nav a:hover {
 
 .schedule-list dt {
   font-family: var(--font-heading);
-  color: #c9a45e;
+  color: var(--color-gold);
   font-weight: bold;
   text-transform: uppercase;
   font-size: 0.9rem;
@@ -1296,7 +1264,7 @@ header nav a:hover {
   font-family: var(--font-body);
   font-size: 0.85rem;
   text-transform: uppercase;
-  color: #c9a45e;
+  color: var(--color-gold);
   border-bottom: 1px solid #444;
   padding-bottom: 0.25rem;
   margin-top: var(--s1);
@@ -1334,9 +1302,9 @@ header nav a:hover {
   display: inline-flex;
   align-items: center;
   padding: 0.3rem 0.7rem;
-  background-color: rgba(201, 164, 94, 0.1);
-  color: #c9a45e;
-  border: 1px solid rgba(201, 164, 94, 0.5);
+  background-color: rgba(var(--color-gold-rgb), 0.1);
+  color: var(--color-gold);
+  border: 1px solid rgba(var(--color-gold-rgb), 0.5);
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -1348,15 +1316,15 @@ header nav a:hover {
   content: "PDF";
   font-size: 0.6rem;
   padding: 0.1rem 0.3rem;
-  background-color: #c9a45e;
+  background-color: var(--color-gold);
   color: #1a1a1a;
   border-radius: 2px;
 }
 
 /* 4. Featured Download: Integrating the new row logic */
 .featured-download {
-  background: rgba(201, 164, 94, 0.1);
-  border-left: 4px solid #c9a45e;
+  background: rgba(var(--color-gold-rgb), 0.1);
+  border-left: 4px solid var(--color-gold);
   /* Resetting padding here because .music-row-link handles it now */
   padding: 0;
 }
@@ -1372,7 +1340,7 @@ header nav a:hover {
 }
 .meta-block h4 {
   font-size: 0.75rem;
-  color: #c9a45e;
+  color: var(--color-gold);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
 }
@@ -1389,7 +1357,7 @@ header nav a:hover {
 .tracks-section {
   margin-top: var(--s3);
   padding-top: var(--s2);
-  border-top: 1px dashed rgba(201, 164, 94, 0.3);
+  border-top: 1px dashed rgba(var(--color-gold-rgb), 0.3);
 }
 
 .voice-card {
@@ -1399,7 +1367,7 @@ header nav a:hover {
   text-align: center;
 }
 .voice-card h4 {
-  color: #c9a45e;
+  color: var(--color-gold);
   font-size: 0.9rem;
   margin: 0;
 }
@@ -1452,8 +1420,8 @@ header nav a:hover {
 .video-accordion[open] summary {
   margin-bottom: 1.5rem;
   background: transparent;
-  border: 1px solid rgba(201, 164, 94, 0.5);
-  color: #c9a45e;
+  border: 1px solid rgba(var(--color-gold-rgb), 0.5);
+  color: var(--color-gold);
 }
 
 /* Smoothly fade in the video when the details are opened */
@@ -1484,4 +1452,11 @@ header nav a:hover {
   text-align: center;
   border-top: 1px solid #eee;
   padding-top: var(--s2);
+}
+.u-text-center {
+  text-align: center;
+}
+
+.u-margin-inline-auto {
+  margin-inline: auto;
 }
