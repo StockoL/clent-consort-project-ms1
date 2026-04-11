@@ -151,6 +151,7 @@ The visual design is engineered to guide the user's eye from the high-impact "Id
 - CSS3: Custom properties, Flexbox, Grid, and Scroll-Snap.
 - Lighthouse: Performance and Accessibility auditing.
 - Google Fonts: Integration of _Cinzel_ and _Inter_.
+- Gemini 3 Flash: technical synthesiser
 
 ## Global Features & Design System
 
@@ -383,6 +384,20 @@ The final error was resolved at once. I had two definitions for `.rhythm-slide`,
 | Skeleton Key    | Input “Clent2026”         | Redirects to Members Dashboard      | Pass      |
 | Form Validation | Submit empty Contact form | Browser prompts for required fields | Pass      |
 | Sticky Header   | Scroll down any page      | Header remains visible at top       | Pass      |
+
+## Architectural Collaboration with AI
+
+To achieve a high-performance, 100% accessible frontend, I utilised Gemini 3 Flash as a specialized technical synthesizer. The development workflow was structured as follows:
+
+**System Axioms:** I established the "Golden Rules" of the project—specifically the Spacing Scale (using CSS custom properties), the Typography Hierarchy, and the Compositional Primitives based on the Every Layout methodology.
+
+**Prompt Engineering & Direction:** I provided the AI with specific structural constraints and intent (e.g., "Implement a Switcher pattern where the threshold is 40rem and the gap is --s1").
+
+**Synthesis & Refinement:** I used the AI to generate raw CSS implementations of these patterns. I then manually audited, refactored, and tuned the code to ensure DRY (Don't Repeat Yourself) principles and WCAG 2.1 AA accessibility compliance.
+
+**Defensive UX Design:** I directed the creation of a JavaScript-based interceptor for form submissions to bypass static-hosting limitations, ensuring a closed "User Loop" and a polished UX.
+
+**Conclusion:** The resulting codebase is a hybrid of human-led architectural vision and AI-assisted execution. This approach allowed for a "100-Score" Lighthouse audit while maintaining strict adherence to modern, scalable CSS standards.
 
 ## Deployment and Submission
 
