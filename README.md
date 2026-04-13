@@ -306,7 +306,7 @@ The Home page “index.html” architecture prioritises the 'Critical Path'—en
 
 **Visual Polish:** Uses a subtle sepia filter and contrast adjustment on the conductor's headshot to align with the "Cathedral Aesthetic" and provide a consistent tonal warmth.
 
-**Lighthouse Report:** The About page achieved a Performance score of 85. This 'performance cost' was a conscious design choice to prioritise high-impact visual storytelling via background videos. To mitigate the impact, I implemented poster images and used the `playsinline` attribute to ensure efficient loading on mobile devices.
+**Lighthouse Report:** The About page achieved a Performance score of 86. This 'performance cost' was a conscious design choice to prioritise high-impact visual storytelling via background videos. To mitigate the impact, I implemented poster images and used the `playsinline` attribute to ensure efficient loading on mobile devices. The page also has a Best Practices score of 77 due to the Spotify playlist embed. Spotify injects cookies for its player functionality which are flagged by Lighthouse. The embed uses certain legacy features for cross-browser support that trigger warnings. I have chosen to prioritise the User Experience (providing choral context via audio) over a synthetic 100 score. To mitigate impact, I implemented `loading: lazy;` on the iframe to ensure it doesn't block the initial page load.
 
 The About page represents the peak of the project's CSS sophistication. By leveraging Scroll Snap and View Timelines, I created a complex interactive timeline that remains entirely functional with JavaScript disabled, proving that high-end UX can be achieved through semantic, standards-based CSS.
 
@@ -454,6 +454,10 @@ The Contact page architecture is focused on reducing "form fatigue" and ensuring
 - **Issue Identified:** Lighthouse Audit indicated non-sequential heading orders.
 - **Action Taken:** Refactored sub-headings from `<h4>` to `<h3>` to ensure a sequentially-descending order, improving semantic navigation for screen reader users.
 - **Outcome:** Score increased from 93 to 95, more consistent with the rest of the site.
+
+**Lighthouse Report 2: Video embed**
+
+- The page has a Best Practices score of 77 due to the YouTube video embed. YouTube injects cookies for its player functionality which are flagged by Lighthouse. The embed uses certain legacy features for cross-browser support that trigger warnings. I have chosen to prioritise the User Experience (providing choral context via audio) over a synthetic 100 score. To mitigate impact, I implemented `loading: lazy;` on the iframe to ensure it doesn't block the initial page load.
 
 The Member Dashboard represents the 'Utility' pillar of the project. By adapting the site's layout primitives to a higher-density content environment, I ensured that ensemble members can access critical scores and logistics with minimal friction. This page demonstrates a clear understanding of how to use CSS to improve workflow and data accessibility.
 
@@ -604,15 +608,16 @@ The visual identity of The Clent Consort is a blend of authentic archival photog
 
 ### Performance and Accessibility (Lighthouse Scores)
 
-| Page    | Performance | Accessibility | Best Practices | SEO |
-| :------ | :---------- | :------------ | :------------- | :-- |
-| Index   | 93          | 100           | 96             | 100 |
-| About   | 85          | 100           | 96             | 100 |
-| Events  | 99          | 100           | 96             | 100 |
-| Contact | 99          | 100           | 96             | 100 |
-| Login   | 99          | 100           | 96             | 100 |
-| Members | 100         | 100           | 77             | 100 |
-| 404     | 100         | 100           | 96             | 100 |
+| Page         | Performance | Accessibility | Best Practices | SEO |
+| :----------- | :---------- | :------------ | :------------- | :-- |
+| Index        | 98          | 100           | 100            | 100 |
+| About        | 86          | 100           | 77             | 100 |
+| Events       | 99          | 95            | 100            | 100 |
+| Contact      | 99          | 96            | 100            | 100 |
+| Login        | 99          | 96            | 100            | 100 |
+| Members      | 99          | 95            | 100            | 100 |
+| (VOICE)\_hub | 100         | 98            | 77             | 100 |
+| 404          | 99          | 100           | 100            | 100 |
 
 ### Testing
 
@@ -645,6 +650,48 @@ The final error was resolved at once. I had two definitions for `.rhythm-slide`,
 | Skeleton Key    | Input “Clent2026”         | Redirects to Members Dashboard      | Pass      |
 | Form Validation | Submit empty Contact form | Browser prompts for required fields | Pass      |
 | Sticky Header   | Scroll down any page      | Header remains visible at top       | Pass      |
+
+## Technical Challenges and Solutions
+
+1. **Distorted Logo and Aspect Ratio Issues**
+
+- **Problem:** On the Members Dashboard only, I noticed the logo was correctly proportioned, and then realised it was stretched on all the other pages of the site. I realised this was because the flexbox container was expanded to accommodate the members nav content, which was longer.
+- **Solution:** I identified that the source itself, the logo asset, needed to be a true 1:1 ratio as I had defined the width and height of the asset to be 50x50, a perfect square, in the HTML. I used GIMP to fix the canvas size.
+
+2. **Best Practices Trade-Off**
+
+- **Problem:** After implementing iframes on the About (Spotify) and Learning Hubs (YouTube), the Lighthouse "Best Practices" scores dropped from 98-100 to 77 due to third-party cookies and legacy code within the Spotify/YouTube iframe.
+- **Solution:** Instead of deleting the feature to chase a number, I optimised what I could (adding `loading: lazy;` and `title` attributes) and then documented the justification.
+
+3. **Uncanny Valley of Media**
+
+- **Problem:** I had implemented a high-end "scrollytelling" video reel on the About page, but initial user testing found it confusing. The "slight movement" without perceived context made the user think the images were broken or that they were missing something.
+- **Solution:** Instead of deleting the work, as other users valued the "cinematic" experience, I added a "repertoire hub" with a Spotify playlist. This provided the sound that the user was looking for, while keeping the cinematic video reel as the atmospheric background that other users valued.
+
+4. **The "Rhythm" Scrollytelling Performance**
+
+- **Problem:** Implementing a scroll-linked animation where text content stays pinned while background media transition smoothly.
+- **Solution:** I used modern CSS layout primitives and handled the background attachment and z-index layering to ensure that the content remained readable (foreground) while the media provided the "rhythm" (background).
+
+5. \*\*The "Squashed Nav" on Member Dashboard
+
+- **Problem:** On the Member Dashboard, the four navigation links were collapsing onto two lines when viewed on mobile viewports, creating an uneven staircase effect that broke the header's symmetry.
+- **Solution:** I created an additional spacing scale unit (--s-2) at 0.5rem to account for the longer navigation strings on the Member Dashboard.
+
+6. **Social Metadata and Favicons**
+
+- **Problem:** When sharing the site link or looking at the browser tab, there was no visual identity (no icon in the tab) and the social media preview (OG Tags) was either blank or pulled a random, poorly cropped version of the logo.
+- **Solution:** I created a dedicated favicon and set up Open Graph meta tags in the head. I used GIMP to create a specific "share image" to ensure the Clent Consort looked professional on WhatsApp, Facebook, or iMessage.
+
+7. **CSS Class Naming Error**
+
+- **Problem:** The 404 page styles were not applying once migrated from HTML inline styling to the style.css sheet because the CSS selector was named .404-content. In CSS, class names cannot start with an unescaped digit.
+- **Solution:** I renamed the class, ensuring it started with a letter. This cleared the syntax errors and allowed the browser to correctly parse the logic.
+
+8. **Active State Nav Link Error**
+
+- **Problem:** While I had designed styling for the main navigation links to change state, only the "home" link seemed to be active on any page of the site.
+- **Solution:** I updated the `aria-current="page"` attribute within the nav bar on each page of the site to reflect the change to the user and reassure them of their successful navigation to whichever page they were looking at.
 
 ## Architectural Collaboration with AI
 
