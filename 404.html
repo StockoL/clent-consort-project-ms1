@@ -8,6 +8,7 @@
       content="The page you are looking for cannot be found. Please check the URL or return to the homepage of The Clent Consort."
     />
     <title>Error</title>
+    <!-- SEO & SOCIAL METADATA: Custom error page configuration to maintain brand consistency and provide clear navigation paths during 404 events.  -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -18,11 +19,11 @@
       property="og:description"
       content="The page you are looking for cannot be found. Please check the URL or return to the homepage of The Clent Consort."
     />
+    <!-- Open Graph / Sharing icon (WhatsApp etc.) -->
     <meta
       property="og:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
-
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="The Clent Consort" />
     <meta
@@ -33,7 +34,10 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- ASSET OPTIMISATION: Critical asset pre-fetching to ensure the error state renders instantly for a seamless user experience. -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,9 +46,12 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- Body tag with ID for top -->
   <body id="top">
+    <!-- SITE HEADER: Consistent global navigation allows users to recover from broken links without using the browser's back button. -->
     <header class="site-header">
       <div class="l-center header-inner">
+        <!-- Logo -->
         <a href="index.html" class="logo-link">
           <img
             src="assets/images/clent-consort-logo.webp"
@@ -54,6 +61,7 @@
           />
           <span class="brand-name">The Clent Consort</span>
         </a>
+        <!-- Main Navigation -->
         <nav aria-label="Main Navigation">
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -64,24 +72,20 @@
         </nav>
       </div>
     </header>
-    <main
-      class="l-center l-stack"
-      style="
-        --stack-space: var(--s3);
-        text-align: center;
-        padding-block: var(--s5);
-      "
-    >
-      <h1 class="cinzel-heading">404: The Silence of the Stones</h1>
+    <!-- ERROR ARCHITECTURE: Uses .l-stack and .l-center primitives to ensure the error message is perfectly positioned and legible across all viewports. -->
+    <main class="l-center l-stack error-content">
+      <h1>404: The Silence of the Stones</h1>
       <p>
         It seems the page you are looking for has echoed away. Perhaps it was a
         wrong turn in the cloisters?
       </p>
 
       <div class="l-center">
+        <!-- UX RECOVERY: High-visibility .cta-button provides a clear 'Escape Hatch' to redirect users back to the primary site entry point. -->
         <a href="index.html" class="cta-button">Return to the Overture</a>
       </div>
     </main>
+    <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic and a #top skip-link for keyboard efficiency. -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">

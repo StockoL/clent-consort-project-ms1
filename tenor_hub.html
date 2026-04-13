@@ -8,6 +8,7 @@
       content="Tenor Learning Hub for The Clent Consort members."
     />
     <title>Member Dashboard - The Clent Consort</title>
+    <!-- SEO & SOCIAL METADATA: Optimised for OpenGraph/Twitter protocols to ensure professional link previews and search indexing. -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -33,6 +34,7 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- ASSET OPTIMISATION: Pre-connecting to external origins to minimise First Contentful Paint (FCP) and network latency. -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,7 +44,9 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- Body with ID for anchor navigation -->
   <body id="top">
+    <!-- SITE HEADER: Implements .site-header for sticky positioning and .l-center for consistent horizontal containment. -->
     <header class="site-header">
       <div class="l-center header-inner">
         <a href="index.html" class="logo-link">
@@ -64,12 +68,14 @@
       </div>
     </header>
     <main class="l-center">
+      <!-- CONTENT ARCHITECTURE: Utilises the .l-stack primitive to manage macro-spacing and vertical rhythm between sections. -->
       <div class="l-stack l-stack--large">
         <header>
           <h1>Tenor Learning Hub</h1>
           <p class="u-muted">Current Project: Mozart Requiem</p>
         </header>
-
+        <!-- Video Content -->
+        <!-- COMPONENT: .box.invert creates a high-contrast 'well' for focus, utilising solid background codes for WCAG 2.1 AA compliance. -->
         <div class="video-wrapper box invert l-stack l-stack--small">
           <div class="l-stack l-stack--small">
             <h3>Mozart: Requiem (Tenor)</h3>
@@ -77,11 +83,12 @@
               Focus on the 'Lacrimosa' phrasing and the breath marks at bar 12.
             </p>
           </div>
-
+          <!-- Video Player -->
           <details class="video-accordion" name="mozart-tenor">
             <summary class="cta-button">Open Practice Player</summary>
 
             <div class="video-responsive u-margin-top">
+              <!-- PROGRESSIVE DISCLOSURE: Using HTML5 details to defer iframe loading; this optimises performance by reducing initial page weight. -->
               <iframe
                 src="https://www.youtube.com/embed/8lf2bhv8zkI"
                 title="Tenor Practice Track"
@@ -94,6 +101,7 @@
                   gyroscope;
                   picture-in-picture;
                 "
+                loading="lazy;"
                 allowfullscreen
               >
               </iframe>
@@ -102,6 +110,7 @@
         </div>
       </div>
     </main>
+    <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic and a #top skip-link for keyboard efficiency. -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">

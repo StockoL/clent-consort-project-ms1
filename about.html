@@ -8,11 +8,13 @@
       content="Explore the mission and project rhythm of The Clent Consort, a choral ensemble that bridges ancient and contemporary church music."
     />
     <title>About - The Clent Consort</title>
+    <!-- SEO & SOCIAL METADATA: Strategic tagging to emphasise the mission-driven nature of the ensemble, ensuring clarity when shared on professional and social platforms. -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
       content="https://stockol.github.io/clent-consort-project-ms1/"
     />
+    <!-- Sharing Image (WhatsApp, etc.) -->
     <meta property="og:title" content="The Clent Consort" />
     <meta
       property="og:description"
@@ -22,7 +24,7 @@
       property="og:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
-
+    <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content="The Clent Consort" />
     <meta
@@ -33,7 +35,9 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,9 +46,12 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- Body tag with ID for top -->
   <body id="top">
+    <!-- Header -->
     <header class="site-header">
       <div class="l-center header-inner">
+        <!-- Logo -->
         <a href="index.html" class="logo-link">
           <img
             src="assets/images/clent-consort-logo.webp"
@@ -54,6 +61,7 @@
           />
           <span class="brand-name">The Clent Consort</span>
         </a>
+        <!-- Main Navigation -->
         <nav aria-label="Main Navigation">
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -64,7 +72,9 @@
         </nav>
       </div>
     </header>
+    <!-- MISSION ARCHITECTURE: Utilises a high-contrast cover pattern with central alignment to establish immediate brand ethos and emotional resonance. -->
     <main>
+      <!-- Mission Statement -->
       <div class="mission-cover">
         <div class="center-content">
           <p>
@@ -77,7 +87,10 @@
           </p>
         </div>
       </div>
+      <!-- Conductor's Note -->
+      <!-- SIDEBAR COMPOSITION: Implements the .l-sidebar primitive to manage the relationship between biographical imagery and textual narrative, ensuring a balanced 'Director's voice' section. -->
       <section class="conductor-sidebar sidebar">
+        <!-- Conductor's Image -->
         <div class="sidebar-image">
           <img
             src="assets/images/conductor_headshot.jpg"
@@ -86,6 +99,7 @@
             alt="Conductor in a dark suit and blue tie stands facing the camera with a gentle smile, while a choir in dark attire holding blue music folders is seated behind him before a large pipe organ in a historic church hall, creating a formal and welcoming atmosphere."
           />
         </div>
+        <!-- Conductor's Text -->
         <div class="sidebar-text">
           <h2>A Note from the Conductor</h2>
           <p>
@@ -107,13 +121,15 @@
           </p>
         </div>
       </section>
+      <!-- Project Rhythm Section with Swipe Navigation -->
+      <!-- PROJECT RHYTHM COMPONENT: A bespoke scrollytelling implementation. Uses CSS Scroll Snap and sticky navigation to guide the user through the project lifecycle. -->
       <div class="project-rhythm-swipe-wrapper">
         <nav class="swipe-nav" aria-label="Project stages">
           <a href="#slide-01"><span>01</span> Foundations</a>
           <a href="#slide-02"><span>02</span> Preparation</a>
           <a href="#slide-03"><span>03</span> Residency</a>
         </nav>
-
+        <!-- DYNAMIC BACKGROUNDS: Employs muted, looping video assets as atmospheric backgrounds. Playsinline and muted attributes ensure compliance with modern mobile browser autoplay policies. -->
         <div class="project-rhythm-scroll">
           <article class="rhythm-slide" id="slide-01">
             <div class="l-frame slide-bg">
@@ -207,15 +223,17 @@
           </article>
         </div>
       </div>
+      <!-- Repertoire Section with Spotify Playlist feature -->
+
       <section class="repertoire-section l-center l-stack">
         <div class="repertoire-header u-text-center">
           <h2 class="cinzel-heading">Our Sound & Inspiration</h2>
           <p class="u-measure u-margin-inline-auto">
             While we prepare our own studio recordings, explore the works
-            currently under our baton. This is the sound of The Clent Consort.
+            currently in our repertoire. This is the sound of The Clent Consort.
           </p>
         </div>
-
+        <!-- REPERTOIRE LAYOUT: Combines the .l-sidebar primitive with .box.invert to provide a clear distinction between seasonal metadata and interactive audio content. -->
         <div class="l-sidebar repertoire-grid">
           <div class="box invert repertoire-meta">
             <h3 class="s-1">The 2026 Season</h3>
@@ -226,6 +244,7 @@
             </ul>
           </div>
 
+          <!-- Spotify Playlist with embedded player and lazy loading -->
           <div class="playlist-container">
             <iframe
               style="border-radius: 12px"
@@ -248,6 +267,7 @@
         </div>
       </section>
     </main>
+    <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic and a #top skip-link for keyboard efficiency. -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">

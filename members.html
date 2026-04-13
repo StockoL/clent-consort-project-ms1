@@ -8,6 +8,7 @@
       content="The Clent Consort Member Area. Access your personalised choral resources, project foundations, and upcoming residency details in one central portal."
     />
     <title>Member Dashboard - The Clent Consort</title>
+    <!-- SEO & SOCIAL METADATA: Strategic tagging for a private portal context. While indexable, the metadata is tailored to provide a professional, utility-focused preview for members accessing the hub via mobile devices. -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -33,7 +34,9 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,6 +45,7 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- Body with ID for back-to-top anchor link and unique member dashboard -->
   <body id="top" class="dashboard-page">
     <header class="site-header">
       <div class="l-center header-inner">
@@ -54,6 +58,7 @@
           />
           <span class="brand-name">The Clent Consort</span>
         </a>
+        <!-- NAVIGATIONAL LANDMARKS: Uses a specialised .nav-list--dashboard variant. This allows for clear internal anchor-link navigation, essential for a dense, resource-heavy single-page dashboard layout. -->
         <nav aria-label="Main Navigation">
           <ul class="nav-list nav-list--dashboard">
             <li><a href="#schedule" class="nav-link">Schedule</a></li>
@@ -64,7 +69,7 @@
         </nav>
       </div>
     </header>
-
+    <!-- Member Dashboard Content -->
     <main class="l-center">
       <div class="l-stack l-stack--large login-wrapper">
         <header class="l-stack l-stack--small">
@@ -73,9 +78,10 @@
             Welcome back! Access your rehearsal materials and schedules below.
           </p>
         </header>
-
+        <!-- Rehearsal Schedule Section -->
         <section class="box invert l-stack" id="schedule">
           <h2>Rehearsal Schedule</h2>
+          <!-- SIDEBAR COMPOSITION: Implements the .l-sidebar primitive to manage the relationship between primary tabular data (the schedule) and seasonal metadata (aside). This ensures a balanced visual weight on wide screens while stacking logically on mobile. -->
           <div class="l-sidebar dashboard-sidebar">
             <div class="l-stack l-stack--small">
               <p>
@@ -101,6 +107,7 @@
                 </div>
               </dl>
             </div>
+            <!-- Schedule Metadata -->
             <aside class="schedule-meta l-stack l-stack--small">
               <div class="meta-block">
                 <h3>Current Focus</h3>
@@ -118,13 +125,13 @@
             </aside>
           </div>
         </section>
-
+        <!-- Logistics Section with Event Details and link -->
         <article class="box invert l-stack" id="logistics">
           <div class="l-stack l-stack--small">
             <header class="logistics-card-header">
               <h2>Next Event: Cathedral Visit</h2>
               <a
-                href="assets\members\clent_consort_logistics.pdf"
+                href="assets/members/clent_consort_logistics.pdf"
                 class="file-link file-link--large"
               >
                 Download Logistics Pack
@@ -144,10 +151,11 @@
                 <dd>Evensong at 17:30</dd>
               </div>
             </dl>
-
+            <!-- Venue Location with Google Maps Link to external maps -->
             <div class="box invert l-stack">
               <h3>Venue Location</h3>
               <p>Worcester Cathedral, WR1 2LA</p>
+              <!-- UX ACCESSIBILITY: Rather than an embedded iframe which can cause performance lag (Layout Shift), this section uses a deliberate CTA button to trigger native mapping applications via secure rel="noopener" protocols. -->
               <a
                 href="https://www.google.com/maps/place/Worcester+Cathedral/@52.188895,-2.2232577,17z/data=!3m1!4b1!4m6!3m5!1s0x4870f08d07fc8575:0xcdbfd8f27272572a!8m2!3d52.188895!4d-2.2206828!16zL20vMGpyaF8?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
@@ -163,16 +171,17 @@
             </div>
           </div>
         </article>
-
+        <!-- Music Library Section with Downloadable Scores -->
         <article class="box invert l-stack" id="library">
           <h2>Music Library</h2>
           <div class="l-stack l-stack--large">
+            <!-- CONTENT MODULARITY: Utilizes a repeatable service module pattern. Each .music-item is designed with flexible span-based labels to ensure consistent alignment regardless of title length. -->
             <section class="l-stack l-stack--small">
               <h3 class="service-title">Saturday Eucharist</h3>
               <ul class="music-list l-stack l-stack--small">
                 <li class="featured-download">
                   <a
-                    href="assets\members\clent_consort_hymns_and_psalms_placeholder.pdf"
+                    href="assets/members/clent_consort_hymns_and_psalms_placeholder.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -186,7 +195,7 @@
                 </li>
                 <li class="music-item">
                   <a
-                    href="assets\members\mozart_spatzenmesse.pdf"
+                    href="assets/members/mozart_spatzenmesse.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -199,7 +208,7 @@
                 </li>
                 <li class="music-item">
                   <a
-                    href="assets\members\haydn_Insanae_et_vanae_curae.pdf"
+                    href="assets/members/haydn_Insanae_et_vanae_curae.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -212,13 +221,13 @@
                 </li>
               </ul>
             </section>
-
+            <!-- End of copyable service module -->
             <section class="l-stack l-stack--small">
               <h3 class="service-title">Saturday Evensong</h3>
               <ul class="music-list l-stack l-stack--small">
                 <li class="featured-download">
                   <a
-                    href="assets\members\clent_consort_hymns_and_psalms_placeholder.pdf"
+                    href="assets/members/clent_consort_hymns_and_psalms_placeholder.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -232,7 +241,7 @@
                 </li>
                 <li class="music-item">
                   <a
-                    href="assets\members\ayleward_responses.pdf"
+                    href="assets/members/ayleward_responses.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -243,7 +252,7 @@
                 </li>
                 <li class="music-item">
                   <a
-                    href="assets\members\noble_in_b_minor.pdf"
+                    href="assets/members/noble_in_b_minor.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -256,7 +265,7 @@
                 </li>
                 <li class="music-item">
                   <a
-                    href="assets\members\palestrina_sicut_cervus.pdf"
+                    href="assets/members/palestrina_sicut_cervus.pdf"
                     class="music-row-link"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -269,7 +278,7 @@
             </section>
           </div>
         </article>
-
+        <!-- Voice Part Learning Hubs Links for streamlined access -->
         <section class="box invert l-stack tracks-section" id="hub">
           <div class="l-stack l-stack--small">
             <h2>Voice Part Learning Hubs</h2>
@@ -278,6 +287,7 @@
               composer.
             </p>
           </div>
+          <!-- ALGORITHMIC LAYOUT: Employs the .l-switcher primitive for the voice-part learning cards. This ensures a 4-column grid on desktop that automatically transitions to a 2-column or 1-column stack based on available viewport width, without the need for manual media queries. -->
           <div class="l-switcher voice-hub-switcher">
             <div class="voice-card l-stack l-stack--small">
               <h3>Soprano</h3>
@@ -323,10 +333,12 @@
         </section>
       </div>
     </main>
+    <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic and a #top skip-link for keyboard efficiency. -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">
           <div class="footer-col-left">
+            <!-- Members Logout Link -->
             <a href="login.html" class="footer-btn">Logout</a>
           </div>
 

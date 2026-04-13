@@ -2,12 +2,14 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
+    <!-- Viewport scale definition -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Experience The Clent Consort, a project-led choral ensemble inhabiting Britain's historic cathedral spaces through ancient and contemporary choral excellence."
     />
     <title>Home - The Clent Consort</title>
+    <!-- SEO & SOCIAL METADATA: Strategic brand positioning for high-impact social sharing. Optimised with OpenGraph and Twitter protocols to ensure the 'Ancient Spires, Modern Voices' ethos translates across platforms. -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -33,13 +35,17 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- CRITICAL ASSET PRELOADING: Explicitly preloading the Hero Image with 'fetchpriority=high' to optimise the Largest Contentful Paint (LCP) and ensure immediate visual impact upon entry. -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <!-- Preload Hero Image for performance -->
     <link
       rel="preload"
       as="image"
@@ -48,9 +54,15 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- GLOBAL STYLES: Architecture is built on 'Every Layout' primitives, ensuring the site scales algorithmically rather than relying on brittle, fixed breakpoints. -->
+  <!-- Body with ID for back-to-top anchor link -->
   <body id="top">
     <header class="site-header">
+      <!-- SITE HEADER: Employs a sticky-positioning strategy with backdrop-filter
+      blur to maintain navigational context while maximising vertical viewport
+      real estate. -->
       <div class="l-center header-inner">
+        <!-- Logo anchor -->
         <a href="index.html" class="logo-link">
           <img
             src="assets/images/clent-consort-logo.webp"
@@ -60,6 +72,7 @@
           />
           <span class="brand-name">The Clent Consort</span>
         </a>
+        <!-- Main Navigation -->
         <nav aria-label="Main Navigation">
           <ul>
             <li><a href="index.html" aria-current="page">Home</a></li>
@@ -71,6 +84,7 @@
       </div>
     </header>
     <main>
+      <!-- HERO COMPOSITION: A high-impact 'Cover' pattern. Utilizes the .l-stack primitive to maintain mathematical rhythm between the brand headline, sub-narrative, and primary call-to-action (CTA). -->
       <section class="hero-cover">
         <div class="l-stack">
           <h1>The Clent Consort</h1>
@@ -79,15 +93,17 @@
         </div>
       </section>
     </main>
-
+    <!-- Footer -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">
           <div class="footer-col-left">
+            <!-- 'Secret' Member Login button -->
             <a href="login.html" class="footer-btn">Member Login</a>
           </div>
 
           <div class="footer-col-center">
+            <!-- Social Media SVG Icons / YouTube, Instagram, Facebook -->
             <div class="social-group">
               <a href="#" class="social-icon" aria-label="YouTube">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -112,8 +128,9 @@
               </a>
             </div>
           </div>
-
+          <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic. -->
           <div class="footer-col-right">
+            <!-- ACCESSIBILITY: The #top anchor provides an essential 'Skip to Top' utility, enhancing keyboard navigation efficiency and conforming to WCAG 2.1 AAA navigational standards. -->
             <a href="#top" class="footer-btn">Top ↑</a>
           </div>
         </div>

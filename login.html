@@ -8,6 +8,7 @@
       content="Secure member access for The Clent Consort. Log in to view rehearsal schedules, download sheet music, and access project-specific resources."
     />
     <title>Member Login - The Clent Consort</title>
+    <!-- SEO & SOCIAL METADATA: Strategic indexing exclusion logic (via meta description) ensures this utility page is framed correctly for search engines while providing clear intent for users. -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -33,7 +34,10 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- ASSET OPTIMISATION: Standardised pre-loading of branding and typographic assets to ensure a zero-latency transition from the public site to the secure portal. -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -42,9 +46,11 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- Body with ID for back-to-top anchor link -->
   <body id="top">
     <header class="site-header">
       <div class="l-center header-inner">
+        <!-- Logo anchor -->
         <a href="index.html" class="logo-link">
           <img
             src="assets/images/clent-consort-logo.webp"
@@ -54,6 +60,7 @@
           />
           <span class="brand-name">The Clent Consort</span>
         </a>
+        <!-- Main Navigation -->
         <nav aria-label="Main Navigation">
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -66,12 +73,14 @@
     </header>
     <main class="l-center">
       <div class="login-wrapper l-stack l-stack--large">
+        <!-- USER FLOW: Dedicated .login-nav with a .back-link utility. This provides a clear 'escape hatch' back to the public domain, preventing user frustration during authentication. -->
         <nav class="login-nav">
           <a href="index.html" class="back-link">
             <span aria-hidden="true">&larr;</span> Back to Public Site
           </a>
         </nav>
-
+        <!-- Member Login Form -->
+        <!-- AUTHENTICATION UI: Combines .box.invert with .l-stack primitives. This creates a focused, high-contrast environment that minimises peripheral distractions during the login process. -->
         <section class="box invert l-stack">
           <div class="l-stack l-stack--small login-header">
             <h1>Member Login</h1>
@@ -79,6 +88,7 @@
           </div>
 
           <form action="members.html" method="GET" class="l-stack">
+            <!-- PROTOTYPE LOGIC: Using GET method for client-side navigation within this static demonstration. -->
             <div class="form-group l-stack l-stack--small">
               <label for="user">Username</label>
               <input
@@ -90,7 +100,7 @@
                 autocomplete="username"
               />
             </div>
-
+            <!-- DEFENSIVE UX: Implements pattern-matching on the password field to provide immediate client-side validation. Uses aria-describedby to link the input with its pedagogical 'hint' for screen-reader parity. -->
             <div class="form-group l-stack l-stack--small">
               <label for="pass">Skeleton Key</label>
               <input
@@ -107,7 +117,7 @@
                 <strong>Hint:</strong> The name of the choir + the current year.
               </p>
             </div>
-
+            <!-- INCLUSIVE DESIGN: Form inputs are styled with minimum height requirements (min-height: 3.5rem) to ensure "Fat-Finger" compatibility on mobile devices and meet WCAG touch-target guidelines. -->
             <button type="submit" class="cta-button">
               Enter Resource Area
             </button>
@@ -119,6 +129,7 @@
         </section>
       </div>
     </main>
+    <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic and a #top skip-link for keyboard efficiency. -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">

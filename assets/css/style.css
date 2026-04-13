@@ -1439,6 +1439,19 @@ header nav a:hover {
     transform: translateY(0);
   }
 }
+
+/* 404 Page Styles */
+.error-content {
+  flex: 1; /* Pushes footer down */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical center */
+  align-items: center; /* Horizontal center */
+
+  --stack-space: var(--s3);
+  text-align: center;
+  padding-block: var(--s5);
+}
 /* --- General Utilities --- */
 .u-measure {
   max-width: 65ch;

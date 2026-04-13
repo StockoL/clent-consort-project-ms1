@@ -8,6 +8,7 @@
       content="Get in touch with The Clent Consort for booking inquiries, audition information, or to learn more about our upcoming projects."
     />
     <title>Contact - The Clent Consort</title>
+    <!-- SEO & SOCIAL METADATA: Targeted descriptions to encourage user engagement and inquiries, with OpenGraph support for professional business-to-business previews. -->
     <meta property="og:type" content="website" />
     <meta
       property="og:url"
@@ -33,6 +34,7 @@
       property="twitter:image"
       content="https://stockol.github.io/clent-consort-project-ms1/assets/images/logo_share_preview.jpg"
     />
+    <!-- ASSET OPTIMISATION: Critical pre-fetching of typography assets to ensure form labels render immediately, preventing layout shift during user input. -->
     <link rel="icon" type="image/png" href="assets/images/favicon-clent.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,6 +44,7 @@
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
+  <!-- Body with ID for top of page -->
   <body id="top">
     <header class="site-header">
       <div class="l-center header-inner">
@@ -66,14 +69,22 @@
     </header>
     <main class="l-center">
       <div class="l-stack l-stack--large">
+        <!-- Contact Hero Section / UX NARRATIVE: A concise hero section designed to orient the user and provide a clear 'Job to be Done' before they interact with the data entry fields. -->
         <section class="contact-hero l-stack l-stack--small">
-          <h1>Get in Touch</h1>
+          <h1>Connect With Us</h1>
           <p>
-            Whether you're interested in booking the Consort or applying for an
-            audition, we'd love to hear from you.
+            Whether you are looking to bring our music to your next event or you
+            are a singer interested in joining our ranks, we would love to hear
+            from you. Simply scroll to the relevant section below to get
+            started.
           </p>
         </section>
-
+        <!-- FORM ARCHITECTURE: Utilises the .l-switcher primitive to present two distinct contact streams (General vs. Audition). This maintains a clean visual hierarchy and reduces cognitive friction. -->
+        <!-- INCLUSIVE DESIGN: Each form is contained within a .box.invert component.
+        High-contrast labels and focus-visible outlines are implemented to
+        ensure WCAG 2.1 AA compliance for users with visual or motor
+        impairments. -->
+        <!-- Contact Form 1 / General Enquiries -->
         <div class="l-switcher contact-forms-layout" style="--threshold: 60rem">
           <section class="contact-form-container box invert l-stack">
             <h2>General Enquiry</h2>
@@ -106,6 +117,7 @@
             </form>
           </section>
 
+          <!-- Contact Form 2 / Prospective Members -->
           <section class="contact-form-container box invert l-stack">
             <h2>Join the Consort</h2>
             <form action="#" method="post" class="l-stack">
@@ -144,14 +156,13 @@
         </div>
       </div>
     </main>
-
+    <!-- GLOBAL FOOTER: Features a 3-column .footer-grid with mobile-first stacking logic and a #top skip-link for keyboard efficiency. -->
     <footer class="invert footer-slim">
       <div class="l-center">
         <div class="footer-grid">
           <div class="footer-col-left">
             <a href="login.html" class="footer-btn">Member Login</a>
           </div>
-
           <div class="footer-col-center">
             <div class="social-group">
               <a href="#" class="social-icon" aria-label="YouTube">
@@ -177,7 +188,6 @@
               </a>
             </div>
           </div>
-
           <div class="footer-col-right">
             <a href="#top" class="footer-btn">Top ↑</a>
           </div>
@@ -185,6 +195,7 @@
         <p class="copyright">&copy; 2026 The Clent Consort</p>
       </div>
     </footer>
+    <!-- INTERACTIVE LOGIC: The contact.js script is loaded with a 'defer' attribute. This ensures the DOM is fully parsed before the form interceptor attaches, providing immediate validation and feedback without blocking the initial page load. -->
     <script src="assets/contact.js" defer></script>
   </body>
 </html>
