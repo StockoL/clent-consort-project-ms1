@@ -64,7 +64,9 @@ Before writing a single line of code, I utilised **Excalidraw** to create low-fi
 - **Secure Member Login** | High Importance/Low Feasibility | Build Later (Phase 2)
 
 **Constraints and Exclusions**
-In the interest of meeting the project deadline and maintaining high code quality, a secure login system is currently out of scope. The "Member Resource Area" need will be met via a public but unlinked page in Phase 1. This satisfies the user's need for information without the technical "scope creep" of backend database management at this stage.
+In the interest of meeting the project deadline and maintaining high code quality, a truly secure login system is currently out of scope. The "Member Resource Area" need will be met via a public but unlinked page in Phase 1. This satisfies the user's need for information without the technical "scope creep" of backend database management at this stage.
+
+_N.B. By the end of Phase 1, it was possible to implement a a member authentication prototype via Constraint Validation API. See notes below._
 
 ---
 
@@ -173,29 +175,81 @@ I used CSS Custom Properties (`--s-1` to `--s5`) to create a mathematical spacin
 
 #### Layout Primitives
 
-- **`.l-stack`**: Manages vertical spacing between elements automatically, preventing the need for manual margin-top declarations on individual components.
-- **`.l-switcher`**: An intrinsic layout tool that allows elements to sit side-by-side on large screens but automatically stack vertically when a threshold is met, reducing the reliance on complex media queries.
-- **`.l-center`**: A utility that keeps content within a readable maximum width while centering it on the screen.
-- **`.l-reel`**: Provides a smooth, horizontal scrolling experience for galleries or lists on mobile devices.
+##### 1\. The Stack & The "Lobotomised Owl"
 
-#### Header & Navigation
+- **The Logic:** `.l-stack > * + *`
+- **The Decision:** I moved away from individual element margins to a "stack" pattern. By using the **Adjacent Sibling Selector**, I ensure vertical rhythm is only injected _between_ elements.
+- **Impact:** This offers a "Single Source of Truth" for spacing, preventing the "double-margin" bug common in CSS and ensuring consistent vertical flow regardless of what content is added.
 
-The header serves as the primary "Command Centre" for the user.
+##### 2\. The Switcher (The "Holy Albatross" Variant)
 
-- **Persistent Navigation**: Using position: sticky, the header remains available at all times, ensuring the user never feels "lost in the score."
-- **Semantic Accessibility**: I used the `aria-current="page"` attribute to provide a visual and structural cue to users (and screen readers) regarding their current location.
-- **Dual-Context Navigation**:
-  - **Public Nav**: Focused on the "EPK" experience (About, Events, Contact).
-  - **Member Nav**: A tailored "Dashboard" navigation for the _members.html_ page.
-- **Landscape Optimisation:** Implemented a specific "Short-Height" media query (`max-height: 450px`) to compress the header and brand assets. This prevents the UI from obscuring content on landscape mobile devices, maintaining a functional "aspect ratio" for the user.
+- **The Logic:** `flex-basis: calc((var(--threshold) - 100%) * 999);`
+- **The Decision:** This is a **container-based logic gate**. If the container is narrower than the threshold (e.g., 40rem), the calculation results in a massive number, forcing elements to grow and wrap. If it’s wider, they sit side-by-side.
+- **Impact:** This creates **algorithmic responsiveness**. It allows components to be responsive based on their own width rather than the browser viewport—essential for a modular design system.
 
-#### Footer
+##### 3\. The Sidebar & The "999" Grow Hack
 
-The footer provides a "Coda" to every page, offering secondary navigation and social proof.
+- **The Logic:** `flex-grow: 999` on the last child.
+- **The Decision:** I used this to create a "constrained" sidebar. The first child has a fixed-ideal basis (20rem), while the second child (the content) is told to grow 999 times faster. This ensures the content always fills the remaining space but wraps below the sidebar when things get tight.
+- **Impact:** Uses a **Flexbox algorithm** to manage complex asymmetrical layouts without relying on brittle percentages.
 
-- **Three-Column Grid:** Managed via a responsive flex layout that elegantly stacks into a single column on mobile devices.
-- **Interactive Elements:** Includes a "Member Login" gateway and a "`Top ↑`" anchor to improve long-page navigation.
-- **SVG Integration:** Social media icons are implemented using inline SVGs, ensuring high-performance loading and perfect scaling on all display types.
+##### 4\. The Reel (`.l-reel`)
+
+- **The Problem:** Traditional "carousels" require heavy JavaScript libraries, which negatively impact performance and accessibility scores.
+- **The Solution:** Provides a smooth, horizontal scrolling experience using native CSS Flexbox and Scroll Snapping (`scroll-snap-type: x mandatory`).
+- **Architectural Intent:** Performance-first interaction. By utilising native browser scrolling, the site achieves a very high Best Practices score while providing a premium, app-like swiping feel on mobile devices.
+
+##### 5\. The Frame & Aspect Ratio
+
+- **The Logic:** `aspect-ratio: var(--aspect-ratio, 16/9);`
+- **The Decision:** Used to prevent **Layout Shift (CLS)**. By defining the box before the image or video loads, the browser reserves the correct amount of space.
+- **Impact:** Directly links to the **Lighthouse Performance** criteria by managing how the browser handles media assets.
+
+##### 6\. The Unified Invert Pattern
+
+- **The Logic:** `.box.invert`
+- **The Decision:** Instead of creating ten different "Card" classes, I created a single `.box` primitive for padding and added an `.invert` modifier for the "Dark Mode" aesthetic.
+- **Impact:** Uses **DRY (Don't Repeat Yourself)** principles and **BEM-lite** naming conventions. It allows me to turn any layout (a Sidebar, a Stack, or a Center) into a "Card" simply by adding the class.
+
+##### 7\. The Center (`.l-center`)
+
+- **The Problem:** On ultra-wide monitors, text lines can stretch across the entire screen. This exceeds the "ideal measure" (65–75 characters), making it physically difficult for the eye to track from the end of one line to the start of the next, leading to "line-length fatigue."
+- **The Solution:** A utility that uses `box-sizing: content-box` combined with `margin-inline: auto`. By setting a `max-width` of **80rem**, the browser ensures the content remains centered and contained regardless of how wide the viewport becomes.
+- **Architectural Intent:** Prioritising **Readability and Visual Ergonomics**. By using `content-box`, the padding is added _to_ the width rather than subtracted from it, ensuring that the "gutters" (white space on the sides) remain consistent and reliable across the entire design system.
+
+### **Global Component Architecture**
+
+While the layout is governed by primitives, the **Global Components** provide the functional and aesthetic "skin" of the site. These were designed with a focus on **WCAG 2.1 AA compliance** and **performance-first rendering**.
+
+#### **1\. The Site Header (`.site-header`)**
+
+- **The Problem:** Navigation often gets lost as users scroll through long archival lists or event details.
+- **The Solution:** Implemented a `sticky` header with a `backdrop-filter: blur(8px)`. This keeps navigation accessible at all times while allowing the content to remain visible beneath a semi-transparent layer.
+- **Architectural Intent:** **Context Preservation.** By using a responsive `flex-direction` (stacking on mobile, side-by-side on desktop), the header maintains a professional brand presence without consuming excessive vertical space on small devices.
+
+#### **2\. The Primary CTA (`.cta-button`)**
+
+- **The Problem:** Inaccessible touch targets and poor color contrast are common barriers for mobile and visually impaired users.
+- **The Solution:** Buttons are engineered with a `min-height: 48px` and high-contrast color pairings (Gold on Black). I used **Active State** feedback (`transform: scale(0.98)`) to provide haptic-like visual cues.
+- **Architectural Intent:** **Inclusive Interactivity.** By moving the "visual lift" to CSS transforms and using the `Cinzel` heading font for buttons, I’ve elevated the UI's "Premium" feel while strictly adhering to mobile-first accessibility standards.
+
+#### **3\. Responsive Footer Grid (`.footer-grid`)**
+
+- **The Problem:** Standard multi-column footers often become illegible or poorly spaced when collapsed onto mobile screens.
+- **The Solution:** A flexible 3-column grid that utilizes **CSS Order Manipulation** (`order: 1, 2, 3`) at the 45rem breakpoint.
+- **Architectural Intent:** **Mobile-First Prioritisation.** On mobile, the "Top ↑" link is promoted to the first position to allow users to exit long scrolls easily, while the "Member Login" is moved to the bottom to prioritise public engagement links.
+
+#### **4\. Global Focus States (`:focus-visible`)**
+
+- **The Problem:** Default browser focus outlines are often low-contrast or visually jarring, leading many developers to remove them, which breaks keyboard accessibility.
+- **The Solution:** I implemented a custom `:focus-visible` state with an `outline-offset: 4px` using the site's gold brand color.
+- **Architectural Intent:** **Keyboard Parity.** This ensures that users navigating via Tab keys or assistive tech have a clear, high-contrast visual indicator of their location on the page, matching the aesthetic of the mouse-hover states.
+
+#### **5\. System Aesthetics: Custom Scrollbars**
+
+- **The Problem:** Default browser scrollbars (typically grey) clash with the high-contrast dark-mode aesthetic of the Consort’s branding.
+- **The Solution:** Customised the `-webkit-scrollbar` with a "floating" gold thumb using a matching track color.
+- **Architectural Intent:** **Total Brand Immersion.** This ensures that even the browser's native UI elements feel like a deliberate part of the "Stone and Gold" design language, providing a cohesive experience from top to bottom.
 
 ## Individual Pages
 
@@ -211,6 +265,31 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 - **`Min-height: 80vh`**: set as `100vh` behaved strangely on some mobile browser address bars, and the navigation was to be kept visible at the bottom of the fold.
 
 **User Flow:** The primary Call to Action (CTA) "Our Next Project" directs users straight to the Events page, facilitating the "Patron’s Path."
+
+The Home page “index.html” architecture prioritises the 'Critical Path'—ensuring that brand-heavy visuals do not come at the cost of performance. By utilising CSS-only overlays and fluid scaling, I reduced the total amount of required code while improving the site's resilience across diverse device categories.
+
+#### **1\. Largest Contentful Paint (LCP) Optimization**
+
+- **The Decision:** Implementing `<link rel="preload">` with `fetchpriority="high"` for the hero background image.
+- **The "Why":** Standard browser behavior discovers background images defined in CSS later in the loading process. By explicitly preloading this asset in the HTML `<head>`, I ensured the primary visual element renders almost instantly, significantly reducing the LCP time.
+
+#### **2\. Fluid Typography & The `clamp()` Function**
+
+- **The Logic:** `font-size: clamp(2.5rem, 10vw, 5rem);`
+- **The Decision:** I utilised a fluid type scale for the main heading instead of multiple media queries.
+- **The "Why":** The `clamp()` function allows the text to scale dynamically between a minimum (2.5rem) and maximum (5rem) size based on the viewport width (10vw). This prevents "orphaned" words on small screens and ensures the heading remains a dominant focal point on large displays without manual intervention.
+
+#### **3\. Atmospheric Layering: Gradient Overlays**
+
+- **The Logic:** `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(...)`
+- **The Decision:** Applying a semi-transparent black overlay directly within the `background` property.
+- **The "Why":** This is a critical **Accessibility (WCAG 2.1)** choice. By darkening the image at the code level, I guarantee a high contrast ratio for the white text regardless of the image's original brightness, ensuring legibility for all users.
+
+#### **4\. The "Cover" Pattern & Vertical Rhythm**
+
+- **The Logic:** Combining `.hero-cover` (flexbox centering) with the `.l-stack` primitive.
+- **The Decision:** The hero uses a `min-height: 80vh` to ensure it "hugs" the fold of the screen, while the internal content is managed by a recursive stack.
+- **The "Why":** This decouples the container's height from its content. The `.l-stack` ensures that the gap between the title, tagline, and CTA button remains mathematically consistent with the rest of the site's modular scale.
 
 ### about.html
 
@@ -229,6 +308,30 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 
 **Lighthouse Report:** The About page achieved a Performance score of 85. This 'performance cost' was a conscious design choice to prioritise high-impact visual storytelling via background videos. To mitigate the impact, I implemented poster images and used the `playsinline` attribute to ensure efficient loading on mobile devices.
 
+The About page represents the peak of the project's CSS sophistication. By leveraging Scroll Snap and View Timelines, I created a complex interactive timeline that remains entirely functional with JavaScript disabled, proving that high-end UX can be achieved through semantic, standards-based CSS.
+
+#### 1\. The Sidebar Logic (.l-sidebar)
+
+- **The Decision:** Implementing the Sidebar primitive for the "Conductor’s Note."
+- **The "Why":** By setting `flex-grow: 999` on the text container and a fixed basis on the image, the layout handles the "Biographical" section intelligently. On desktop, the text takes the lion's share of the width; on mobile, the high grow-value forces a clean vertical stack once the 50% min-width threshold is breached.
+
+#### 2\. Pure CSS Scrollytelling (Project Rhythm)
+
+- **The Decision:** Utilising `scroll-snap-type: x mandatory` and `view-timeline`.
+- **The "Why":** To explain the project cycle, I built a horizontal "Swipe Wrapper." Using `scroll-snap`, I ensure that each stage of the cycle (Foundations, Preparation, Residency) locks perfectly into the viewport, mimicking the behavior of a native mobile application.
+
+#### 3\. Scroll-Driven Reveal Animations
+
+- **The Logic:** `animation-timeline: --slide-reveal;`
+- **The Decision:** Implementing the experimental CSS View Timeline API.
+- **The "Why":** As the user scrolls horizontally, the content (headings and text) performs a "reveal" animation (scaling and fading). By anchoring the animation to the scroll progress rather than a timer, the user controls the pace of the narrative, creating a highly engaging "Scrollytelling" effect.
+
+#### 4\. Atmospheric Video Integration
+
+- **The Logic:** `object-fit: cover` with `filter: brightness(0.5)`.
+- **The Decision:** Using muted, looping background videos for each rhythm slide.
+- **The "Why":** To maintain the "Ancient stone" aesthetic, the videos are treated with CSS filters to ensure text contrast. By using `playsinline` and `poster` attributes, I ensured that the experience is optimised for "Low Power Mode" and slower mobile connections.
+
 ### events.html
 
 **Strategic Goal:** To provide a comprehensive record of the ensemble's track record while highlighting the most important upcoming "Next Project."
@@ -246,6 +349,29 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 
 - **Clean Code Approach:** Implemented as a list of `.archive-item` components. By using flexbox with a high flex-grow value on descriptions, the archive functions as a self-aligning table that automatically stacks on smaller screens.
 - **Semantics:** Extensive use of the `<time>` element ensures the chronological data is accessible and SEO-friendly.
+
+The Events page demonstrates effective information architecture. By transitioning from a complex Sidebar for featured content to a horizontal Reel for recent news, and finally a simplified Stack for the archive, the layout adapts its density to match the user's intent as they move down the page.
+
+#### 1\. Featured Content Composition
+
+- **The Decision:** Using a `.card.box.invert` combined with a responsive `.l-sidebar`.
+- **The "Why":** The "Next Event" requires the highest visual hierarchy. By utilising the Sidebar primitive, the event image and details sit side-by-side on desktop but stack on mobile. I used `aspect-ratio: 16 / 9` for the image container to ensure **Cumulative Layout Shift (CLS)** is avoided while the high-priority "Enquire" button remains prominent.
+
+#### 2\. The Interactive Performance Reel
+
+- **The Decision:** Implementing the `.l-reel` primitive for the "Recent Performances" section.
+- **The "Why":** Choral repertoires are text-heavy. Instead of a vertical list that would require excessive scrolling, the Reel allows users to "swipe" through recent programs. I utilised **CSS Scroll Snapping** to ensure each performance card locks into place, providing a tactile, app-like experience.
+
+#### 3\. Semantic Archiving
+
+- **The Decision:** Using the `<time>` element with the `datetime` attribute for every entry.
+- **The "Why":** To ensure the archive is **SEO-friendly** and machine-readable. By providing dates in the `YYYY-MM` format within the attribute, search engines can accurately index the ensemble's history, while the front-end displays a human-friendly "October 2025."
+
+#### 4\. Repertoire & Third-Party Integration
+
+- **The Logic:** Combining an `.l-sidebar` with an `<iframe>` for the Spotify playlist.
+- **The Decision:** The playlist is wrapped in a `.playlist-container` with `loading="lazy"`.
+- **The "Why":** External embeds can be performance bottlenecks. By using **Lazy Loading**, the Spotify player is only initialised as the user scrolls near it, protecting the initial PageSpeed score. The use of `.box.invert` with a `border-left` accent creates a "Season Info" sidebar that provides context to the audio content.
 
 ### contact.html
 
@@ -269,7 +395,33 @@ The footer provides a "Coda" to every page, offering secondary navigation and so
 
 To prevent the default browser `405` error associated with static hosting (GitHub Pages), I implemented a custom JavaScript event listener on the contact forms. This script utilises `event.preventDefault()` to intercept the submission and dynamically injects a context-specific success message into the DOM. This ensures a seamless 'User Loop' and maintains the application's visual integrity without requiring a back-end server.
 
-### members.html
+The Contact page represents a synthesis of technical performance and empathetic UX. By combining intrinsic layout primitives with non-blocking JavaScript and high-contrast accessible styling, I have created an interactive environment that is as robust as it is aesthetically consistent with the brand's 'Ancient Stone' identity.
+
+The Contact page architecture is focused on reducing "form fatigue" and ensuring that user input remains accessible and performant across all devices.
+
+#### 1\. Dual-Stream Form Architecture (.l-switcher)
+
+- **The Decision:** Implementing the `.l-switcher` primitive with a `--threshold: 60rem` to manage two distinct forms (General vs. Audition).
+- **The "Why":** By separating the "Job to be Done" into two clear streams, I reduced cognitive friction. The Switcher ensures that on wide screens, the forms sit side-by-side to minimize vertical scrolling, but automatically stack on tablets and mobile devices to maintain a focused data-entry experience.
+
+#### 2\. Inclusive Input Design & WCAG Compliance
+
+- **The Decision:** Utilising high-contrast labels, `aria-describedby` associations, and explicit `:focus` rings.
+- **The "Why":** Accessibility is a core architectural pillar. By styling inputs with white backgrounds against the dark `.box.invert` container, I ensured a contrast ratio that meets WCAG 2.1 AA requirements. I also implemented a 3px gold box-shadow on focus to provide a clear "visual anchor" for keyboard and motor-impaired users.
+
+#### 3\. Form Ergonomics & Touch Targets
+
+- **The Logic:** `padding: var(--s0)` on inputs and `1rem` on buttons.
+- **The Decision:** Every input and button is engineered to exceed the standard 48x48px touch target.
+- **The "Why":** This prevents "fat-finger" errors on mobile devices. The physical "lift" on hover (`transform: translateY(-2px)`) and the "press" feedback on active states provide immediate haptic-like visual confirmation to the user that their interaction has been registered.
+
+#### 4\. Non-Blocking Interactive Logic (contact.js)
+
+- **The Logic:** `<script src="..." defer>`
+- **The Decision:** Loading the form interceptor with the `defer` attribute.
+- **The "Why":** This is a critical performance and stability choice. `defer` ensures the browser downloads the script in the background while parsing the HTML, but only executes it after the DOM is fully constructed. This prevents "null reference" errors when the script tries to grab form elements and ensures the page remains interactive from the first second of load.
+
+### members.html and [VOICE]\_hub.html
 
 **Strategic Goal:** To provide a centralised, mobile-optimised "Single Source of Truth" for active ensemble members to access logistics and rehearsal materials.
 
@@ -303,6 +455,56 @@ To prevent the default browser `405` error associated with static hosting (GitHu
 - **Action Taken:** Refactored sub-headings from `<h4>` to `<h3>` to ensure a sequentially-descending order, improving semantic navigation for screen reader users.
 - **Outcome:** Score increased from 93 to 95, more consistent with the rest of the site.
 
+The Member Dashboard represents the 'Utility' pillar of the project. By adapting the site's layout primitives to a higher-density content environment, I ensured that ensemble members can access critical scores and logistics with minimal friction. This page demonstrates a clear understanding of how to use CSS to improve workflow and data accessibility.
+
+The Member Dashboard is designed as a central hub for ensemble members, prioritising "at-a-glance" information retrieval and resource access. It leverages recursive primitives to manage a high density of data without sacrificing legibility.
+
+#### 1\. Navigation Landmarks & Anchor Flow
+
+- **The Decision:** Implementing a specialised `.nav-list--dashboard` variant for internal anchor links.
+- **The "Why":** Dashboards are often long-form, resource-heavy pages. By providing persistent anchor-link navigation in the header, I’ve reduced the user's "interaction cost," allowing them to jump directly to rehearsal schedules or music libraries without excessive manual scrolling.
+
+#### 2\. Performance-Focused Mapping UX
+
+- **The Decision:** Using a high-visibility CTA button for Google Maps rather than an embedded `<iframe>`.
+- **The "Why":** Embedded maps are a common cause of **Layout Shift (CLS)** and can significantly slow down the main thread. By using a deliberate link with `rel="noopener noreferrer"`, I improved the page’s performance while allowing members to trigger their native mobile mapping applications for a superior turn-by-turn navigation experience.
+
+#### 3\. Algorithmic Learning Hubs (.l-switcher)
+
+- **The Logic:** `flex-basis: calc((var(--threshold) - 100%) * 999);`
+- **The Decision:** Employing the Switcher primitive for the voice-part cards (Soprano, Alto, Tenor, Bass).
+- **The "Why":** **Intrinsic Responsiveness.** Instead of writing complex media queries for a 4-column grid, the Switcher calculates the layout based on the available container width. This ensures the voice-part cards sit in a clean row on large screens but automatically transition to a 2x2 or 1x4 grid as space becomes limited, maintaining accessibility across all device sizes.
+
+#### 4\. Refined PDF & Logistics Links
+
+- **The Logic:** `.file-link--large` using `rgba()` alpha transparency.
+- **The Decision:** Implementing a custom file-download component that transitions from a low-profile ghost button to a high-contrast brand gold on hover.
+- **The "Why":** To distinguish "External Links" from "File Downloads." By including a visual `.file-icon` span and using `inline-flex` for alignment, I created a tactile UI element that clearly indicates the "Download" action to the user.
+
+#### 5\. The Sidebar Logic & Desktop Dividers
+
+- **The Logic:** `.dashboard-sidebar > :first-child { flex-basis: 40rem; flex-grow: 999; }`
+- **The Decision:** I implemented an asymmetrical sidebar for the dashboard.
+- **The "Why":** On wide screens, I utilised a `border-left` divider and padding to create a "Metadata Column" for attendance and focus notes. By using the `999` grow factor on the schedule, the layout ensures the primary data always dominates the viewport, only wrapping the metadata underneath when space is genuinely restricted.
+
+#### 6\. Content Modularity: The Clickable Row Pattern
+
+- **The Logic:** `.music-row-link { display: flex; justify-content: space-between; }`
+- **The Decision:** Designing the entire row as the hit area for file downloads.
+- **The "Why":** **Mobile Ergonomics.** By making the entire row a flexbox link, I created a massive touch target (min-height 48px). This follows the "Fitts's Law" principle, making it easier for musicians to tap on specific scores during rehearsals. The `::before` pseudo-element on the `.file-indicator` ensures the "PDF" label is injected via CSS, keeping the HTML clean and dry.
+
+#### 7\. Progressive Disclosure (Video Accordions)
+
+- **The Logic:** Using the semantic `<details>` and `<summary>` elements.
+- **The Decision:** Videos are hidden within accordions with a custom `fadeIn` animation.
+- **The "Why":** This is a **UX Performance** pattern. By using "Progressive Disclosure," I prevent "Information Overload." Users only load and view the videos they need. It also prevents multiple videos from playing simultaneously, ensuring a clean audio experience in the Learning Hubs.
+
+#### 8\. The Video Primitive (16:9 Aspect Ratio)
+
+- **The Logic:** `.video-responsive { padding-bottom: 56.25%; height: 0; }`
+- **The Decision:** Implementing the "Intrinsic Ratio" box for iframes.
+- **The "Why":** **Cumulative Layout Shift (CLS) Prevention.** Iframes are notoriously difficult to make responsive. By using the "Magic Number" (56.25% for 16:9), I created a container that reserves the correct space _before_ the YouTube/Vimeo player loads. This ensures the page doesn't "jump" when the video initialises, maintaining a high performance score.
+
 ### login.html
 
 **Strategic Goal:** To provide a low-friction "Member Only" gateway that demonstrates user flow and security concepts within a front-end scope.
@@ -318,6 +520,39 @@ To prevent the default browser `405` error associated with static hosting (GitHu
 
 To maintain the project's focus on HTML and CSS while still fulfilling the 'Member Resource' user story, I utilised the HTML5 Constraint Validation API. By using the ‘pattern’ attribute on the password input, I created a functional gateway that requires no client-side scripting (JavaScript) or back-end logic. This ensures the application remains lightweight, accessible, and strictly within the technical scope of the Milestone 1 brief.
 
+The Login page architecture is designed to handle sensitive user interactions with high-visibility feedback loops. It utilises CSS selectors to provide real-time validation feedback, ensuring a frictionless transition into the secure member portal.
+
+The Member Login page takes advantage of CSS-only state management. By engineering a feedback loop that reacts to user input in real-time—without the need for JavaScript—I have maintained a high performance score while providing a secure, accessible, and premium-feeling authentication experience.
+
+#### 1\. State-Driven Visual Feedback (Security UX)
+
+- **The Decision:** Implementing a multi-state border system for the password field using `:placeholder-shown`, `:valid`, and `:invalid` pseudo-classes.
+- **The "Why":** **Immediate Validation.** By utilising a "Logic Gate" approach, the input remains neutral while empty, turns red only when the user starts typing an incorrect key, and provides a "Green Light" (Success) state the moment the correct pattern is matched. This reduces user anxiety and provides clear, haptic-like visual confirmation without requiring a page reload.
+
+#### 2\. Defensive Input Engineering
+
+- **The Logic:** `input[type="password"]:not(:placeholder-shown):focus:invalid`
+- **The Decision:** I utilised high-specificity selectors to suppress the default browser "Red Border" on empty fields.
+- **The "Why":** Standard browser validation often marks a field as "invalid" before the user has even finished typing, which is a poor UX practice. My implementation ensures that the "Error" state is only triggered once the user has actively engaged with the input, preventing "False Alarms."
+
+#### 3\. Inclusive Typography & Touch Targets
+
+- **The Logic:** `min-height: 3.5rem` and `font-size: 1.1rem`.
+- **The Decision:** Form inputs are engineered with "Fat-Finger" touch targets and a specific font size to prevent mobile browser behavior.
+- **The "Why":** On iOS devices, the browser automatically zooms in on any input with a font size smaller than 16px (1rem). By setting the font to `1.1rem` (roughly 18px), I ensured the layout remains stable and accessible during the focus state, preventing unwanted layout shifts for mobile users.
+
+#### 4\. Cognitive Accessibility (Pedagogical Hints)
+
+- **The Logic:** Connecting the password field to the hint text using `aria-describedby="pass-hint"`.
+- **The Decision:** Providing a high-contrast pedagogical hint ("Skeleton Key") for the login credentials.
+- **The "Why":** This follows **WCAG 2.1 AA** principles for cognitive support. The ARIA association ensures that screen readers announce the hint automatically when the user focuses on the password field, ensuring that the "Prototype Security" does not become a barrier to accessibility.
+
+#### 5\. Kinesthetic Navigation (.back-link)
+
+- **The Logic:** `transform: translateX(-5px)` on hover.
+- **The Decision:** Implementing a physical "nudge" to the left for the back-to-public-site link.
+- **The "Why":** This provides a subtle directional cue. By physically moving the link in the direction the user is "returning" to (the left/previous context), the UI reinforces the navigational hierarchy through movement.
+
 ### 404.html
 
 **Strategic Goal:** To handle navigation errors gracefully and prevent user drop-off by providing a clear, thematic "Return to Home" path.
@@ -328,6 +563,32 @@ To maintain the project's focus on HTML and CSS while still fulfilling the 'Memb
 - Dynamic Spacing: Employs a local CSS variable override (`--stack-space`) to increase vertical padding, ensuring the error message is the central focus of the viewport.
 
 **Tone & Identity:** The copy ("The Silence of the Stones") maintains the "Cathedral Aesthetic," ensuring that even a technical error feels like part of the ensemble's unique brand story.
+
+The 404 page is designed as a seamless "Recovery State." It utilises the project's global primitives to maintain brand authority while providing the user with immediate navigational alternatives.
+
+The Error page architecture demonstrates attention to detail in 'Non-Happy Path' user journeys. By applying the project's modular scale and flexbox-driven vertical management, I ensured that even the site's error state is accessible, performant, and emotionally resonant with the ensemble's brand identity.
+
+#### 1\. Vertical State Management (`flex: 1`)
+
+- **The Logic:** `.error-content { flex: 1; }`
+- **The Decision:** Setting the `<main>` element to expand and fill the available viewport height.
+- **The "Why":** On pages with minimal content (like an error message), the footer can often "float" in the middle of the screen. By utilising a flex-grow strategy on the main container, I ensured the footer is always pushed to the bottom of the viewport, maintaining a professional and intentional layout regardless of content length.
+
+#### 2\. Centered Architectural Primitive (`.l-center`)
+
+- **The Decision:** Combining the `.l-center` primitive with `text-align: center`.
+- **The "Why":** For an error state, visual focus is paramount. The `.l-center` primitive ensures the message doesn't bleed into the edges of wide monitors, while the internal flexbox centering keeps the "404" message as the optical focal point of the page.
+
+#### 3\. Large Scale Vertical Rhythm (`--s5`)
+
+- **The Logic:** `padding-block: var(--s5);`
+- **The Decision:** Utilizing the largest step in the 1.5 modular scale for the error container's padding.
+- **The "Why":** Visual Breathability. To reflect the "Silence of the Stones" theme, I utilised excessive white space. This thematic spacing provides a psychological "reset" for the user, contrasting the dense information of the Dashboard or Events pages.
+
+#### 4\. UX Recovery & The 'Escape Hatch'
+
+- **The Decision:** Positioning a high-visibility `.cta-button` immediately following the error narrative.
+- **The "Why":** Strategic UX Recovery. An error page without a clear path forward leads to high "Bounce Rates." By styling the "Return to Overture" link as a primary CTA, I provided a clear 'Escape Hatch,' guiding the user back into the site's primary conversion funnel.
 
 ### Media & Assets
 

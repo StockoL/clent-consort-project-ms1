@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-  /* Spacing Scale */
+  /* Modular Spacing Scale with 1.5 ratio */
   --s-1: 0.8rem;
   --s0: 1rem;
   --s1: 1.5rem;
@@ -125,6 +125,7 @@ body {
 }
 /* --- THE STACK --- */
 /* Injects vertical space between siblings */
+/* Lobotomised Owl */
 .l-stack > * + * {
   margin-top: var(--space, var(--s1));
 }
@@ -318,8 +319,8 @@ header nav a:hover {
   outline: 2px solid var(--color-gold);
   outline-offset: 4px;
 }
-/* Footer */
 
+/* Footer */
 .footer-slim {
   margin-top: var(--s1);
   padding: 1.5rem 0 1rem; /* Very tight vertical padding */
@@ -335,7 +336,7 @@ header nav a:hover {
   margin-bottom: 1rem;
 }
 
-/* FooterButton Styling */
+/* Footer Button */
 .footer-btn {
   display: inline-block;
   text-decoration: none;
@@ -599,7 +600,7 @@ header nav a:hover {
 }
 
 .swipe-nav a span {
-  color: var (--color-gold);
+  color: var(--color-gold);
   font-weight: bold;
 }
 
@@ -697,50 +698,7 @@ header nav a:hover {
   margin-bottom: var(--s-1);
   display: block;
 }
-.repertoire-section {
-  padding-block: var(--s4);
-  border-top: 1px solid #eee;
-}
 
-.repertoire-header {
-  text-align: center;
-}
-
-/* Center the paragraph inside the header if it has a max-width */
-.repertoire-header .u-measure {
-  margin-inline: auto;
-}
-
-.repertoire-grid {
-  align-items: stretch;
-}
-
-/* The 'Season' Info Box */
-.repertoire-grid > :first-child {
-  flex-basis: 30rem;
-  flex-grow: 1;
-  /* Add these to ensure the meta box behaves correctly */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* The Playlist Container */
-.repertoire-grid > :last-child {
-  flex-basis: 20rem;
-  flex-grow: 999;
-}
-
-.playlist-container {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  background: #000;
-  overflow: hidden; /* Keeps the iframe corners rounded */
-}
-
-.repertoire-section .box.invert {
-  border-left: 4px solid #c9a45e;
-}
 /* --- EVENTS PAGE: Featured, Reel, Archive --- */
 .featured-event .invert {
   background-color: #1a1a1a;
@@ -863,7 +821,51 @@ header nav a:hover {
   flex-basis: 15rem;
   flex-grow: 999;
 }
+/* Repertoire Section */
+.repertoire-section {
+  padding-block: var(--s4);
+  border-top: 1px solid #eee;
+}
 
+.repertoire-header {
+  text-align: center;
+}
+
+/* Center the paragraph inside the header if it has a max-width */
+.repertoire-header .u-measure {
+  margin-inline: auto;
+}
+
+.repertoire-grid {
+  align-items: stretch;
+}
+
+/* The 'Season' Info Box */
+.repertoire-grid > :first-child {
+  flex-basis: 30rem;
+  flex-grow: 1;
+  /* Add these to ensure the meta box behaves correctly */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* The Playlist Container */
+.repertoire-grid > :last-child {
+  flex-basis: 20rem;
+  flex-grow: 999;
+}
+
+.playlist-container {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background: #000;
+  overflow: hidden; /* Keeps the iframe corners rounded */
+}
+
+.repertoire-section .box.invert {
+  border-left: 4px solid #c9a45e;
+}
 /* --- CONTACT PAGE --- */
 
 /* 1. Layout & Constraints */
@@ -1013,39 +1015,9 @@ header nav a:hover {
     justify-content: center;
   }
 }
-/* ==========================================================================
-   5. ANIMATIONS
-   ========================================================================== */
-
-@keyframes heroEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-.hero-cover h1 {
-  animation: heroEntrance 1.2s ease-out forwards;
-}
-
-.hero-cover p {
-  opacity: 0;
-  animation: heroEntrance 1.2s ease-out 0.4s forwards;
-}
-
-.hero-cover .cta-button {
-  opacity: 0;
-  animation: heroEntrance 1.2s ease-out 0.8s forwards;
-}
 
 /* ==========================================================================
-   6. LOGIN PAGE & SECURITY FEEDBACK
+   5. LOGIN PAGE & SECURITY FEEDBACK
    ========================================================================== */
 
 .login-nav {
@@ -1171,7 +1143,7 @@ header nav a:hover {
   letter-spacing: 0.05ch;
 }
 /* ==========================================================================
-   7. MEMBER DASHBOARD SPECIFICS
+   6. MEMBER DASHBOARD SPECIFICS
    ========================================================================== */
 
 /* --- Layout Settings (Pure CSS Thresholds) --- */
@@ -1452,6 +1424,37 @@ header nav a:hover {
   text-align: center;
   padding-block: var(--s5);
 }
+/* ==========================================================================
+   6. ANIMATIONS & UTILITY CLASSES
+   ========================================================================== */
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-cover h1 {
+  animation: heroEntrance 1.2s ease-out forwards;
+}
+
+.hero-cover p {
+  opacity: 0;
+  animation: heroEntrance 1.2s ease-out 0.4s forwards;
+}
+
+.hero-cover .cta-button {
+  opacity: 0;
+  animation: heroEntrance 1.2s ease-out 0.8s forwards;
+}
+
 /* --- General Utilities --- */
 .u-measure {
   max-width: 65ch;
