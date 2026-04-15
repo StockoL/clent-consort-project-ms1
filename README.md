@@ -1,11 +1,28 @@
 # The Clent Consort | Project README
 
-This project is a bespoke web application developed for **The Clent Consort**, an amateur choral ensemble based in the Clent Hills, Worcestershire. Moving beyong a simple static brochure, the application is designed to function as a dual-purpose digital ecosystem: providing a high-visibility "Electronic Press Kit" (EPK) to secure prestigious ecclesiastical residencies, while simultaneously serving as a centralised logistics hub for the active members of the choir. By applying the **5 Planes of User Experience**, the development focuses on high-performance accessibility, ensuring that the "digital performance" of the site matches the musical excellence of the ensemble itself.
+This project is a bespoke web application developed for **The Clent Consort**, an amateur choral ensemble based in the Clent Hills, Worcestershire. Moving beyond a simple static brochure, the application is designed to function as a dual-purpose digital ecosystem: providing a high-visibility "Electronic Press Kit" (EPK) to secure prestigious ecclesiastical residencies, while simultaneously serving as a centralised logistics hub for the active members of the choir. By applying the **5 Planes of User Experience**, the development focuses on high-performance accessibility, ensuring that the "digital performance" of the site matches the musical excellence of the ensemble itself.
+
+## Table of Contents
+
+1.  [Strategy Plane](#1-strategy-plane)
+2.  [Scope Plane](#2-scope-plane)
+3.  [Structure Plane](#3-structure-plane)
+4.  [Skeleton Plane](#4-skeleton-plane)
+5.  [Surface Plane](#5-surface-plane)
+6.  [Technologies Used](#technologies-used)
+7.  [Global Features & Design System](#global-features--design-system)
+8.  [Individual Pages](#individual-pages)
+9.  [Media & Assets](#media--assets)
+10. [Performance and Accessibility](#performance-and-accessibility-lighthouse-scores)
+11. [Testing](#testing)
+12. [Technical Challenges and Solutions](#technical-challenges-and-solutions)
+13. [Architectural Collaboration with AI](#architectural-collaboration-with-ai)
+14. [Deployment and Submission](#deployment-and-submission)
 
 ## 1. Strategy Plane
 
 **Project Goals**
-The objective is to architect a high-performance, responsive web application for The Clent Consort. The site must serve as both a public-facing promotional tool and a functionpal resource hub for ensemble members.
+The objective is to architect a high-performance, responsive web application for The Clent Consort. The site must serve as both a public-facing promotional tool and a functional resource hub for ensemble members.
 
 **Primary Business Goal:** To secure at least two high-profile cathedral residencies per year by providing a 'digital portfolio' that proves musical excellence and reliability.
 
@@ -39,7 +56,7 @@ Before writing a single line of code, I utilised **Excalidraw** to create low-fi
 - **Rapid Prototyping**: Test the "intrinsic layout" concepts from _Every Layout_ in a visual environment, identifying where the `.l-switcher` and `.l-sidebar` primitives would be most effective.
 - **Layout Consistency**: Ensure the "Cathedral Aesthetic" remained grounded in a clean, functional grid across all breakpoints.
 
----
+## [Back to Top ↑](#table-of-contents)
 
 ## 2. Scope Plane
 
@@ -68,7 +85,7 @@ In the interest of meeting the project deadline and maintaining high code qualit
 
 _N.B. By the end of Phase 1, it was possible to implement a a member authentication prototype via Constraint Validation API. See notes below._
 
----
+## [Back to Top ↑](#table-of-contents)
 
 ## 3. Structure Plane
 
@@ -94,7 +111,7 @@ To ensure "easy-to-follow journeys," the site is designed around key user paths:
 - **Predictable Navigation:** Consistent placement of the navigation bar across all pages ensures the user never feels "lost in the score."
 - **Resilient UX (404 Strategy):** A custom 404 page is implemented. To avoid "dead ends," it features a prominent **"Return to Home"** button. This is a strategic choice over a browser "Back" button to ensure the user stays within the application's intended flow.
 
----
+## [Back to Top ↑](#table-of-contents)
 
 ## 4. Skeleton Plane
 
@@ -120,6 +137,8 @@ To ensure "easy-to-follow journeys," the site is designed around key user paths:
 
 - [See assets/documentation/]
 - _Note: In line with "Mobile-First" design principles, wireframes were first conceived for small-screen devices before being "orchestrated" for Tablet and Desktop resolutions._
+
+## [Back to Top ↑](#table-of-contents)
 
 ## 5. Surface Plane
 
@@ -147,13 +166,21 @@ The visual design is engineered to guide the user's eye from the high-impact "Id
 
 - Strategic use of whitespace is employed as a visual "musical rest," preventing clutter and allowing any photography to take centre stage.
 
+## [Back to Top ↑](#table-of-contents)
+
 ## Technologies Used
 
 - HTML5: Semantic structure and Constraint Validation API.
 - CSS3: Custom properties, Flexbox, Grid, and Scroll-Snap.
+- JavaScript: Simple responsivity added to Contact page forms for user feedback for this prototype
 - Lighthouse: Performance and Accessibility auditing.
 - Google Fonts: Integration of _Cinzel_ and _Inter_.
 - Gemini 3 Flash: technical synthesiser
+- W3C HTML Validator and W3C CSS Validator (Jigsaw)
+- GIMP: Image editing
+- Excalidraw: Initial wireframe design
+
+## [Back to Top ↑](#table-of-contents)
 
 ## Global Features & Design System
 
@@ -251,6 +278,8 @@ While the layout is governed by primitives, the **Global Components** provide th
 - **The Solution:** Customised the `-webkit-scrollbar` with a "floating" gold thumb using a matching track color.
 - **Architectural Intent:** **Total Brand Immersion.** This ensures that even the browser's native UI elements feel like a deliberate part of the "Stone and Gold" design language, providing a cohesive experience from top to bottom.
 
+## [Back to Top ↑](#table-of-contents)
+
 ## Individual Pages
 
 ### index.html
@@ -292,6 +321,10 @@ The Home page “index.html” architecture prioritises the 'Critical Path'—en
 - **The "Why":** This decouples the container's height from its content. The `.l-stack` ensures that the gap between the title, tagline, and CTA button remains mathematically consistent with the rest of the site's modular scale.
 
 ![Home Page Lighthouse Score](assets/documentation/lighthouse-home.png)
+
+[Back to Top ↑](#table-of-contents)
+
+---
 
 ### about.html
 
@@ -336,6 +369,10 @@ The About page represents the peak of the project's CSS sophistication. By lever
 
 ![About Page Lighthouse Score](assets/documentation/lighthouse-about.png)
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ### events.html
 
 **Strategic Goal:** To provide a comprehensive record of the ensemble's track record while highlighting the most important upcoming "Next Project."
@@ -378,6 +415,10 @@ The Events page demonstrates effective information architecture. By transitionin
 - **The "Why":** External embeds can be performance bottlenecks. By using **Lazy Loading**, the Spotify player is only initialised as the user scrolls near it, protecting the initial PageSpeed score. The use of `.box.invert` with a `border-left` accent creates a "Season Info" sidebar that provides context to the audio content.
 
 ![Events Page Lighthouse Score](assets/documentation/lighthouse-events.png)
+
+[Back to Top ↑](#table-of-contents)
+
+---
 
 ### contact.html
 
@@ -428,6 +469,10 @@ The Contact page architecture is focused on reducing "form fatigue" and ensuring
 - **The "Why":** This is a critical performance and stability choice. `defer` ensures the browser downloads the script in the background while parsing the HTML, but only executes it after the DOM is fully constructed. This prevents "null reference" errors when the script tries to grab form elements and ensures the page remains interactive from the first second of load.
 
 ![Contact Page Lighthouse Score](assets/documentation/lighthouse-contact.png)
+
+[Back to Top ↑](#table-of-contents)
+
+---
 
 ### members.html and [VOICE]\_hub.html
 
@@ -521,6 +566,10 @@ The Member Dashboard is designed as a central hub for ensemble members, prioriti
 
 ![Hub Pages Lighthouse Scores](assets/documentation/lighthouse-hubpages.png)
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ### login.html
 
 **Strategic Goal:** To provide a low-friction "Member Only" gateway that demonstrates user flow and security concepts within a front-end scope.
@@ -571,6 +620,10 @@ The Member Login page takes advantage of CSS-only state management. By engineeri
 
 ![Login Page Lighthouse Score](assets/documentation/lighthouse-login.png)
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ### 404.html
 
 **Strategic Goal:** To handle navigation errors gracefully and prevent user drop-off by providing a clear, thematic "Return to Home" path.
@@ -610,9 +663,17 @@ The Error page architecture demonstrates attention to detail in 'Non-Happy Path'
 
 ![404 Page Lighthouse Score](assets/documentation/lighthouse-404.png)
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ### Media & Assets
 
 The visual identity of The Clent Consort is a blend of authentic archival photography, professional-grade AI-assisted imagery, and optimised stock media.
+
+[Back to Top ↑](#table-of-contents)
+
+---
 
 #### Source Credits
 
@@ -635,9 +696,13 @@ The visual identity of The Clent Consort is a blend of authentic archival photog
 | (VOICE)\_hub | 100         | 98            | 77             | 100 |
 | 404          | 99          | 100           | 100            | 100 |
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ### Testing
 
-### **Automated Testing**
+#### **Automated Testing**
 
 I utilised industry-standard auditing tools to ensure the application meets high performance and accessibility benchmarks.
 
@@ -683,6 +748,10 @@ The global style.css file was audited using the W3C Jigsaw Service. While the re
 | **Hubs**    | **Progressive Disclosure** | Click an Accordion Summary               | The YouTube player is revealed with autoplay disabled and lazy loading enabled. | Pass      |
 | **Hubs**    | **Media Player**           | Click YouTube Play                       | Audio/Video streams correctly within the responsive frame.                      | Pass      |
 | **404**     | **Return Link**            | Click to return to public site           | Link to public site works when clicked                                          | Pass      |
+
+[Back to Top ↑](#table-of-contents)
+
+---
 
 ## Technical Challenges and Solutions
 
@@ -731,6 +800,10 @@ The global style.css file was audited using the W3C Jigsaw Service. While the re
 - **Problem:** W3C validator checks for about.html and the voice part learning hubs flagged several errors within the third-party iframe embeds (Spotify and YouTube). Specifically, using a percentage value for the width attribute instead of a unitless integer, the use of the obsolete frameborder attribute, and a syntax error in the loading attribute (lazy;).
 - **Solution:** Successfully refactored all third-party embeds to eliminate inline styling and obsolete attributes. I transitioned all presentational logic—including `border: 0`, `width: 100%`, and `aspect-ratio` into the global style.css stylesheet. This ensured 100% W3C compliance while enforcing a strict Separation of Concerns (SoC) architecture, allowing the design system to control the appearance of external widgets globally.
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ## Architectural Collaboration with AI
 
 To achieve a high-performance, 100% accessible frontend, I utilised Gemini 3 Flash as a specialised technical synthesizer and pair-programmer. The development workflow was structured as follows:
@@ -747,6 +820,10 @@ To achieve a high-performance, 100% accessible frontend, I utilised Gemini 3 Fla
 
 **Conclusion:** The resulting codebase is a hybrid of human-led architectural vision and AI-assisted execution. This approach allowed for a high-scoring Lighthouse audit while maintaining strict adherence to modern, scalable, and semantic HTML5/CSS3 standards.
 
+[Back to Top ↑](#table-of-contents)
+
+---
+
 ## Deployment and Submission
 
 The site was developed using **Visual Studio Code**, tracked via **Git**, and deployed to **GitHub Pages**. The live site is accessible at: [https://stockol.github.io/clent-consort-project-ms1/]
@@ -756,7 +833,7 @@ The site was developed using **Visual Studio Code**, tracked via **Git**, and de
 The following steps were taken to deploy the application:
 
 1. **Repository Setup:** A new repository was initialised on GitHub to host the project files.
-2. **Local to Remote Connection:** The local deployment environment was linked to the remote respoitory using the command `git remote add origin [https://stockol.github.io/clent-consort-project-ms1/]`.
+2. **Local to Remote Connection:** The local deployment environment was linked to the remote respoitory using the command `git remote add origin https://github.com/StockoL/clent-consort-project-ms1.git`.
 3. **Version Control:** Regular commits were made using the "conventional commits" standard to ensure a clear, auditable history of the architectural development of the site.
 4. **Deployment Settings:** Within the GitHub repository settings, the **Pages** section was configured to deploy from the `main` branch.
 5. **Final Build:** Upon the final `git push`, the GitHub Pages build engine automatically compiled the assets and assigned the live URL.
