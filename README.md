@@ -291,6 +291,8 @@ The Home page “index.html” architecture prioritises the 'Critical Path'—en
 - **The Decision:** The hero uses a `min-height: 80vh` to ensure it "hugs" the fold of the screen, while the internal content is managed by a recursive stack.
 - **The "Why":** This decouples the container's height from its content. The `.l-stack` ensures that the gap between the title, tagline, and CTA button remains mathematically consistent with the rest of the site's modular scale.
 
+![Home Page Lighthouse Score](assets/documentation/lighthouse-home.png)
+
 ### about.html
 
 **Strategic Goal:** To communicate the ensemble's unique "Project-Based" identity and the spiritual/architectural philosophy behind their work.
@@ -332,6 +334,8 @@ The About page represents the peak of the project's CSS sophistication. By lever
 - **The Decision:** Using muted, looping background videos for each rhythm slide.
 - **The "Why":** To maintain the "Ancient stone" aesthetic, the videos are treated with CSS filters to ensure text contrast. By using `playsinline` and `poster` attributes, I ensured that the experience is optimised for "Low Power Mode" and slower mobile connections.
 
+![About Page Lighthouse Score](assets/documentation/lighthouse-about.png)
+
 ### events.html
 
 **Strategic Goal:** To provide a comprehensive record of the ensemble's track record while highlighting the most important upcoming "Next Project."
@@ -372,6 +376,8 @@ The Events page demonstrates effective information architecture. By transitionin
 - **The Logic:** Combining an `.l-sidebar` with an `<iframe>` for the Spotify playlist.
 - **The Decision:** The playlist is wrapped in a `.playlist-container` with `loading="lazy"`.
 - **The "Why":** External embeds can be performance bottlenecks. By using **Lazy Loading**, the Spotify player is only initialised as the user scrolls near it, protecting the initial PageSpeed score. The use of `.box.invert` with a `border-left` accent creates a "Season Info" sidebar that provides context to the audio content.
+
+![Events Page Lighthouse Score](assets/documentation/lighthouse-events.png)
 
 ### contact.html
 
@@ -420,6 +426,8 @@ The Contact page architecture is focused on reducing "form fatigue" and ensuring
 - **The Logic:** `<script src="..." defer>`
 - **The Decision:** Loading the form interceptor with the `defer` attribute.
 - **The "Why":** This is a critical performance and stability choice. `defer` ensures the browser downloads the script in the background while parsing the HTML, but only executes it after the DOM is fully constructed. This prevents "null reference" errors when the script tries to grab form elements and ensures the page remains interactive from the first second of load.
+
+![Contact Page Lighthouse Score](assets/documentation/lighthouse-contact.png)
 
 ### members.html and [VOICE]\_hub.html
 
@@ -509,6 +517,10 @@ The Member Dashboard is designed as a central hub for ensemble members, prioriti
 - **The Decision:** Implementing the "Intrinsic Ratio" box for iframes.
 - **The "Why":** **Cumulative Layout Shift (CLS) Prevention.** Iframes are notoriously difficult to make responsive. By using the "Magic Number" (56.25% for 16:9), I created a container that reserves the correct space _before_ the YouTube/Vimeo player loads. This ensures the page doesn't "jump" when the video initialises, maintaining a high performance score.
 
+![Members Page Lighthouse Score](assets/documentation/lighthouse-members.png)
+
+![Hub Pages Lighthouse Scores](assets/documentation/lighthouse-hubpages.png)
+
 ### login.html
 
 **Strategic Goal:** To provide a low-friction "Member Only" gateway that demonstrates user flow and security concepts within a front-end scope.
@@ -557,6 +569,8 @@ The Member Login page takes advantage of CSS-only state management. By engineeri
 - **The Decision:** Implementing a physical "nudge" to the left for the back-to-public-site link.
 - **The "Why":** This provides a subtle directional cue. By physically moving the link in the direction the user is "returning" to (the left/previous context), the UI reinforces the navigational hierarchy through movement.
 
+![Login Page Lighthouse Score](assets/documentation/lighthouse-login.png)
+
 ### 404.html
 
 **Strategic Goal:** To handle navigation errors gracefully and prevent user drop-off by providing a clear, thematic "Return to Home" path.
@@ -594,6 +608,8 @@ The Error page architecture demonstrates attention to detail in 'Non-Happy Path'
 - **The Decision:** Positioning a high-visibility `.cta-button` immediately following the error narrative.
 - **The "Why":** Strategic UX Recovery. An error page without a clear path forward leads to high "Bounce Rates." By styling the "Return to Overture" link as a primary CTA, I provided a clear 'Escape Hatch,' guiding the user back into the site's primary conversion funnel.
 
+![404 Page Lighthouse Score](assets/documentation/lighthouse-404.png)
+
 ### Media & Assets
 
 The visual identity of The Clent Consort is a blend of authentic archival photography, professional-grade AI-assisted imagery, and optimised stock media.
@@ -611,11 +627,11 @@ The visual identity of The Clent Consort is a blend of authentic archival photog
 | Page         | Performance | Accessibility | Best Practices | SEO |
 | :----------- | :---------- | :------------ | :------------- | :-- |
 | Index        | 98          | 100           | 100            | 100 |
-| About        | 86          | 100           | 77             | 100 |
+| About        | 89          | 95            | 77             | 100 |
 | Events       | 99          | 95            | 100            | 100 |
 | Contact      | 99          | 96            | 100            | 100 |
 | Login        | 99          | 96            | 100            | 100 |
-| Members      | 99          | 95            | 100            | 100 |
+| Members      | 100         | 95            | 100            | 100 |
 | (VOICE)\_hub | 100         | 98            | 77             | 100 |
 | 404          | 99          | 100           | 100            | 100 |
 
@@ -645,11 +661,27 @@ The final error was resolved at once. I had two definitions for `.rhythm-slide`,
 
 **Manual Testing**
 
-| Feature         | Action                    | Expected Result                     | Pass/Fail |
-| :-------------- | :------------------------ | :---------------------------------- | :-------- |
-| Skeleton Key    | Input “Clent2026”         | Redirects to Members Dashboard      | Pass      |
-| Form Validation | Submit empty Contact form | Browser prompts for required fields | Pass      |
-| Sticky Header   | Scroll down any page      | Header remains visible at top       | Pass      |
+| Category    | Feature                    | Action                                   | Expected Result                                                                 | Pass/Fail |
+| :---------- | :------------------------- | :--------------------------------------- | :------------------------------------------------------------------------------ | :-------- |
+| **Global**  | **Navigation Logic**       | Click all Nav links on all pages         | Each link directs to the correct .html file with no 404s.                       | Pass      |
+| **Global**  | **Active Page State**      | Navigate through all public pages        | Respective Nav link turns gold and underlined via aria-current="page".          | Pass      |
+| **Global**  | **Logo Home Link**         | Click Logo from any sub-page             | User is returned to index.html.                                                 | Pass      |
+| **Global**  | **Sticky UX**              | Scroll past the Hero section             | Header remains pinned with a 8px blur backdrop for context.                     | Pass      |
+| **Home**    | **Hero Narrative**         | Reload page                              | Cinematic 'reveal' animation of text and gold CTA renders smoothly.             | Pass      |
+| **Home**    | **Primary CTA**            | Click "Our Next Project"                 | Immediate redirect to events.html.                                              | Pass      |
+| **About**   | **Video Autoplay**         | Load about.html                          | Background videos loop silently without blocking DOM content.                   | Pass      |
+| **About**   | **Rhythm Nav**             | Click "Foundations", "Preparation", etc. | Scroll-snap locks to the correct slide; Nav dots indicate position.             | Pass      |
+| **Events**  | **Program Reel**           | Swipe horizontally (Mobile)              | Recent performance cards snap into place with mandatory logic.                  | Pass      |
+| **Contact** | **Form Switching**         | Toggle Desktop/Mobile view               | Forms sit side-by-side on desktop and stack vertically on mobile.               | Pass      |
+| **Contact** | **Validation Loop**        | Submit with empty fields                 | Browser's Constraint Validation API triggers "Please fill out this field".      | Pass      |
+| **Contact** | **JS Interceptor**         | Submit valid form data                   | Form is replaced by a success message/thank you without page reload.            | Pass      |
+| **Login**   | **Defensive Security**     | Type incorrect "Skeleton Key"            | The border turns red with glow only after typing begins.                        | Pass      |
+| **Login**   | **Pattern Match**          | Input "Clent2026"                        | The border turns green; Submit button allows access to members.html.            | Pass      |
+| **Members** | **Logistics UX**           | Click "Open in Google Maps"              | Maps interface opens in a new tab (\_blank) for navigation.                     | Pass      |
+| **Members** | **Asset Delivery**         | Click "Download Logistics Pack"          | The .pdf file opens in a new tab for print/download.                            | Pass      |
+| **Hubs**    | **Progressive Disclosure** | Click an Accordion Summary               | The YouTube player is revealed with autoplay disabled and lazy loading enabled. | Pass      |
+| **Hubs**    | **Media Player**           | Click YouTube Play                       | Audio/Video streams correctly within the responsive frame.                      | Pass      |
+| **404**     | **Return Link**            | Click to return to public site           | Link to public site works when clicked                                          | Pass      |
 
 ## Technical Challenges and Solutions
 
@@ -695,18 +727,43 @@ The final error was resolved at once. I had two definitions for `.rhythm-slide`,
 
 ## Architectural Collaboration with AI
 
-To achieve a high-performance, 100% accessible frontend, I utilised Gemini 3 Flash as a specialized technical synthesizer. The development workflow was structured as follows:
+To achieve a high-performance, 100% accessible frontend, I utilised Gemini 3 Flash as a specialised technical synthesizer and pair-programmer. The development workflow was structured as follows:
 
-**System Axioms:** I established the "Golden Rules" of the project—specifically the Spacing Scale (using CSS custom properties), the Typography Hierarchy, and the Compositional Primitives based on the Every Layout methodology.
+**System Axioms:** I established the "Golden Rules" of the project — specifically the Spacing Scale (using CSS custom properties), the Typography Hierarchy, and the Compositional Primitives based on the Every Layout methodology.
 
-**Prompt Engineering & Direction:** I provided the AI with specific structural constraints and intent (e.g., "Implement a Switcher pattern where the threshold is 40rem and the gap is --s1").
+**Prompt Engineering & Direction:** I provided specific structural constraints and intent (e.g., "Implement a Switcher pattern where the threshold is 40rem and the gap is --s1"). Crucially, I used the AI to troubleshoot and debug more complex CSS parsing errors, such as identifying unclosed braces and resolving class-naming syntax conflicts that were impacting page layout.
 
 **Synthesis & Refinement:** I used the AI to generate raw CSS implementations of these patterns. I then manually audited, refactored, and tuned the code to ensure DRY (Don't Repeat Yourself) principles and WCAG 2.1 AA accessibility compliance.
 
 **Defensive UX Design:** I directed the creation of a JavaScript-based interceptor for form submissions to bypass static-hosting limitations, ensuring a closed "User Loop" and a polished UX.
 
-**Conclusion:** The resulting codebase is a hybrid of human-led architectural vision and AI-assisted execution. This approach allowed for a "100-Score" Lighthouse audit while maintaining strict adherence to modern, scalable CSS standards.
+**Critical Evaluation and Refinement:** I did not treat AI output as final. I manually audited and refactored code to ensure DRY principles. For example, AI would often provide me with code that conflicted with my defined primitives, suggesting redundant media queries for matters of layout that would be handled already. Whilst it was useful to generate repetitive tasks, there was a large degree of intervention required to ensure the cohesiveness of the project as a whole.
+
+**Conclusion:** The resulting codebase is a hybrid of human-led architectural vision and AI-assisted execution. This approach allowed for a high-scoring Lighthouse audit while maintaining strict adherence to modern, scalable, and semantic HTML5/CSS3 standards.
 
 ## Deployment and Submission
 
-The site was deployed to **GitHub Pages**, and the live site is accessible at: [https://stockol.github.io/clent-consort-project-ms1/]
+The site was developed using **Visual Studio Code**, tracked via **Git**, and deployed to **GitHub Pages**. The live site is accessible at: [https://stockol.github.io/clent-consort-project-ms1/]
+
+### Deployment via GitHub Pages
+
+The following steps were taken to deploy the application:
+
+1. **Repository Setup:** A new repository was initialised on GitHub to host the project files.
+2. **Local to Remote Connection:** The local deployment environment was linked to the remote respoitory using the command `git remote add origin [https://stockol.github.io/clent-consort-project-ms1/]`.
+3. **Version Control:** Regular commits were made using the "conventional commits" standard to ensure a clear, auditable history of the architectural development of the site.
+4. **Deployment Settings:** Within the GitHub repository settings, the **Pages** section was configured to deploy from the `main` branch.
+5. **Final Build:** Upon the final `git push`, the GitHub Pages build engine automatically compiled the assets and assigned the live URL.
+
+### Local Cloning (For Development and Audit)
+
+To run this project locally for auditing purposes:
+
+1. Navigate to the GitHub Repository [https://github.com/StockoL/clent-consort-project-ms1].
+2. Click the **Code** button and copy the HTTPS URL.
+3. Open your local terminal and type: `git clone https://github.com/StockoL/clent-consort-project-ms1.git`.
+4. Once cloned, navigate into the directory and open `index.html` in any modern web browser.
+
+### Path Management
+
+All internal asset paths utilise forward-slashes (/) to ensure cross-platform compatibility between local Windows development and the Linux-based GitHub Pages servers.
