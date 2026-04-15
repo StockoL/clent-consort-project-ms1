@@ -18,7 +18,8 @@
   --font-body: "Inter", sans-serif;
 
   /* ACCESSIBILITY TUNED COLORS */
-  --color-gold: #8a6d3b; /* Darkened from #c9a45e for 4.5:1 contrast */
+  --color-gold: #8a6d3b; /* Darkened for 4.5:1 contrast */
+  --color-gold-rgb: 138, 109, 59; /* For rgba() usage */
   --color-gold-light: #dcb97a; /* Kept for hover states on dark backgrounds */
   --color-dark: #1a1a1a;
   --color-white: #ffffff;
@@ -698,6 +699,12 @@ header nav a:hover {
   font-size: var(--s3);
   margin-bottom: var(--s-1);
   display: block;
+}
+
+.spotify-about-playlist {
+  border: 0;
+  border-radius: 12px;
+  width: 100%;
 }
 
 /* --- EVENTS PAGE: Featured, Reel, Archive --- */
@@ -1411,6 +1418,14 @@ header nav a:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.external-embed {
+  border: 0;
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  aspect-ratio: 16 / 9;
 }
 
 /* 404 Page Styles */
