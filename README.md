@@ -810,6 +810,16 @@ The global style.css file was audited using the W3C Jigsaw Service. While the re
 - **Problem:** Following the refactor to a modern CSS Color Level 4 syntax, the W3C validator retained 9 errors. These consisted of "Unknown Property" flags for Scroll-driven Animation specs and "Parse Errors" specifically at the closing parenthesis of `rgb()` functions utilising CSS variables.
 - **Solution:** Conducted a compatibility audit confirming these errors are purely due to the W3C validator's lack of support for emerging Level 4 modules. I made the architectural decision to retain these styles as "Progressive Enhancements." To maintain a "Clean Code" standard, I documented these as known false positives in the technical documentation, ensuring that the codebase remains DRY and leverages high-performance, native browser animations over heavy JavaScript alternatives.
 
+12. **Structural Flexbox Optimization and Viewport Overflow Resolution**
+
+- **Problem:** During mobile viewport testing (iPhone SE), a significant layout break was identified on the Events page, where the container generated a 676px width on a 320px screen. This was accompanied by a "vertical lock" issue where content would not scroll naturally on mobile devices.
+- **Solution:** Diagnosed a "nested pressure cooker" conflict using browser developer tools. The issue was traced to a fixed height: 100vh on the body flex-container, which prevented internal primitive math from calculating intrinsic heights. I refactored the global layout to utilise min-height: 100vh and applied max-width: 100% safety valves to all primitive children (Sidebar and Switcher) to ensure they respect the viewport boundaries without breaking the flex-engine. This eliminated all horizontal overflow and restored natural vertical scrolling while maintaining the "sticky footer" layout across the entire device spectrum.
+
+13. **CSS Cascade Management and Contextual Spacing Strategy**
+
+- **Problem:** Mid-sized viewports (iPad Mini) exhibited "stretched" header aesthetics, with navigation elements hugging the screen edges. Additionally, hero-led pages required "edge-to-edge" contact with the header, while content-heavy pages (Contact/Events) felt vertically "cramped" against the footer.
+- **Solution:** Identified and eliminated a redundant CSS declaration for the `.header-inner` class that was overriding media queries due to the nature of the CSS Cascade. To resolve the spacing issue, I implemented a Contextual Spacing Strategy using the child-combinator selector `main > .l-stack { padding-block-end: var(--s4); }`. This targeted approach allows the vertical stack to inject space only where logically required, preserving the full-bleed aesthetic of the index hero. Consolidating "ghost code" into a single, adaptive block—using modular scale padding ( `padding-inline: 3rem`) for tablets restored visual balance and improved codebase maintainability. The resulting layout is robust, scalable, and provides a professional centred aesthetic on tablets without requiring heavy-handed workarounds.
+
 [Back to Top ↑](#table-of-contents)
 
 ---

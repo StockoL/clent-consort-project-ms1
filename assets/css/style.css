@@ -39,7 +39,9 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
 }
 
 h1,
@@ -59,15 +61,14 @@ html {
     scroll-padding-top: 170px;
   }
 }
-body {
-  height: 100%;
-  overflow-y: auto;
-}
 
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+main > .l-stack > :last-child {
+  margin-bottom: var(--s2);
 }
 /* Ensure the scrollytelling section also respects it */
 .project-rhythm-scroll {
@@ -79,10 +80,12 @@ main {
 
 /* The Center: Keeps content in a readable middle column */
 .l-center {
-  box-sizing: content-box;
+  box-sizing: border-box;
   margin-inline: auto;
   max-width: 80rem;
-  padding-inline: var(--s1);
+  width: 100%;
+  /* Use a smaller padding on mobile so content has room to breathe */
+  padding-inline: 1rem;
 }
 
 /* The Sidebar: General layout tool */
@@ -205,18 +208,33 @@ main {
     font-size: 0.9rem;
   }
 }
+/* --- THE HEADER INNER LOGIC --- Fixed for all screen sizes, including previously overlooked tablets */
 .header-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--s1);
-  padding: var(--s0) 0;
+  gap: var(--s0); /* Tightened gap for mobile */
+  padding-block: var(--s0); /* Clean vertical spacing */
+
+  /* ADD THIS: Limits how far they stretch on tablets */
+  max-width: 70rem;
+  margin-inline: auto;
+  width: 100%;
 }
 
 @media (min-width: 45rem) {
   .header-inner {
     flex-direction: row;
     justify-content: space-between;
+    /* Tablet padding: This creates the "buffer" from the edges */
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 80rem) {
+  .header-inner {
+    /* Large screens: No extra padding needed as l-center kicks in */
+    padding-inline: 0;
   }
 }
 
@@ -270,24 +288,6 @@ header nav a {
 header nav a:hover {
   color: var(--color-gold);
   text-decoration: underline;
-}
-
-/* The Inner: Handles the centering and the flex layout */
-.header-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--s1);
-  padding: var(--s0) 0; /* Vertical padding only, l-center handles horizontal */
-
-  /* No max-width here; .l-center utility handles it */
-}
-
-@media (min-width: 45rem) {
-  .header-inner {
-    flex-direction: row;
-    justify-content: space-between;
-  }
 }
 
 /* CTA Button */
@@ -910,6 +910,8 @@ header nav a:hover {
   opacity: 1;
   flex: 1 1 25rem;
   max-width: 35rem;
+  width: 100%;
+  margin-inline: auto;
 }
 
 /* 3. Elements & Typography */
