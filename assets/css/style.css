@@ -19,7 +19,7 @@
 
   /* ACCESSIBILITY TUNED COLORS */
   --color-gold: #8a6d3b; /* Darkened for 4.5:1 contrast */
-  --color-gold-rgb: 138, 109, 59; /* For rgba() usage */
+  --color-gold-rgb: 138 109 59; /* For rgba() usage */
   --color-gold-light: #dcb97a; /* Kept for hover states on dark backgrounds */
   --color-dark: #1a1a1a;
   --color-white: #ffffff;
@@ -680,6 +680,11 @@ header nav a:hover {
   padding: var(--s2);
 
   /* Scroll-Driven Reveal Animation */
+  /* MODERN PROGRESSIVE ENHANCEMENT:
+  The following properties use the CSS Scroll-driven Animations spec.
+  W3C Validator may flag these as unknown properties, but they are 
+  supported in modern browsers (Chrome 115+, Edge 115+, Safari 17+).
+*/
   view-timeline-name: --slide-reveal;
   view-timeline-axis: block;
   animation: reveal-content linear both;
@@ -985,8 +990,8 @@ header nav a:hover {
 .file-link--large {
   display: inline-flex;
   align-items: center;
-  background-color: rgba(var(--color-gold-rgb), 0.1);
-  border: 1px solid rgba(var(--color-gold-rgb), 0.4);
+  background-color: rgba(var(--color-gold-rgb) / 0.1);
+  border: 1px solid rgba(var(--color-gold-rgb) / 0.4);
   color: var(--color-gold);
   padding: 0.75rem 1.25rem;
   border-radius: 4px;
@@ -1147,7 +1152,7 @@ header nav a:hover {
 }
 .form-hint {
   font-size: 0.8rem;
-  color: rgba(var(--color-gold-rgb), 0.7); /* Muted gold */
+  color: rgba(var(--color-gold-rgb) / 0.7); /* Muted gold */
   line-height: 1.4;
   margin-top: 0.25rem;
 }
@@ -1290,9 +1295,9 @@ header nav a:hover {
   display: inline-flex;
   align-items: center;
   padding: 0.3rem 0.7rem;
-  background-color: rgba(var(--color-gold-rgb), 0.1);
+  background-color: rgba(var(--color-gold-rgb) / 0.1);
   color: var(--color-gold);
-  border: 1px solid rgba(var(--color-gold-rgb), 0.5);
+  border: 1px solid rgba(var(--color-gold-rgb) / 0.5);
   border-radius: 4px;
   font-size: 0.75rem;
   font-weight: 600;
@@ -1311,7 +1316,7 @@ header nav a:hover {
 
 /* 4. Featured Download: Integrating the new row logic */
 .featured-download {
-  background: rgba(var(--color-gold-rgb), 0.1);
+  background: rgba(var(--color-gold-rgb) / 0.1);
   border-left: 4px solid var(--color-gold);
   /* Resetting padding here because .music-row-link handles it now */
   padding: 0;
@@ -1345,7 +1350,7 @@ header nav a:hover {
 .tracks-section {
   margin-top: var(--s3);
   padding-top: var(--s2);
-  border-top: 1px dashed rgba(var(--color-gold-rgb), 0.3);
+  border-top: 1px dashed rgba(var(--color-gold-rgb) / 0.3);
 }
 
 .voice-card {
@@ -1408,7 +1413,7 @@ header nav a:hover {
 .video-accordion[open] summary {
   margin-bottom: 1.5rem;
   background: transparent;
-  border: 1px solid rgba(var(--color-gold-rgb), 0.5);
+  border: 1px solid rgba(var(--color-gold-rgb) / 0.5);
   color: var(--color-gold);
 }
 

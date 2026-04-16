@@ -800,6 +800,11 @@ The global style.css file was audited using the W3C Jigsaw Service. While the re
 - **Problem:** W3C validator checks for about.html and the voice part learning hubs flagged several errors within the third-party iframe embeds (Spotify and YouTube). Specifically, using a percentage value for the width attribute instead of a unitless integer, the use of the obsolete frameborder attribute, and a syntax error in the loading attribute (lazy;).
 - **Solution:** Successfully refactored all third-party embeds to eliminate inline styling and obsolete attributes. I transitioned all presentational logic—including `border: 0`, `width: 100%`, and `aspect-ratio` into the global style.css stylesheet. This ensured 100% W3C compliance while enforcing a strict Separation of Concerns (SoC) architecture, allowing the design system to control the appearance of external widgets globally.
 
+10. **Global Layout Architecture and Sticky Footer Implementation**
+
+- **Problem:** On pages with minimal content - specifically the 404 error page - the footer failed to anchor to the bottom of the viewport, resulting in an unprofessional "floating" appearance and fragmented visual flow. Additionally, a persistent white-space gap existed between the Home page hero section and the footer due to the layout's inability to dynamically absorb vacant vertical space.
+- **Solution:** Engineered a robust flexbox-based global layout system by refactoring the <body> into a flex container with a `column` orientation and a minimum height of `100vh`. By applying `flex: 1` to the <main> element and the `.hero-cover` class, I transformed these sections into "greedy" containers that automatically expand to consume all available viewport space. This update eliminated the need for fragile margin-based hacks, ensured the footer remains pinned to the bottom of the screen regardless of content volume, and maintained a seamless, flush transition between high-impact visual elements and the site's footer.
+
 [Back to Top ↑](#table-of-contents)
 
 ---
