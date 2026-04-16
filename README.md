@@ -295,6 +295,9 @@ While the layout is governed by primitives, the **Global Components** provide th
 
 **User Flow:** The primary Call to Action (CTA) "Our Next Project" directs users straight to the Events page, facilitating the "Patron’s Path."
 
+![Home Page Desktop Preview](assets/documentation/index-desktop.png)
+![Home Page Mobile Preview](assets/documentation/index-mobile.png)
+
 The Home page “index.html” architecture prioritises the 'Critical Path'—ensuring that brand-heavy visuals do not come at the cost of performance. By utilising CSS-only overlays and fluid scaling, I reduced the total amount of required code while improving the site's resilience across diverse device categories.
 
 #### **1\. Largest Contentful Paint (LCP) Optimization**
@@ -343,6 +346,9 @@ The Home page “index.html” architecture prioritises the 'Critical Path'—en
 
 **Lighthouse Report:** The About page achieved a Performance score of 86. This 'performance cost' was a conscious design choice to prioritise high-impact visual storytelling via background videos. To mitigate the impact, I implemented poster images and used the `playsinline` attribute to ensure efficient loading on mobile devices. The page also has a Best Practices score of 77 due to the Spotify playlist embed. Spotify injects cookies for its player functionality which are flagged by Lighthouse. The embed uses certain legacy features for cross-browser support that trigger warnings. I have chosen to prioritise the User Experience (providing choral context via audio) over a synthetic 100 score. To mitigate impact, I implemented `loading: lazy;` on the iframe to ensure it doesn't block the initial page load.
 
+![About Page Desktop Preview](assets/documentation/about-desktop.png)
+![About Page Mobile Preview](assets/documentation/about-mobile.png)
+
 The About page represents the peak of the project's CSS sophistication. By leveraging Scroll Snap and View Timelines, I created a complex interactive timeline that remains entirely functional with JavaScript disabled, proving that high-end UX can be achieved through semantic, standards-based CSS.
 
 #### 1\. The Sidebar Logic (.l-sidebar)
@@ -390,6 +396,9 @@ The About page represents the peak of the project's CSS sophistication. By lever
 
 - **Clean Code Approach:** Implemented as a list of `.archive-item` components. By using flexbox with a high flex-grow value on descriptions, the archive functions as a self-aligning table that automatically stacks on smaller screens.
 - **Semantics:** Extensive use of the `<time>` element ensures the chronological data is accessible and SEO-friendly.
+
+![Events Page Desktop Preview](assets/documentation/events-desktop.png)
+![Events Page Mobile Preview](assets/documentation/events-mobile.png)
 
 The Events page demonstrates effective information architecture. By transitioning from a complex Sidebar for featured content to a horizontal Reel for recent news, and finally a simplified Stack for the archive, the layout adapts its density to match the user's intent as they move down the page.
 
@@ -441,6 +450,9 @@ The Events page demonstrates effective information architecture. By transitionin
 **JavaScript: Defensive UX Refinement**
 
 To prevent the default browser `405` error associated with static hosting (GitHub Pages), I implemented a custom JavaScript event listener on the contact forms. This script utilises `event.preventDefault()` to intercept the submission and dynamically injects a context-specific success message into the DOM. This ensures a seamless 'User Loop' and maintains the application's visual integrity without requiring a back-end server.
+
+![Contact Page Desktop Preview](assets/documentation/contact-desktop.png)
+![Contact Page Mobile Preview](assets/documentation/contact-mobile.png)
 
 The Contact page represents a synthesis of technical performance and empathetic UX. By combining intrinsic layout primitives with non-blocking JavaScript and high-contrast accessible styling, I have created an interactive environment that is as robust as it is aesthetically consistent with the brand's 'Ancient Stone' identity.
 
@@ -511,6 +523,12 @@ The Contact page architecture is focused on reducing "form fatigue" and ensuring
 **Lighthouse Report 2: Video embed**
 
 - The page has a Best Practices score of 77 due to the YouTube video embed. YouTube injects cookies for its player functionality which are flagged by Lighthouse. The embed uses certain legacy features for cross-browser support that trigger warnings. I have chosen to prioritise the User Experience (providing choral context via audio) over a synthetic 100 score. To mitigate impact, I implemented `loading: lazy;` on the iframe to ensure it doesn't block the initial page load.
+
+![Members Page Desktop Preview](assets/documentation/members-desktop.png)
+![Members Page Mobile Preview](assets/documentation/members-mobile.png)
+
+![Hub Pages Desktop Preview](assets/documentation/hub-desktop.png)
+![Hub Pages Mobile Preview](assets/documentation/hub-mobile.png)
 
 The Member Dashboard represents the 'Utility' pillar of the project. By adapting the site's layout primitives to a higher-density content environment, I ensured that ensemble members can access critical scores and logistics with minimal friction. This page demonstrates a clear understanding of how to use CSS to improve workflow and data accessibility.
 
@@ -585,6 +603,9 @@ The Member Dashboard is designed as a central hub for ensemble members, prioriti
 
 To maintain the project's focus on HTML and CSS while still fulfilling the 'Member Resource' user story, I utilised the HTML5 Constraint Validation API. By using the ‘pattern’ attribute on the password input, I created a functional gateway that requires no client-side scripting (JavaScript) or back-end logic. This ensures the application remains lightweight, accessible, and strictly within the technical scope of the Milestone 1 brief.
 
+![Login Page Desktop Preview](assets/documentation/login-desktop.png)
+![Login Page Mobile Preview](assets/documentation/login-mobile.png)
+
 The Login page architecture is designed to handle sensitive user interactions with high-visibility feedback loops. It utilises CSS selectors to provide real-time validation feedback, ensuring a frictionless transition into the secure member portal.
 
 The Member Login page takes advantage of CSS-only state management. By engineering a feedback loop that reacts to user input in real-time—without the need for JavaScript—I have maintained a high performance score while providing a secure, accessible, and premium-feeling authentication experience.
@@ -634,6 +655,9 @@ The Member Login page takes advantage of CSS-only state management. By engineeri
 - Dynamic Spacing: Employs a local CSS variable override (`--stack-space`) to increase vertical padding, ensuring the error message is the central focus of the viewport.
 
 **Tone & Identity:** The copy ("The Silence of the Stones") maintains the "Cathedral Aesthetic," ensuring that even a technical error feels like part of the ensemble's unique brand story.
+
+![Error Page Desktop Preview](assets/documentation/error-desktop.png)
+![Error Page Mobile Preview](assets/documentation/error-mobile.png)
 
 The 404 page is designed as a seamless "Recovery State." It utilises the project's global primitives to maintain brand authority while providing the user with immediate navigational alternatives.
 
