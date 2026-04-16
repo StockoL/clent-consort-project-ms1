@@ -37,6 +37,9 @@ body {
   line-height: 1.5;
   color: #333;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 h1,
@@ -47,6 +50,7 @@ h3 {
   letter-spacing: 0.05ch;
 }
 html {
+  height: 100%;
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }
@@ -60,6 +64,11 @@ body {
   overflow-y: auto;
 }
 
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
 /* Ensure the scrollytelling section also respects it */
 .project-rhythm-scroll {
   background-color: #000;
@@ -324,7 +333,6 @@ header nav a:hover {
 
 /* Footer */
 .footer-slim {
-  margin-top: var(--s1);
   padding: 1.5rem 0 1rem; /* Very tight vertical padding */
   background-color: #1a1a1a;
   border-top: 1px solid rgba(201, 164, 94, 0.2);
@@ -457,7 +465,7 @@ header nav a:hover {
 .hero-cover {
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  flex: 1;
   padding: var(--s1);
   background:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
