@@ -805,6 +805,11 @@ The global style.css file was audited using the W3C Jigsaw Service. While the re
 - **Problem:** On pages with minimal content - specifically the 404 error page - the footer failed to anchor to the bottom of the viewport, resulting in an unprofessional "floating" appearance and fragmented visual flow. Additionally, a persistent white-space gap existed between the Home page hero section and the footer due to the layout's inability to dynamically absorb vacant vertical space.
 - **Solution:** Engineered a robust flexbox-based global layout system by refactoring the <body> into a flex container with a `column` orientation and a minimum height of `100vh`. By applying `flex: 1` to the <main> element and the `.hero-cover` class, I transformed these sections into "greedy" containers that automatically expand to consume all available viewport space. This update eliminated the need for fragile margin-based hacks, ensured the footer remains pinned to the bottom of the screen regardless of content volume, and maintained a seamless, flush transition between high-impact visual elements and the site's footer.
 
+11. **Advanced CSS Specification Management and Validation Strategy**
+
+- **Problem:** Following the refactor to a modern CSS Color Level 4 syntax, the W3C validator retained 9 errors. These consisted of "Unknown Property" flags for Scroll-driven Animation specs and "Parse Errors" specifically at the closing parenthesis of `rgb()` functions utilising CSS variables.
+- **Solution:** Conducted a compatibility audit confirming these errors are purely due to the W3C validator's lack of support for emerging Level 4 modules. I made the architectural decision to retain these styles as "Progressive Enhancements." To maintain a "Clean Code" standard, I documented these as known false positives in the technical documentation, ensuring that the codebase remains DRY and leverages high-performance, native browser animations over heavy JavaScript alternatives.
+
 [Back to Top ↑](#table-of-contents)
 
 ---
